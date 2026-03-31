@@ -1,0 +1,9 @@
+{
+  "label": "numerical_artifact_failure",
+  "triggered": true,
+  "metric": 1.9999999999679998,
+  "threshold": 0.3,
+  "direction": "gt",
+  "message": "Observable variation across refinement levels is too large.",
+  "archive_path": "failures\\G6_application\\BP_Non_Normal_Shear_reference_seed0_numerical_artifact_failure.json"
+}

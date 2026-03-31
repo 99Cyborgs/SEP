@@ -1,0 +1,178 @@
+[
+  {
+    "key": "spectral_gap",
+    "name": "Spectral gap",
+    "symbol": "delta",
+    "definition": "Real-part separation between retained slow eigenvalues and the leading discarded eigenvalue of an autonomous generator.",
+    "units": "inverse time",
+    "norm_convention": "spectral ordering by descending real part",
+    "diagnostic_status": "primary",
+    "estimation_procedure": "Order eigenvalues by real part and compute the retained-discarded separation.",
+    "acceptance_tolerance": ">= 5e-2 on positive linear reference runs"
+  },
+  {
+    "key": "singular_gap",
+    "name": "Singular gap",
+    "symbol": "Delta",
+    "definition": "Difference between the last retained and first discarded singular values of a windowed transfer operator.",
+    "units": "dimensionless",
+    "norm_convention": "operator 2-norm singular values",
+    "diagnostic_status": "primary",
+    "estimation_procedure": "Compute an SVD per window and take sigma_m - sigma_{m+1}.",
+    "acceptance_tolerance": ">= 1e-2 on positive transport reference runs"
+  },
+  {
+    "key": "projector_deformation",
+    "name": "Projector deformation",
+    "symbol": "epsilon_s",
+    "definition": "Operator-norm deviation between the estimated and baseline slow carrier projectors.",
+    "units": "dimensionless",
+    "norm_convention": "operator 2-norm",
+    "diagnostic_status": "primary",
+    "estimation_procedure": "Compute ||P_est - P_ref||_2.",
+    "acceptance_tolerance": "<= 3e-1 on accepted linear cases"
+  },
+  {
+    "key": "coherent_projector_deformation",
+    "name": "Coherent projector deformation",
+    "symbol": "epsilon_c",
+    "definition": "Window-to-window or baseline-to-window deformation of coherent transport carriers.",
+    "units": "dimensionless",
+    "norm_convention": "operator 2-norm",
+    "diagnostic_status": "primary",
+    "estimation_procedure": "Compare coherent source/target projectors across windows.",
+    "acceptance_tolerance": "<= 4e-1 on accepted transport cases"
+  },
+  {
+    "key": "block_residual_norm",
+    "name": "Block residual norm",
+    "symbol": "rho",
+    "definition": "Norm of the off-block residual after extracting a block-diagonal reduced model.",
+    "units": "inverse time or per window",
+    "norm_convention": "operator 2-norm",
+    "diagnostic_status": "primary",
+    "estimation_procedure": "Project onto the carrier, zero out within-block entries, then take the residual norm.",
+    "acceptance_tolerance": "<= 2.5e-1 on positive references"
+  },
+  {
+    "key": "leakage_trajectory",
+    "name": "Leakage trajectory",
+    "symbol": "ell",
+    "definition": "Observed finite-horizon leakage sequence for the claimed subsystem decomposition.",
+    "units": "dimensionless",
+    "norm_convention": "operator 2-norm or normalized state-energy leakage, branch dependent",
+    "diagnostic_status": "primary",
+    "estimation_procedure": "Evaluate the benchmark-specific leakage observable on the sampled horizon.",
+    "acceptance_tolerance": "interpreted through autonomy horizon and gate thresholds"
+  },
+  {
+    "key": "autonomy_horizon",
+    "name": "Autonomy horizon",
+    "symbol": "tau_eta",
+    "definition": "Largest sampled time or window index for which leakage remains below eta.",
+    "units": "time or windows",
+    "norm_convention": "inherits the leakage norm convention",
+    "diagnostic_status": "primary",
+    "estimation_procedure": "Scan the leakage trajectory against eta and retain the largest admissible sample.",
+    "acceptance_tolerance": "compared against the affine-law prediction"
+  },
+  {
+    "key": "cross_subsystem_transfer_rate",
+    "name": "Cross-subsystem transfer rate",
+    "symbol": "chi",
+    "definition": "Off-block transport or coupling rate within the reduced carrier.",
+    "units": "inverse time or per window",
+    "norm_convention": "operator 2-norm",
+    "diagnostic_status": "secondary",
+    "estimation_procedure": "Measure off-block reduced-model coupling or coherent transfer.",
+    "acceptance_tolerance": "no universal threshold"
+  },
+  {
+    "key": "reduced_model_forecast_error",
+    "name": "Reduced model forecast error",
+    "symbol": "E_red",
+    "definition": "Mismatch between projected full evolution and reduced-model evolution.",
+    "units": "dimensionless",
+    "norm_convention": "operator 2-norm averaged over forecast times",
+    "diagnostic_status": "secondary",
+    "estimation_procedure": "Compare projected propagators against reduced propagators on the same time grid.",
+    "acceptance_tolerance": "<= 2.5e-1 on positive references"
+  },
+  {
+    "key": "transient_amplification_score",
+    "name": "Transient amplification score",
+    "symbol": "Gamma_T",
+    "definition": "Finite-horizon amplification beyond decay predicted by the spectral abscissa.",
+    "units": "dimensionless",
+    "norm_convention": "operator 2-norm",
+    "diagnostic_status": "diagnostic",
+    "estimation_procedure": "Evaluate sup_t ||e^{tA}|| exp(-alpha(A)t).",
+    "acceptance_tolerance": "> 1.5 marks nonnormal risk"
+  },
+  {
+    "key": "ensemble_averaged_leakage",
+    "name": "Ensemble averaged leakage",
+    "symbol": "E[ell]",
+    "definition": "Mean leakage across stochastic trajectories or benchmark ensembles.",
+    "units": "dimensionless",
+    "norm_convention": "inherits branch-specific leakage norm",
+    "diagnostic_status": "secondary",
+    "estimation_procedure": "Average leakage over samples or replicates.",
+    "acceptance_tolerance": "stochastic gate dependent"
+  },
+  {
+    "key": "leakage_variance",
+    "name": "Leakage variance",
+    "symbol": "Var[ell]",
+    "definition": "Variance of leakage across an ensemble or bootstrap.",
+    "units": "dimensionless squared",
+    "norm_convention": "inherits branch-specific leakage norm",
+    "diagnostic_status": "secondary",
+    "estimation_procedure": "Compute sample variance across trajectories or replicates.",
+    "acceptance_tolerance": "<= 8e-2 on the reference stochastic case"
+  },
+  {
+    "key": "affine_law_regression_coefficients",
+    "name": "Affine law regression coefficients",
+    "symbol": "beta",
+    "definition": "Estimated coefficients for the L1, L2, and L3 leakage-law families.",
+    "units": "mixed coefficients",
+    "norm_convention": "least-squares fit",
+    "diagnostic_status": "secondary",
+    "estimation_procedure": "Fit L1, L2, and L3 on the observed leakage data with held-out evaluation.",
+    "acceptance_tolerance": "extension laws should beat weaker baselines when justified"
+  },
+  {
+    "key": "transportability_metrics",
+    "name": "Transportability metrics",
+    "symbol": "Theta",
+    "definition": "Metrics comparing coherent, stochastic, or parameter-shifted behavior against simpler surrogates.",
+    "units": "dimensionless",
+    "norm_convention": "ratio or relative difference conventions per benchmark",
+    "diagnostic_status": "diagnostic",
+    "estimation_procedure": "Compare coherent runs against frozen surrogates or held-out parameter continuation.",
+    "acceptance_tolerance": "> 0.6 on positive transport-style cases"
+  },
+  {
+    "key": "coordinate_sensitivity_metrics",
+    "name": "Coordinate sensitivity metrics",
+    "symbol": "Xi",
+    "definition": "Sensitivity of core observables to admissible coordinate transforms.",
+    "units": "dimensionless",
+    "norm_convention": "relative change plus projector back-error",
+    "diagnostic_status": "diagnostic",
+    "estimation_procedure": "Apply orthogonal transforms, recompute observables, and summarize induced changes.",
+    "acceptance_tolerance": "<= 3.5e-1 on accepted claims"
+  },
+  {
+    "key": "numerical_refinement_metrics",
+    "name": "Numerical refinement metrics",
+    "symbol": "R_num",
+    "definition": "Variation of core observables across refinement levels.",
+    "units": "dimensionless",
+    "norm_convention": "relative span across refinement ladders",
+    "diagnostic_status": "diagnostic",
+    "estimation_procedure": "Repeat the analysis at multiple resolutions and report the spread.",
+    "acceptance_tolerance": "<= 2e-1 on accepted claims"
+  }
+]

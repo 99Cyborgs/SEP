@@ -1,0 +1,217 @@
+{
+  "benchmark_id": "BP_T2_Same_Spectrum_Pair",
+  "branch": "nonnormal",
+  "theorem_tier": "T2",
+  "parameter_id": "matched_normal",
+  "seed": 0,
+  "parameters": {
+    "parameter_id": "matched_normal",
+    "times": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.0,
+      3.25,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0
+    ],
+    "eta": 0.45,
+    "slow_count": 2,
+    "block_sizes": [
+      1,
+      1
+    ],
+    "paired_parameter_id": "matched_nonnormal",
+    "slow_eigenvalues": [
+      -0.08,
+      -0.13
+    ],
+    "fast_eigenvalues": [
+      -1.1,
+      -1.3
+    ],
+    "pairing_rule": "same retained eigenvalues, different slow-block geometry"
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.07560110000122222,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": 0.9700000000000001,
+    "singular_gap": null,
+    "projector_deformation": 0.0010062126204336797,
+    "coherent_projector_deformation": null,
+    "block_residual_norm": 0.001380520550783886,
+    "leakage_trajectory": [
+      5.10545071766915e-16,
+      0.00033619044647362553,
+      0.0006549731740844272,
+      0.0009570366885759051,
+      0.001243044866780798,
+      0.001513637795971711,
+      0.00176943258534419,
+      0.0020110241505437707,
+      0.0022389859721189996,
+      0.0024538708287538003,
+      0.002656211506104897,
+      0.002846521482043205,
+      0.0030252955890721998,
+      0.00319301065467115,
+      0.0033501261202868713,
+      0.0034970846396741393,
+      0.0036343126572621447,
+      0.003762220967202438,
+      0.0038812052537324326,
+      0.003991646613468025,
+      0.004093912060218874,
+      0.004188355012900638,
+      0.0042753157670997735,
+      0.004355121950828445,
+      0.004428088964989608
+    ],
+    "autonomy_horizon": 6.0,
+    "cross_subsystem_transfer_rate": 0.001380520550783886,
+    "reduced_model_forecast_error": 7.018184019907332e-05,
+    "transient_amplification_score": 1.000000075253688,
+    "ensemble_averaged_leakage": null,
+    "leakage_variance": null,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": 0.4679739556777545,
+        "rho_tau": 0.5536393479176405
+      },
+      "L2": {
+        "epsilon_s": 0.03424294472121067,
+        "rho_tau": 0.92567663176373,
+        "rho_tau_sq": -48.90212349449092
+      },
+      "L3": {
+        "epsilon_s": -0.011185923859311124,
+        "gamma_rho_tau": 1.0322875179599067,
+        "gamma_rho_tau_sq": -31.243372082936713
+      }
+    },
+    "transportability_metrics": {
+      "same_spectrum_counterexample": {
+        "current_branch": "matched_normal",
+        "paired_branch": "matched_nonnormal",
+        "current_gap": 0.9700000000000001,
+        "paired_gap": 0.9700000000000001,
+        "gap_difference": 0.0,
+        "current_transient_amplification": 1.000000075253688,
+        "paired_transient_amplification": 11.47174844732256,
+        "transient_amplification_ratio": 0.08717067671468008,
+        "current_autonomy_horizon": 6.0,
+        "paired_autonomy_horizon": 0.0,
+        "current_pseudospectral_proxy": 100.00003607846095,
+        "paired_pseudospectral_proxy": 3668.09116249948,
+        "current_best_law": "L3",
+        "paired_best_law": "L2",
+        "current_l3_minus_l1_rmse": 0.00031709419506031195,
+        "paired_l3_minus_l1_rmse": 0.07273397395012299
+      }
+    },
+    "coordinate_sensitivity_metrics": null,
+    "numerical_refinement_metrics": null,
+    "predicted_autonomy_horizon": 325.23513476465024,
+    "eigenvector_condition_number": 1.4844190219018583,
+    "pseudospectral_proxy": 100.00003607846095,
+    "transient_coincidence_score": 0.6988314752630109
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.4679739556777545,
+        "rho_tau": 0.5536393479176405
+      },
+      "train_rmse": 0.00024290861049662064,
+      "test_rmse": 0.0003317866792440087,
+      "residual_mean": -2.9547762877832906e-05,
+      "residual_std": 0.0002729036847549553,
+      "selected": false,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.03424294472121067,
+        "rho_tau": 0.92567663176373,
+        "rho_tau_sq": -48.90212349449092
+      },
+      "train_rmse": 1.989402148405229e-05,
+      "test_rmse": 3.724964288743724e-05,
+      "residual_mean": 7.75608598447695e-06,
+      "residual_std": 2.5553466270314647e-05,
+      "selected": false,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.011185923859311124,
+        "gamma_rho_tau": 1.0322875179599067,
+        "gamma_rho_tau_sq": -31.243372082936713
+      },
+      "train_rmse": 7.93728742898861e-06,
+      "test_rmse": 1.4692484183696706e-05,
+      "residual_mean": -2.9935164037923444e-06,
+      "residual_std": 1.014678916668233e-05,
+      "selected": true,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L3",
+    "ranked_laws": [
+      "L3",
+      "L2",
+      "L1"
+    ],
+    "improvement_over_l1": 0.00031709419506031195
+  },
+  "gate_outcomes": {},
+  "failure_labels": [],
+  "figure_references": [],
+  "notes": [
+    "This benchmark holds the retained slow eigenvalues fixed while changing the slow-block geometry from rotated normal to upper-triangular nonnormal form.",
+    "The paired branch comparison is intended as Paper C failure-geometry evidence, not as a new theorem closure claim."
+  ]
+}

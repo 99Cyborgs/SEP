@@ -1,0 +1,213 @@
+{
+  "summary_kind": "cross_domain_navigation_package",
+  "acceptance_criteria": {
+    "min_singular_gap": 0.35,
+    "max_coherent_projector_deformation": 0.15,
+    "min_autonomy_horizon": 3.0,
+    "max_refinement_span": 0.2
+  },
+  "threshold_layers": {
+    "clickstream_and_support": {
+      "taxonomy_thresholds": {
+        "min_gap": 0.03,
+        "max_projector_deformation": 0.35,
+        "max_block_residual": 0.35,
+        "max_transient_amplification": 6.0,
+        "min_horizon_ratio": 0.45,
+        "max_coordinate_sensitivity": 0.5,
+        "max_refinement_span": 0.3
+      },
+      "package_acceptance_thresholds": {
+        "min_singular_gap": 0.35,
+        "max_coherent_projector_deformation": 0.15,
+        "min_autonomy_horizon": 3.0,
+        "max_refinement_span": 0.2
+      },
+      "blocking_failure_labels": [
+        "carrier_failure",
+        "coupling_failure",
+        "numerical_artifact_failure"
+      ]
+    },
+    "workflow": {
+      "taxonomy_thresholds": {
+        "min_gap": 0.03,
+        "max_projector_deformation": 0.35,
+        "max_block_residual": 0.35,
+        "max_transient_amplification": 6.0,
+        "min_horizon_ratio": 0.45,
+        "max_coordinate_sensitivity": 0.5,
+        "max_refinement_span": 0.3
+      },
+      "package_acceptance_thresholds": {
+        "min_singular_gap": 0.27,
+        "max_coherent_projector_deformation": 0.18,
+        "min_autonomy_horizon": 3.0,
+        "max_refinement_span": 0.2
+      },
+      "blocking_failure_labels": [
+        "carrier_failure",
+        "coupling_failure",
+        "numerical_artifact_failure"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "case_id": "docs_reference",
+      "benchmark_id": "BP_Clickstream_Docs_Funnel",
+      "parameter_id": "reference",
+      "accepted": true,
+      "acceptance_profile": "cross_domain_navigation",
+      "metrics": {
+        "singular_gap": 0.397374090450784,
+        "coherent_projector_deformation": 0.06104729662141483,
+        "autonomy_horizon": 4.0,
+        "max_relative_span": 0.02944618218464895,
+        "block_residual_norm": 0.09745792624210901
+      },
+      "failure_labels": [],
+      "blocking_failures_present": [],
+      "advisory_failures_present": [],
+      "rejection_reasons": [],
+      "ledger_json": "results/ledgers/BP_Clickstream_Docs_Funnel/reference_seed0.json"
+    },
+    {
+      "case_id": "docs_negative",
+      "benchmark_id": "BP_Clickstream_Docs_Funnel",
+      "parameter_id": "negative_detour",
+      "accepted": false,
+      "acceptance_profile": "cross_domain_navigation",
+      "metrics": {
+        "singular_gap": 0.06218421417966025,
+        "coherent_projector_deformation": 0.5522009870293002,
+        "autonomy_horizon": 4.0,
+        "max_relative_span": 0.09926308376024906,
+        "block_residual_norm": 0.38167769600252666
+      },
+      "failure_labels": [
+        "carrier_failure",
+        "coupling_failure"
+      ],
+      "blocking_failures_present": [
+        "carrier_failure",
+        "coupling_failure"
+      ],
+      "advisory_failures_present": [],
+      "rejection_reasons": [
+        "singular_gap_below_package_floor",
+        "carrier_deformation_above_package_ceiling",
+        "blocking_failure_label:carrier_failure",
+        "blocking_failure_label:coupling_failure"
+      ],
+      "ledger_json": "results/ledgers/BP_Clickstream_Docs_Funnel/negative_detour_seed0.json"
+    },
+    {
+      "case_id": "support_reference",
+      "benchmark_id": "BP_Support_Portal_Funnel",
+      "parameter_id": "reference",
+      "accepted": true,
+      "acceptance_profile": "cross_domain_navigation",
+      "metrics": {
+        "singular_gap": 0.3681338864017923,
+        "coherent_projector_deformation": 0.05867497195884055,
+        "autonomy_horizon": 4.0,
+        "max_relative_span": 0.19688386694575188,
+        "block_residual_norm": 0.09803188230664853
+      },
+      "failure_labels": [],
+      "blocking_failures_present": [],
+      "advisory_failures_present": [],
+      "rejection_reasons": [],
+      "ledger_json": "results/ledgers/BP_Support_Portal_Funnel/reference_seed0.json"
+    },
+    {
+      "case_id": "support_negative",
+      "benchmark_id": "BP_Support_Portal_Funnel",
+      "parameter_id": "negative_detour",
+      "accepted": false,
+      "acceptance_profile": "cross_domain_navigation",
+      "metrics": {
+        "singular_gap": 0.026166628171083138,
+        "coherent_projector_deformation": 0.8404729723629586,
+        "autonomy_horizon": 4.0,
+        "max_relative_span": 0.0896284762978004,
+        "block_residual_norm": 0.34303233375784103
+      },
+      "failure_labels": [
+        "carrier_failure",
+        "gap_failure"
+      ],
+      "blocking_failures_present": [
+        "carrier_failure"
+      ],
+      "advisory_failures_present": [],
+      "rejection_reasons": [
+        "singular_gap_below_package_floor",
+        "carrier_deformation_above_package_ceiling",
+        "blocking_failure_label:carrier_failure"
+      ],
+      "ledger_json": "results/ledgers/BP_Support_Portal_Funnel/negative_detour_seed0.json"
+    },
+    {
+      "case_id": "workflow_reference",
+      "benchmark_id": "BP_Workflow_Queue_Funnel",
+      "parameter_id": "reference",
+      "accepted": true,
+      "acceptance_profile": "cross_domain_workflow",
+      "metrics": {
+        "singular_gap": 0.27845055699038207,
+        "coherent_projector_deformation": 0.1380588849603833,
+        "autonomy_horizon": 4.0,
+        "max_relative_span": 0.08016203884909928,
+        "block_residual_norm": 0.0528225656500068
+      },
+      "failure_labels": [],
+      "blocking_failures_present": [],
+      "advisory_failures_present": [],
+      "rejection_reasons": [],
+      "ledger_json": "results/ledgers/BP_Workflow_Queue_Funnel/reference_seed0.json"
+    },
+    {
+      "case_id": "workflow_negative",
+      "benchmark_id": "BP_Workflow_Queue_Funnel",
+      "parameter_id": "negative_detour",
+      "accepted": false,
+      "acceptance_profile": "cross_domain_workflow",
+      "metrics": {
+        "singular_gap": 0.11700418285419555,
+        "coherent_projector_deformation": 0.5847329133437102,
+        "autonomy_horizon": 4.0,
+        "max_relative_span": 0.11925099110861925,
+        "block_residual_norm": 0.2728395482430482
+      },
+      "failure_labels": [
+        "carrier_failure"
+      ],
+      "blocking_failures_present": [
+        "carrier_failure"
+      ],
+      "advisory_failures_present": [],
+      "rejection_reasons": [
+        "singular_gap_below_package_floor",
+        "carrier_deformation_above_package_ceiling",
+        "blocking_failure_label:carrier_failure"
+      ],
+      "ledger_json": "results/ledgers/BP_Workflow_Queue_Funnel/negative_detour_seed0.json"
+    }
+  ],
+  "aggregate_summary": {
+    "accepted_case_count": 3,
+    "rejected_case_count": 3,
+    "benchmarks": [
+      "BP_Clickstream_Docs_Funnel",
+      "BP_Support_Portal_Funnel",
+      "BP_Workflow_Queue_Funnel"
+    ]
+  },
+  "notes": [
+    "The cross-domain package keeps Paper E mobility-only and treats non-mobility evidence as a separate bounded application track.",
+    "Package acceptance is benchmark-local and stricter than the repository-wide failure taxonomy on singular-gap, deformation, horizon, and refinement bounds.",
+    "The supported claim is structural only: the coherent transport machinery is not tied to a single mobility, navigation, or workflow fixture."
+  ]
+}

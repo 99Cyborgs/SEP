@@ -1,0 +1,30 @@
+{
+  "benchmark_id": "BP_Clickstream_Docs_Funnel",
+  "threshold_layers": {
+    "global_failure_taxonomy": {
+      "max_block_residual": 0.35,
+      "max_projector_deformation": 0.35,
+      "min_gap": 0.03
+    },
+    "package_acceptance": {
+      "min_singular_gap": 0.35,
+      "max_coherent_projector_deformation": 0.15,
+      "min_autonomy_horizon": 3.0,
+      "max_refinement_span": 0.2
+    }
+  },
+  "positive_case": {
+    "parameter_id": "reference",
+    "total_sessions_min": 900,
+    "singular_gap_min": 0.39,
+    "projector_deformation_max": 0.08,
+    "refinement_span_max": 0.05,
+    "expected_package_status": "accepted"
+  },
+  "negative_case": {
+    "parameter_id": "negative_detour",
+    "projector_deformation_min": 0.5,
+    "expected_package_status": "rejected",
+    "coupling_failure_expected": true
+  }
+}

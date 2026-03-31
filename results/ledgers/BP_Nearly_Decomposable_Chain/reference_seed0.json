@@ -1,0 +1,182 @@
+{
+  "benchmark_id": "BP_Nearly_Decomposable_Chain",
+  "branch": "linear",
+  "theorem_tier": "T1/T5",
+  "parameter_id": "reference",
+  "seed": 0,
+  "parameters": {
+    "times": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      16.0,
+      17.0,
+      18.0
+    ],
+    "eta": 0.3,
+    "slow_count": 2,
+    "block_sizes": [
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.04640350000045146,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": 0.0399999999999999,
+    "singular_gap": null,
+    "projector_deformation": 0.0,
+    "coherent_projector_deformation": null,
+    "block_residual_norm": 3.469446951953614e-18,
+    "leakage_trajectory": [
+      1.5707608698731833e-16,
+      1.550361064659501e-16,
+      1.6033214955247713e-16,
+      1.7340144686533853e-16,
+      2.041947912213726e-16,
+      1.753753610205372e-16,
+      1.6554216851618725e-16,
+      1.666416743199703e-16,
+      1.7768623831606896e-16,
+      1.9455381895020718e-16,
+      1.7689610369639179e-16,
+      2.129082280115366e-16,
+      1.7793923590976346e-16,
+      2.0234021032997868e-16,
+      1.6373743326595926e-16,
+      2.283318579876285e-16,
+      1.652170721302695e-16,
+      1.728326642572086e-16,
+      1.8140203467599888e-16
+    ],
+    "autonomy_horizon": 18.0,
+    "cross_subsystem_transfer_rate": 3.469446951953614e-18,
+    "reduced_model_forecast_error": 2.1651321987902784e-16,
+    "transient_amplification_score": 1.0,
+    "ensemble_averaged_leakage": null,
+    "leakage_variance": null,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": 0.0,
+        "rho_tau": 4.251253109387394
+      },
+      "L2": {
+        "epsilon_s": 0.0,
+        "rho_tau": 4.251253109387396,
+        "rho_tau_sq": 2.1139164563796726e-16
+      },
+      "L3": {
+        "epsilon_s": 0.0,
+        "gamma_rho_tau": 4.251253109387396,
+        "gamma_rho_tau_sq": 2.1139164563796726e-16
+      }
+    },
+    "transportability_metrics": {
+      "row_stochastic_error": 0.0,
+      "singular_gap_change": 0.03999999999999959,
+      "coarse_state_count": 2.0
+    },
+    "coordinate_sensitivity_metrics": {
+      "max_relative_change": 0.0,
+      "mean_relative_change": 0.0,
+      "projector_back_error": 0.0
+    },
+    "numerical_refinement_metrics": {
+      "max_relative_span": 0.0,
+      "mean": 18.0
+    },
+    "predicted_autonomy_horizon": 8.646911284551352e+16,
+    "eigenvector_condition_number": 1.0000000000000004,
+    "transient_coincidence_score": 1.2635696152936407e-05
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.0,
+        "rho_tau": 4.251253109387394
+      },
+      "train_rmse": 8.288451420003393e-17,
+      "test_rmse": 1.0096538408401152e-16,
+      "residual_mean": 4.6804245849407327e-17,
+      "residual_std": 7.568977423896749e-17,
+      "selected": false,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.0,
+        "rho_tau": 4.251253109387396,
+        "rho_tau_sq": 2.1139164563796726e-16
+      },
+      "train_rmse": 8.288451420003392e-17,
+      "test_rmse": 1.0096538408401152e-16,
+      "residual_mean": 4.680424584940728e-17,
+      "residual_std": 7.568977423896751e-17,
+      "selected": true,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.0,
+        "gamma_rho_tau": 4.251253109387396,
+        "gamma_rho_tau_sq": 2.1139164563796726e-16
+      },
+      "train_rmse": 8.288451420003392e-17,
+      "test_rmse": 1.0096538408401152e-16,
+      "residual_mean": 4.680424584940728e-17,
+      "residual_std": 7.568977423896751e-17,
+      "selected": false,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L2",
+    "ranked_laws": [
+      "L2",
+      "L3",
+      "L1"
+    ],
+    "improvement_over_l1": 0.0
+  },
+  "gate_outcomes": {},
+  "failure_labels": [],
+  "figure_references": [],
+  "notes": []
+}

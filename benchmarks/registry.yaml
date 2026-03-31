@@ -1,0 +1,181 @@
+benchmarks:
+- id: BP_Linear_Two_Block
+  branch: linear
+  tier: T1
+  phase: 1
+  description: Exact planted linear block ODEs with weak slow-block coupling.
+  spec_path: benchmarks/BP_Linear_Two_Block/spec.yaml
+  readme_path: benchmarks/BP_Linear_Two_Block/README.md
+  reference_script: benchmarks/BP_Linear_Two_Block/run_reference.py
+  expected_metrics_path: benchmarks/BP_Linear_Two_Block/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_Linear_Two_Block/figure_recipe.py
+- id: BP_Random_Gap_Ensemble
+  branch: linear
+  tier: T1/T2
+  phase: 1
+  description: Random matrix ensembles with matched spectral gaps and normal/nonnormal branches.
+  spec_path: benchmarks/BP_Random_Gap_Ensemble/spec.yaml
+  readme_path: benchmarks/BP_Random_Gap_Ensemble/README.md
+  reference_script: benchmarks/BP_Random_Gap_Ensemble/run_reference.py
+  expected_metrics_path: benchmarks/BP_Random_Gap_Ensemble/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_Random_Gap_Ensemble/figure_recipe.py
+- id: BP_Nearly_Decomposable_Chain
+  branch: linear
+  tier: T1/T5
+  phase: 1
+  description: Nearly decomposable Markov chains with planted metastable clusters.
+  spec_path: benchmarks/BP_Nearly_Decomposable_Chain/spec.yaml
+  readme_path: benchmarks/BP_Nearly_Decomposable_Chain/README.md
+  reference_script: benchmarks/BP_Nearly_Decomposable_Chain/run_reference.py
+  expected_metrics_path: benchmarks/BP_Nearly_Decomposable_Chain/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_Nearly_Decomposable_Chain/figure_recipe.py
+- id: BP_Windowed_Transport_Flow
+  branch: transport
+  tier: T3
+  phase: 2
+  description: Windowed time-dependent transport operator benchmark on a ring.
+  spec_path: benchmarks/BP_Windowed_Transport_Flow/spec.yaml
+  readme_path: benchmarks/BP_Windowed_Transport_Flow/README.md
+  reference_script: benchmarks/BP_Windowed_Transport_Flow/run_reference.py
+  expected_metrics_path: benchmarks/BP_Windowed_Transport_Flow/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_Windowed_Transport_Flow/figure_recipe.py
+- id: BP_T3_Window_Sensitivity_Pair
+  branch: transport
+  tier: T3
+  phase: 2
+  description: Paired positive-versus-mixed transport family exposing window dependence and coherent carrier failure geometry.
+  spec_path: benchmarks/BP_T3_Window_Sensitivity_Pair/spec.yaml
+  readme_path: benchmarks/BP_T3_Window_Sensitivity_Pair/README.md
+  reference_script: benchmarks/BP_T3_Window_Sensitivity_Pair/run_reference.py
+  expected_metrics_path: benchmarks/BP_T3_Window_Sensitivity_Pair/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_T3_Window_Sensitivity_Pair/figure_recipe.py
+- id: BP_Non_Normal_Shear
+  branch: nonnormal
+  tier: T2
+  phase: 1
+  description: Shear and Jordan-like nonnormal systems with transient growth.
+  spec_path: benchmarks/BP_Non_Normal_Shear/spec.yaml
+  readme_path: benchmarks/BP_Non_Normal_Shear/README.md
+  reference_script: benchmarks/BP_Non_Normal_Shear/run_reference.py
+  expected_metrics_path: benchmarks/BP_Non_Normal_Shear/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_Non_Normal_Shear/figure_recipe.py
+- id: BP_Delay_Coupled_Pair
+  branch: nonnormal
+  tier: T2/T3
+  phase: 2
+  description: Fixed-lag delay-coupled linear module pair analyzed through a sampled history propagator.
+  spec_path: benchmarks/BP_Delay_Coupled_Pair/spec.yaml
+  readme_path: benchmarks/BP_Delay_Coupled_Pair/README.md
+  reference_script: benchmarks/BP_Delay_Coupled_Pair/run_reference.py
+  expected_metrics_path: benchmarks/BP_Delay_Coupled_Pair/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_Delay_Coupled_Pair/figure_recipe.py
+- id: BP_T2_Same_Spectrum_Pair
+  branch: nonnormal
+  tier: T2
+  phase: 2
+  description: Same-spectrum normal versus nonnormal pair exposing transient-growth failure geometry.
+  spec_path: benchmarks/BP_T2_Same_Spectrum_Pair/spec.yaml
+  readme_path: benchmarks/BP_T2_Same_Spectrum_Pair/README.md
+  reference_script: benchmarks/BP_T2_Same_Spectrum_Pair/run_reference.py
+  expected_metrics_path: benchmarks/BP_T2_Same_Spectrum_Pair/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_T2_Same_Spectrum_Pair/figure_recipe.py
+- id: BP_Weakly_Nonlinear_Slow_Manifold
+  branch: nonlinear
+  tier: T4
+  phase: 3
+  description: Weakly nonlinear slow-manifold benchmark with curvature corrections.
+  spec_path: benchmarks/BP_Weakly_Nonlinear_Slow_Manifold/spec.yaml
+  readme_path: benchmarks/BP_Weakly_Nonlinear_Slow_Manifold/README.md
+  reference_script: benchmarks/BP_Weakly_Nonlinear_Slow_Manifold/run_reference.py
+  expected_metrics_path: benchmarks/BP_Weakly_Nonlinear_Slow_Manifold/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_Weakly_Nonlinear_Slow_Manifold/figure_recipe.py
+- id: BP_T4_Local_Validity_Pair
+  branch: nonlinear
+  tier: T4
+  phase: 3
+  description: Paired weakly nonlinear benchmark separating a locally valid regime from amplitude-driven local-validity breakdown.
+  spec_path: benchmarks/BP_T4_Local_Validity_Pair/spec.yaml
+  readme_path: benchmarks/BP_T4_Local_Validity_Pair/README.md
+  reference_script: benchmarks/BP_T4_Local_Validity_Pair/run_reference.py
+  expected_metrics_path: benchmarks/BP_T4_Local_Validity_Pair/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_T4_Local_Validity_Pair/figure_recipe.py
+- id: BP_Noisy_Metastable_Network
+  branch: stochastic
+  tier: T5
+  phase: 4
+  description: Noisy metastable network with propagator estimation and bootstrap uncertainty.
+  spec_path: benchmarks/BP_Noisy_Metastable_Network/spec.yaml
+  readme_path: benchmarks/BP_Noisy_Metastable_Network/README.md
+  reference_script: benchmarks/BP_Noisy_Metastable_Network/run_reference.py
+  expected_metrics_path: benchmarks/BP_Noisy_Metastable_Network/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_Noisy_Metastable_Network/figure_recipe.py
+- id: BP_T5_Stochastic_Stress_Pair
+  branch: stochastic
+  tier: T5
+  phase: 4
+  description: Paired stochastic benchmark isolating sample-stress effects on uncertainty width and confidence-bounded horizons.
+  spec_path: benchmarks/BP_T5_Stochastic_Stress_Pair/spec.yaml
+  readme_path: benchmarks/BP_T5_Stochastic_Stress_Pair/README.md
+  reference_script: benchmarks/BP_T5_Stochastic_Stress_Pair/run_reference.py
+  expected_metrics_path: benchmarks/BP_T5_Stochastic_Stress_Pair/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_T5_Stochastic_Stress_Pair/figure_recipe.py
+- id: BP_Mobility_Chicago_Corridors
+  branch: application
+  tier: T3/G6
+  phase: 5
+  description: Bundled real-data mobility benchmark derived from Divvy Hyde Park station flows.
+  spec_path: benchmarks/BP_Mobility_Chicago_Corridors/spec.yaml
+  readme_path: benchmarks/BP_Mobility_Chicago_Corridors/README.md
+  reference_script: benchmarks/BP_Mobility_Chicago_Corridors/run_reference.py
+  expected_metrics_path: benchmarks/BP_Mobility_Chicago_Corridors/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_Mobility_Chicago_Corridors/figure_recipe.py
+- id: BP_Mobility_Downtown_Routing_Instability
+  branch: application
+  tier: T3/G6
+  phase: 5
+  description: Bundled real-data downtown mobility benchmark selected for routing-instability under coarse graining.
+  spec_path: benchmarks/BP_Mobility_Downtown_Routing_Instability/spec.yaml
+  readme_path: benchmarks/BP_Mobility_Downtown_Routing_Instability/README.md
+  reference_script: benchmarks/BP_Mobility_Downtown_Routing_Instability/run_reference.py
+  expected_metrics_path: benchmarks/BP_Mobility_Downtown_Routing_Instability/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_Mobility_Downtown_Routing_Instability/figure_recipe.py
+- id: BP_Mobility_NYC_East_Corridor
+  branch: application
+  tier: T3/G6
+  phase: 5
+  description: Bundled real-data New York City mobility benchmark selected as a mixed external corridor case.
+  spec_path: benchmarks/BP_Mobility_NYC_East_Corridor/spec.yaml
+  readme_path: benchmarks/BP_Mobility_NYC_East_Corridor/README.md
+  reference_script: benchmarks/BP_Mobility_NYC_East_Corridor/run_reference.py
+  expected_metrics_path: benchmarks/BP_Mobility_NYC_East_Corridor/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_Mobility_NYC_East_Corridor/figure_recipe.py
+- id: BP_Clickstream_Docs_Funnel
+  branch: application
+  tier: T3/G6
+  phase: 5
+  description: Bundled documentation clickstream benchmark selected as non-mobility cross-domain application evidence.
+  spec_path: benchmarks/BP_Clickstream_Docs_Funnel/spec.yaml
+  readme_path: benchmarks/BP_Clickstream_Docs_Funnel/README.md
+  reference_script: benchmarks/BP_Clickstream_Docs_Funnel/run_reference.py
+  expected_metrics_path: benchmarks/BP_Clickstream_Docs_Funnel/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_Clickstream_Docs_Funnel/figure_recipe.py
+- id: BP_Support_Portal_Funnel
+  branch: application
+  tier: T3/G6
+  phase: 5
+  description: Bundled support-portal navigation benchmark selected as a second non-mobility cross-domain application evidence family.
+  spec_path: benchmarks/BP_Support_Portal_Funnel/spec.yaml
+  readme_path: benchmarks/BP_Support_Portal_Funnel/README.md
+  reference_script: benchmarks/BP_Support_Portal_Funnel/run_reference.py
+  expected_metrics_path: benchmarks/BP_Support_Portal_Funnel/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_Support_Portal_Funnel/figure_recipe.py
+- id: BP_Workflow_Queue_Funnel
+  branch: application
+  tier: T3/G6
+  phase: 5
+  description: Bundled workflow-queue benchmark selected as a non-navigation operational application evidence family.
+  spec_path: benchmarks/BP_Workflow_Queue_Funnel/spec.yaml
+  readme_path: benchmarks/BP_Workflow_Queue_Funnel/README.md
+  reference_script: benchmarks/BP_Workflow_Queue_Funnel/run_reference.py
+  expected_metrics_path: benchmarks/BP_Workflow_Queue_Funnel/expected_metrics.json
+  figure_recipe_path: benchmarks/BP_Workflow_Queue_Funnel/figure_recipe.py

@@ -1,0 +1,33 @@
+id: BP_Clickstream_Docs_Funnel
+branch: application
+theorem_tier: T3/G6
+system_class: application_windowed_clickstream
+state_dimension: 4
+formal_system: Row-stochastic page-to-page clickstream operators derived from a bundled documentation navigation fixture.
+parameter_sets:
+  reference:
+    case_label: stable_docs_funnel
+    window_labels: ["launch_week", "onboarding_push", "integration_week", "release_notes_week"]
+    total_sessions_min: 900
+  negative_detour:
+    case_label: docs_detour_negative
+    window_labels: ["launch_week", "onboarding_push", "integration_week", "release_notes_week"]
+    total_sessions_min: 600
+data_provenance:
+  source_page: bundled_repository_fixture
+  source_archive: docs_navigation_funnel_q1_2026.json
+  derivation_rule: Aggregate bundled page-transition counts into ordered product-lifecycle windows; preserve one negative detour case.
+ground_truth_notes:
+  - This is a bounded cross-domain application fixture, not a public-data theorem claim.
+  - The reference case is intended to show stable coherent structure outside mobility.
+  - The negative detour case is retained to preserve explicit rejection evidence.
+expected_failure_modes:
+  - carrier_failure
+  - coupling_failure
+  - numerical_artifact_failure
+primary_observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon

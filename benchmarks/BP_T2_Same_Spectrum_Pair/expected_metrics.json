@@ -1,0 +1,14 @@
+{
+  "benchmark_id": "BP_T2_Same_Spectrum_Pair",
+  "reference_case": {
+    "parameter_id": "reference",
+    "spectral_gap_match_tolerance": 0.01,
+    "transient_amplification_min": 8.0,
+    "pseudospectral_proxy_min": 1000.0
+  },
+  "matched_normal_case": {
+    "parameter_id": "matched_normal",
+    "transient_amplification_max": 1.1,
+    "pseudospectral_proxy_max": 200.0
+  }
+}

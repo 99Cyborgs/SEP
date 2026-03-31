@@ -1,0 +1,270 @@
+{
+  "benchmark_id": "BP_Mobility_NYC_East_Corridor",
+  "branch": "application",
+  "theorem_tier": "T3/G6",
+  "parameter_id": "reference",
+  "seed": 0,
+  "parameters": {
+    "windows": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "window_labels": [
+      "06:00-09:00",
+      "09:00-12:00",
+      "15:00-18:00",
+      "18:00-21:00"
+    ],
+    "eta": 0.45,
+    "coherent_rank": 2,
+    "block_sizes": [
+      1,
+      1
+    ],
+    "station_names": [
+      "1 Ave & E 68 St",
+      "1 Ave & E 62 St",
+      "E 44 St & Lexington Ave",
+      "E 47 St & Park Ave"
+    ],
+    "station_ids": [
+      "6822.09",
+      "6753.08",
+      "6464.09",
+      "6584.12"
+    ],
+    "total_trips": 1045,
+    "pseudocount": 0.2,
+    "refined_pseudocount": 1.0,
+    "case_label": "nyc_east_side_mixed",
+    "source_archive": "202401-citibike-tripdata.zip",
+    "base_parameter_id": "reference",
+    "station_subset_indices": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.05088229999819305,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": null,
+    "singular_gap": 0.32111225405252897,
+    "projector_deformation": null,
+    "coherent_projector_deformation": 0.4821915250900644,
+    "block_residual_norm": 0.9306149284827114,
+    "leakage_trajectory": [
+      2.2226053616087517e-16,
+      0.02718147785366874,
+      0.07246888185801298,
+      0.056191434999446246
+    ],
+    "autonomy_horizon": 4,
+    "cross_subsystem_transfer_rate": 0.9306149284827114,
+    "reduced_model_forecast_error": null,
+    "transient_amplification_score": null,
+    "ensemble_averaged_leakage": null,
+    "leakage_variance": null,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": -0.030081363562288455,
+        "rho_tau": 0.01947834163783368
+      },
+      "L2": {
+        "epsilon_s": -0.07389693829134127,
+        "rho_tau": 0.04282972034355116,
+        "rho_tau_sq": -0.004879081261728785
+      },
+      "L3": {
+        "epsilon_s": -0.07389693829134127,
+        "gamma_rho_tau": 0.04282972034355116,
+        "gamma_rho_tau_sq": -0.004879081261728785
+      }
+    },
+    "transportability_metrics": {
+      "coherent_vs_frozen_horizon_gain": 0.0,
+      "coherent_horizon": 4.0,
+      "frozen_horizon": 4.0,
+      "coherent_mean_leakage": 0.03896044867778205,
+      "frozen_mean_leakage": 0.02716288199085832,
+      "coherent_minus_frozen_leakage": [
+        -5.296378901361871e-17,
+        -0.03017959136221215,
+        0.04487892882505248,
+        0.03249092928485465
+      ],
+      "coherent_window_singular_gaps": [
+        0.480370769486227,
+        0.35135456540346355,
+        0.12993049546157798,
+        0.3227931858588474
+      ],
+      "frozen_window_singular_gaps": [
+        0.28263394572322487,
+        0.28263394572322487,
+        0.28263394572322487,
+        0.28263394572322487
+      ],
+      "coherent_window_leakage": [
+        2.2226053616087517e-16,
+        7.87691314729596e-16,
+        2.100837988249111e-16,
+        5.850021123738528e-16
+      ],
+      "frozen_window_leakage": [
+        2.752243251744939e-16,
+        2.752243251744939e-16,
+        2.752243251744939e-16,
+        2.752243251744939e-16
+      ],
+      "carrier_tracking": {
+        "mean_deformation": 0.4821915250900644,
+        "max_deformation": 0.832861964375102,
+        "trajectory": [
+          0.3069548219918682,
+          0.30675778890322325,
+          0.832861964375102
+        ]
+      },
+      "source_page": "https://citibikenyc.com/system-data",
+      "source_archive": "202401-citibike-tripdata.zip",
+      "derivation_summary": "Aggregate weekday trips by started_at into ordered commute windows; counts are stored before pseudocount smoothing.",
+      "selected_station_names": [
+        "1 Ave & E 68 St",
+        "1 Ave & E 62 St",
+        "E 44 St & Lexington Ave",
+        "E 47 St & Park Ave"
+      ],
+      "selected_station_ids": [
+        "6822.09",
+        "6753.08",
+        "6464.09",
+        "6584.12"
+      ],
+      "total_trips": 1045.0,
+      "case_label": "nyc_east_side_mixed",
+      "base_parameter_id": "reference"
+    },
+    "coordinate_sensitivity_metrics": {
+      "max_relative_change": 0.0,
+      "mean_relative_change": 0.0,
+      "projector_back_error": 0.0
+    },
+    "numerical_refinement_metrics": {
+      "max_relative_span": 0.06749981753651947,
+      "mean": 0.5620526133378206,
+      "refinement_axis": "pseudocount_smoothing",
+      "singular_gap_relative_span": 0.03035632748896026,
+      "carrier_relative_span": 0.0535634736117351,
+      "residual_relative_span": 0.06749981753651947,
+      "coarse_pseudocount": 0.2,
+      "refined_pseudocount": 1.0
+    },
+    "predicted_autonomy_horizon": 0.0,
+    "singular_values": [
+      [
+        1.3780765696660011,
+        0.6045254981531799
+      ],
+      [
+        1.3380433605267483,
+        0.4557207051899763
+      ],
+      [
+        1.0346949481637344,
+        0.42796481039359074
+      ],
+      [
+        1.0398126049715455,
+        0.574343388753541
+      ]
+    ],
+    "transient_coincidence_score": 0.7383743118571311
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.030081363562288455,
+        "rho_tau": 0.01947834163783368
+      },
+      "train_rmse": 0.003912052609632733,
+      "test_rmse": 0.03259335390013831,
+      "residual_mean": 0.008148338475034581,
+      "residual_std": 0.014514281808845628,
+      "selected": false,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.07389693829134127,
+        "rho_tau": 0.04282972034355116,
+        "rho_tau_sq": -0.004879081261728785
+      },
+      "train_rmse": 2.7246446931892508e-17,
+      "test_rmse": 0.02655692567119554,
+      "residual_mean": 0.006639231417798879,
+      "residual_std": 0.011499486138835216,
+      "selected": true,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.07389693829134127,
+        "gamma_rho_tau": 0.04282972034355116,
+        "gamma_rho_tau_sq": -0.004879081261728785
+      },
+      "train_rmse": 2.7246446931892508e-17,
+      "test_rmse": 0.02655692567119554,
+      "residual_mean": 0.006639231417798879,
+      "residual_std": 0.011499486138835216,
+      "selected": false,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L2",
+    "ranked_laws": [
+      "L2",
+      "L3",
+      "L1"
+    ],
+    "improvement_over_l1": 0.006036428228942771
+  },
+  "gate_outcomes": {},
+  "failure_labels": [
+    "carrier_failure",
+    "coupling_failure"
+  ],
+  "figure_references": [],
+  "notes": [
+    "Derived real-data fixture from 202401-citibike-tripdata.zip using a Manhattan east-side station slice selected as a mixed external application case.",
+    "Coordinate sensitivity is left neutral because arbitrary orthogonal basis changes are not meaningful on named mobility stations in this first application case study."
+  ]
+}

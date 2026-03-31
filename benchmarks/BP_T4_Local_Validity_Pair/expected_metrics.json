@@ -1,0 +1,15 @@
+{
+  "benchmark_id": "BP_T4_Local_Validity_Pair",
+  "reference_case": {
+    "parameter_id": "reference",
+    "local_validity_margin_max": 0.0,
+    "fast_slaving_defect_min": 0.3,
+    "anchor_projector_deformation_min": 0.7
+  },
+  "matched_local_case": {
+    "parameter_id": "matched_local",
+    "local_validity_margin_min": 0.05,
+    "fast_slaving_defect_max": 0.1,
+    "best_law": "L2"
+  }
+}

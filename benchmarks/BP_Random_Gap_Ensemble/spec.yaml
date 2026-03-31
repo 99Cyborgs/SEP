@@ -1,0 +1,24 @@
+id: BP_Random_Gap_Ensemble
+branch: linear
+theorem_tier: T1/T2
+system_class: random_linear_ensemble
+state_dimension: 4
+formal_system: Ensemble of linear matrices with matched slow_count and deliberately varied nonnormality.
+parameter_ranges:
+  gap: [0.05, 0.30]
+  rho: [0.01, 0.12]
+  ensemble_size: [8, 64]
+  slow_count: [2, 2]
+ground_truth_notes:
+  - Slow subsystem count is planted at two.
+  - Normal and nonnormal branches are both represented.
+expected_failure_modes:
+  - gap_failure
+  - transient_growth_failure
+  - horizon_failure
+primary_observables:
+  - spectral_gap
+  - projector_deformation
+  - block_residual_norm
+  - transient_amplification_score
+  - leakage_trajectory

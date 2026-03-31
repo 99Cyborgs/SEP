@@ -1,0 +1,23 @@
+id: BP_Weakly_Nonlinear_Slow_Manifold
+branch: nonlinear
+theorem_tier: T4
+system_class: weakly_nonlinear
+state_dimension: 3
+formal_system: Weakly nonlinear fast-slow system with a two-dimensional slow oscillator sector and one slaved fast variable.
+parameter_ranges:
+  epsilon: [0.05, 0.12]
+  rho: [0.03, 0.10]
+  curvature: [0.0, 1.0]
+  amplitude: [0.1, 1.5]
+ground_truth_notes:
+  - Critical manifold is explicit in the benchmark construction.
+  - Curvature correction is required; no global nonlinear claim is intended.
+expected_failure_modes:
+  - carrier_failure
+  - coupling_failure
+  - horizon_failure
+primary_observables:
+  - projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon

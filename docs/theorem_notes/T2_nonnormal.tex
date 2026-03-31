@@ -1,0 +1,44 @@
+\section{Tier T2: Nonnormal Linear Systems}
+
+\subsection{Problem statement}
+Determine when spectral separation is insufficient because transient growth dominates finite-horizon leakage.
+
+\subsection{Assumptions}
+\begin{enumerate}
+\item The autonomous generator still admits a nominal slow/fast split.
+\item The reduced dynamics is allowed to be strongly nonnormal.
+\item Finite-horizon observables are emphasized over asymptotic decay rates.
+\end{enumerate}
+
+\subsection{Expected statement}
+The pure affine law is not reliable in general. A corrected bound of the form
+\[
+\ell(t) \le C_1 \varepsilon_s + C_2 \Gamma_T \rho t + C_3 (\Gamma_T \rho t)^2
+\]
+is the intended practical statement, where
+\[
+\Gamma_T := \sup_{0 \le t \le T} \|e^{tA}\| e^{-t \alpha(A)}.
+\]
+
+\subsection{Proof ingredients}
+\begin{enumerate}
+\item Resolvent and pseudospectral bounds.
+\item Semigroup growth estimates on finite horizons.
+\item Perturbation estimates that retain nonnormal amplification factors.
+\end{enumerate}
+
+\subsection{Obstruction list}
+\begin{enumerate}
+\item Nearly defective reduced operators.
+\item Large resolvent norms far from the spectrum.
+\item Delay semigroup effects that are only sampled numerically on a finite history grid.
+\end{enumerate}
+
+\subsection{Correspondence to numerics}
+The repository tests this tier with `BP_Non_Normal_Shear`, `BP_Random_Gap_Ensemble`, a same-spectrum counterexample family `BP_T2_Same_Spectrum_Pair`, and a fixed-lag delay benchmark `BP_Delay_Coupled_Pair` analyzed through sampled history propagators. The delay benchmark is now packaged with a bounded semigroup-correspondence evidence bundle that includes refinement spans, constant-history correspondence, and adjacent refinement-stability diagnostics.
+
+\subsection{Current confidence level}
+Medium confidence on the numerical protocol and on the need for correction; theorem packaging is explicitly deferred pending stronger semigroup-facing hypotheses and delay refinement evidence.
+
+\subsection{Open proof gaps}
+Sharp comparison theorems between pseudospectral proxies and measured leakage are not yet proved here, and the delay extension still relies on finite-grid sampled history propagators rather than a theorem at the full semigroup level. The current repository posture is therefore a strengthened evidence package, with the same-spectrum counterexample family serving as failure-geometry evidence and the delay bundle serving only as bounded fixed-lag sampled-history support rather than closure of the general T2 theorem.

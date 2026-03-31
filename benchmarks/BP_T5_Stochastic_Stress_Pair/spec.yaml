@@ -1,0 +1,25 @@
+id: BP_T5_Stochastic_Stress_Pair
+branch: stochastic
+theorem_tier: T5
+system_class: stochastic_sample_stress_pair
+state_dimension: 4
+formal_system: Paired four-state metastable networks with identical transition structure and different Monte Carlo sample counts.
+parameter_sets:
+  reference:
+    case_label: sample_stress
+    trajectories: 40
+  matched_metastable:
+    case_label: matched_metastable
+    trajectories: 400
+ground_truth_notes:
+  - Both branches keep the same metastable network and source-state partition.
+  - The matched branch uses enough trajectories to keep bootstrap width and confidence-bounded horizon stable.
+  - The sample-stress branch widens uncertainty and degrades the confidence-bounded horizon without introducing a new stochastic model class.
+expected_failure_modes:
+  - horizon_failure
+  - numerical_artifact_failure
+primary_observables:
+  - ensemble_averaged_leakage
+  - leakage_variance
+  - autonomy_horizon
+  - stochastic_uncertainty_metrics

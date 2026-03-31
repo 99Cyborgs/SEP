@@ -1,0 +1,9 @@
+{
+  "label": "coupling_failure",
+  "triggered": true,
+  "metric": 2.200050178604016,
+  "threshold": 0.35,
+  "direction": "gt",
+  "message": "Reduced slow dynamics is too strongly coupled for the claimed regime.",
+  "archive_path": "failures\\G1_linear_validity\\BP_T2_Same_Spectrum_Pair_reference_seed0_coupling_failure.json"
+}

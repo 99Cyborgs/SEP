@@ -1,0 +1,12 @@
+{
+  "benchmark_id": "BP_Nearly_Decomposable_Chain",
+  "positive_case": {
+    "spectral_gap_min": 0.05,
+    "block_residual_norm_max": 0.25,
+    "autonomy_horizon_min": 4.0
+  },
+  "negative_case": {
+    "gap_failure_trigger_below": 0.02,
+    "coupling_failure_trigger_above": 0.35
+  }
+}

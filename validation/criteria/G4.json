@@ -1,0 +1,7 @@
+{
+  "gate": "G4",
+  "benchmark_ids": ["BP_Weakly_Nonlinear_Slow_Manifold", "BP_T4_Local_Validity_Pair"],
+  "required_best_law": "L2",
+  "max_projector_deformation": 0.35,
+  "min_autonomy_horizon": 1.0
+}

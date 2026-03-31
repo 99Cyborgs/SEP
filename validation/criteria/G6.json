@@ -1,0 +1,128 @@
+{
+  "gate": "G6",
+  "benchmark_ids": [
+    "BP_Linear_Two_Block",
+    "BP_Nearly_Decomposable_Chain",
+    "BP_Non_Normal_Shear",
+    "BP_Windowed_Transport_Flow",
+    "BP_Weakly_Nonlinear_Slow_Manifold",
+    "BP_Noisy_Metastable_Network",
+    "BP_Mobility_Chicago_Corridors",
+    "BP_Mobility_Downtown_Routing_Instability",
+    "BP_Mobility_NYC_East_Corridor",
+    "BP_Clickstream_Docs_Funnel",
+    "BP_Support_Portal_Funnel",
+    "BP_Workflow_Queue_Funnel"
+  ],
+  "primary_benchmark_ids": [
+    "BP_Linear_Two_Block",
+    "BP_Nearly_Decomposable_Chain",
+    "BP_Non_Normal_Shear",
+    "BP_Windowed_Transport_Flow",
+    "BP_Weakly_Nonlinear_Slow_Manifold",
+    "BP_Noisy_Metastable_Network"
+  ],
+  "application_benchmark_ids": [
+    "BP_Mobility_Chicago_Corridors",
+    "BP_Mobility_Downtown_Routing_Instability",
+    "BP_Mobility_NYC_East_Corridor",
+    "BP_Clickstream_Docs_Funnel",
+    "BP_Support_Portal_Funnel",
+    "BP_Workflow_Queue_Funnel"
+  ],
+  "primary_identifiability_thresholds": {
+    "max_coordinate_sensitivity": 0.5,
+    "max_refinement_span": 0.3
+  },
+  "application_evidence": {
+    "mode": "enforced",
+    "min_accepted_cases": 8,
+    "min_rejected_cases": 6,
+    "required_cases": [
+      {
+        "benchmark_id": "BP_Mobility_Chicago_Corridors",
+        "parameter_id": "weekday_reference",
+        "seed": 0,
+        "expected_status": "accepted"
+      },
+      {
+        "benchmark_id": "BP_Mobility_Chicago_Corridors",
+        "parameter_id": "weekday_pseudocount_tight",
+        "seed": 0,
+        "expected_status": "accepted"
+      },
+      {
+        "benchmark_id": "BP_Mobility_Chicago_Corridors",
+        "parameter_id": "weekday_pseudocount_loose",
+        "seed": 0,
+        "expected_status": "accepted"
+      },
+      {
+        "benchmark_id": "BP_Mobility_Chicago_Corridors",
+        "parameter_id": "weekday_three_station_corridor",
+        "seed": 0,
+        "expected_status": "accepted"
+      },
+      {
+        "benchmark_id": "BP_Mobility_Chicago_Corridors",
+        "parameter_id": "weekday_window_coarsened",
+        "seed": 0,
+        "expected_status": "accepted"
+      },
+      {
+        "benchmark_id": "BP_Mobility_Chicago_Corridors",
+        "parameter_id": "weekend_negative",
+        "seed": 0,
+        "expected_status": "rejected"
+      },
+      {
+        "benchmark_id": "BP_Mobility_Downtown_Routing_Instability",
+        "parameter_id": "reference",
+        "seed": 0,
+        "expected_status": "rejected"
+      },
+      {
+        "benchmark_id": "BP_Mobility_NYC_East_Corridor",
+        "parameter_id": "reference",
+        "seed": 0,
+        "expected_status": "rejected"
+      },
+      {
+        "benchmark_id": "BP_Clickstream_Docs_Funnel",
+        "parameter_id": "reference",
+        "seed": 0,
+        "expected_status": "accepted"
+      },
+      {
+        "benchmark_id": "BP_Clickstream_Docs_Funnel",
+        "parameter_id": "negative_detour",
+        "seed": 0,
+        "expected_status": "rejected"
+      },
+      {
+        "benchmark_id": "BP_Support_Portal_Funnel",
+        "parameter_id": "reference",
+        "seed": 0,
+        "expected_status": "accepted"
+      },
+      {
+        "benchmark_id": "BP_Support_Portal_Funnel",
+        "parameter_id": "negative_detour",
+        "seed": 0,
+        "expected_status": "rejected"
+      },
+      {
+        "benchmark_id": "BP_Workflow_Queue_Funnel",
+        "parameter_id": "reference",
+        "seed": 0,
+        "expected_status": "accepted"
+      },
+      {
+        "benchmark_id": "BP_Workflow_Queue_Funnel",
+        "parameter_id": "negative_detour",
+        "seed": 0,
+        "expected_status": "rejected"
+      }
+    ]
+  }
+}

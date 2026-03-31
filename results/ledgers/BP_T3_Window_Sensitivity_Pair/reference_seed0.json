@@ -1,0 +1,337 @@
+{
+  "benchmark_id": "BP_T3_Window_Sensitivity_Pair",
+  "branch": "transport",
+  "theorem_tier": "T3",
+  "parameter_id": "reference",
+  "seed": 0,
+  "parameters": {
+    "windows": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "eta": 0.38,
+    "grid_size": 24,
+    "window_count": 6,
+    "coherent_rank": 2,
+    "block_sizes": [
+      1,
+      1
+    ],
+    "base_shift": 0.8,
+    "window_groups": [
+      [
+        0
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        3
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "parameter_id": "reference",
+    "case_label": "fast_drift_mixed",
+    "phase_increment": 2.4,
+    "diffusion": 2.8,
+    "coherent_strength": 2.0,
+    "paired_parameter_id": "matched_positive",
+    "paired_case_label": "moderate_drift_positive",
+    "paired_phase_increment": 0.9,
+    "paired_diffusion": 2.8,
+    "paired_coherent_strength": 2.4
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.0641563999997743,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": null,
+    "singular_gap": 0.032933600950884136,
+    "projector_deformation": null,
+    "coherent_projector_deformation": 0.582583182308787,
+    "block_residual_norm": 0.034140385827696705,
+    "leakage_trajectory": [
+      5.515086155877798e-16,
+      0.41873605680000947,
+      0.8257213816923379,
+      0.842062701689416,
+      0.17958793245439883,
+      0.11256425383758778
+    ],
+    "autonomy_horizon": 6,
+    "cross_subsystem_transfer_rate": 0.034140385827696705,
+    "reduced_model_forecast_error": null,
+    "transient_amplification_score": null,
+    "ensemble_averaged_leakage": null,
+    "leakage_variance": null,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": 0.3323802520789273,
+        "rho_tau": -0.13320699922516768
+      },
+      "L2": {
+        "epsilon_s": -0.5014229715083818,
+        "rho_tau": 12.316557647104641,
+        "rho_tau_sq": -52.09483617422065
+      },
+      "L3": {
+        "epsilon_s": -0.5014229715083818,
+        "gamma_rho_tau": 12.316557647104641,
+        "gamma_rho_tau_sq": -52.09483617422065
+      }
+    },
+    "transportability_metrics": {
+      "coherent_vs_frozen_horizon_gain": 0.0,
+      "coherent_horizon": 6.0,
+      "frozen_horizon": 6.0,
+      "coherent_mean_leakage": 0.3964453877456251,
+      "frozen_mean_leakage": 0.24455747302107111,
+      "coherent_peak_leakage": 0.842062701689416,
+      "frozen_peak_leakage": 0.3672402537394845,
+      "coherent_better_window_count": 3.0,
+      "coherent_minus_frozen_leakage": [
+        -1.0962106854420059e-16,
+        0.2662072688245214,
+        0.5659866182791802,
+        0.5149816576430934,
+        -0.18117205649757437,
+        -0.2546759999018967
+      ],
+      "coherent_window_leakage": [
+        5.515086155877798e-16,
+        9.702556809924727e-16,
+        9.702556809924727e-16,
+        8.753429683628738e-16,
+        9.769883527303224e-16,
+        8.544101423345064e-16
+      ],
+      "frozen_window_leakage": [
+        6.611296841319804e-16,
+        6.611296841319804e-16,
+        6.611296841319804e-16,
+        6.611296841319804e-16,
+        6.611296841319804e-16,
+        6.611296841319804e-16
+      ],
+      "coherent_window_singular_gaps": [
+        0.025393538641828917,
+        0.04036335300466787,
+        0.04036335300466787,
+        0.025393538641829694,
+        0.03304391120615524,
+        0.03304391120615524
+      ],
+      "frozen_window_singular_gaps": [
+        0.021019303211675444,
+        0.021019303211675444,
+        0.021019303211675444,
+        0.021019303211675444,
+        0.021019303211675444,
+        0.021019303211675444
+      ],
+      "source_tracking": {
+        "mean_deformation": 0.3103907716960342,
+        "max_deformation": 0.9999912898575593,
+        "trajectory": [
+          0.27598128431129587,
+          0.0,
+          0.27598128431130853,
+          0.9999912898575593,
+          7.311426854074619e-15
+        ]
+      },
+      "target_tracking": {
+        "mean_deformation": 0.2899357576023324,
+        "max_deformation": 0.885851505329634,
+        "trajectory": [
+          0.28191364134101565,
+          0.0,
+          0.28191364134100483,
+          0.885851505329634,
+          7.557924226812293e-15
+        ]
+      },
+      "carrier_tracking": {
+        "mean_deformation": 0.582583182308787,
+        "max_deformation": 0.9836914687980833,
+        "trajectory": [
+          0.4603076891495955,
+          0.6852102176218813,
+          0.4619339401869229,
+          0.9836914687980833,
+          0.32177259578745265
+        ]
+      },
+      "window_sensitivity": {
+        "window_groups": [
+          [
+            0
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "base_window_count": 6,
+        "regrouped_window_count": 4,
+        "regrouped_horizon_gain": 0.0,
+        "regrouped_autonomy_horizon": 4.0,
+        "regrouped_singular_gap": 0.043737491403939954,
+        "regrouped_carrier_mean_deformation": 0.8214140264408313,
+        "regrouped_carrier_max_deformation": 0.997305368472218,
+        "adjacent_window_carrier_mean_deformation": 0.582583182308787,
+        "adjacent_window_carrier_max_deformation": 0.9836914687980833,
+        "autonomy_horizon_relative_span": 0.3333333333333333,
+        "horizon_gain_relative_span": 0.0,
+        "carrier_deformation_relative_span": 0.40995149085072036
+      },
+      "positive_negative_transport_pair": {
+        "current_branch": "fast_drift_mixed",
+        "paired_branch": "moderate_drift_positive",
+        "current_horizon_gain": 0.0,
+        "paired_horizon_gain": 3.0,
+        "current_carrier_deformation": 0.582583182308787,
+        "paired_carrier_deformation": 0.30860970760912776,
+        "current_singular_gap": 0.032933600950884136,
+        "paired_singular_gap": 0.03224704530410183,
+        "current_regrouped_horizon_gain": 0.0,
+        "paired_regrouped_horizon_gain": 2.0,
+        "current_regrouped_carrier_deformation": 0.8214140264408313,
+        "paired_regrouped_carrier_deformation": 0.48548832264152547
+      }
+    },
+    "coordinate_sensitivity_metrics": {
+      "max_relative_change": 0.0,
+      "mean_relative_change": 0.0,
+      "projector_back_error": 0.0
+    },
+    "numerical_refinement_metrics": {
+      "max_relative_span": 0.0,
+      "mean": 6.0
+    },
+    "predicted_autonomy_horizon": 0.0,
+    "singular_values": [
+      [
+        1.0042195221621022,
+        0.9719167898973952
+      ],
+      [
+        1.01098327575434,
+        0.9815591194978018
+      ],
+      [
+        1.01098327575434,
+        0.9815591194978018
+      ],
+      [
+        1.0042195221621015,
+        0.9719167898973957
+      ],
+      [
+        1.0074321467088772,
+        0.9771647321856893
+      ],
+      [
+        1.0074321467088776,
+        0.9771647321856903
+      ]
+    ],
+    "transient_coincidence_score": 0.5727044156687197
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.3323802520789273,
+        "rho_tau": -0.13320699922516768
+      },
+      "train_rmse": 0.15294631880058795,
+      "test_rmse": 0.6562531006002252,
+      "residual_mean": 0.218723326972626,
+      "residual_std": 0.3336333334819273,
+      "selected": false,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.5014229715083818,
+        "rho_tau": 12.316557647104641,
+        "rho_tau_sq": -52.09483617422065
+      },
+      "train_rmse": 0.09297805601397238,
+      "test_rmse": 0.41342206746415405,
+      "residual_mean": 0.13776337106982225,
+      "residual_std": 0.20918206140508774,
+      "selected": true,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.5014229715083818,
+        "gamma_rho_tau": 12.316557647104641,
+        "gamma_rho_tau_sq": -52.09483617422065
+      },
+      "train_rmse": 0.09297805601397238,
+      "test_rmse": 0.41342206746415405,
+      "residual_mean": 0.13776337106982225,
+      "residual_std": 0.20918206140508774,
+      "selected": false,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L2",
+    "ranked_laws": [
+      "L2",
+      "L3",
+      "L1"
+    ],
+    "improvement_over_l1": 0.24283103313607118
+  },
+  "gate_outcomes": {},
+  "failure_labels": [
+    "carrier_failure"
+  ],
+  "figure_references": [],
+  "notes": [
+    "This paired T3 family keeps the transport construction fixed while changing phase drift and coherent strength to expose window-sensitive failure geometry.",
+    "The moderate-drift branch is a positive control; the fast-drift branch is mixed or negative evidence and is reported without becoming gate-fatal in G3."
+  ]
+}

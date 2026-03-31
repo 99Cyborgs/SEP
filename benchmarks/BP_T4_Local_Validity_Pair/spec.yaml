@@ -1,0 +1,28 @@
+id: BP_T4_Local_Validity_Pair
+branch: nonlinear
+theorem_tier: T4
+system_class: weakly_nonlinear_local_validity_pair
+state_dimension: 3
+formal_system: Paired weakly nonlinear fast-slow systems with the same structural template but different local-validity posture.
+parameter_sets:
+  reference:
+    case_label: amplitude_breakdown
+    epsilon: 0.04
+    coupling: 0.04
+  matched_local:
+    case_label: matched_local
+    epsilon: 0.08
+    coupling: 0.07
+ground_truth_notes:
+  - Both branches use the same three-dimensional fast-slow template.
+  - The matched local branch stays closer to the slaved fast-variable relation and keeps the local-validity margin positive.
+  - The amplitude-breakdown branch increases anchor drift and fast slaving defect without claiming a global nonlinear instability theorem.
+expected_failure_modes:
+  - carrier_failure
+  - coupling_failure
+  - horizon_failure
+primary_observables:
+  - projector_deformation
+  - leakage_trajectory
+  - autonomy_horizon
+  - local_validity_metrics

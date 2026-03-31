@@ -1,0 +1,269 @@
+{
+  "benchmark_id": "BP_Workflow_Queue_Funnel",
+  "branch": "application",
+  "theorem_tier": "T3/G6",
+  "parameter_id": "reference",
+  "seed": 0,
+  "parameters": {
+    "windows": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "window_labels": [
+      "quarter_open",
+      "triage_stabilization",
+      "execution_push",
+      "closure_cleanup"
+    ],
+    "eta": 0.45,
+    "coherent_rank": 2,
+    "block_sizes": [
+      1,
+      1
+    ],
+    "stage_names": [
+      "Intake",
+      "Triage",
+      "Execution",
+      "Closure"
+    ],
+    "stage_ids": [
+      "intake",
+      "triage",
+      "execution",
+      "closure"
+    ],
+    "total_cases": 1430,
+    "pseudocount": 0.2,
+    "refined_pseudocount": 0.3,
+    "case_label": "stable_workflow_queue",
+    "source_archive": "workflow_queue_funnel_q1_2026.json",
+    "base_parameter_id": "reference",
+    "dataset_name": "Bundled workflow queue funnel",
+    "stage_subset_indices": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.037062999999761814,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": null,
+    "singular_gap": 0.27845055699038207,
+    "projector_deformation": null,
+    "coherent_projector_deformation": 0.1380588849603833,
+    "block_residual_norm": 0.0528225656500068,
+    "leakage_trajectory": [
+      3.4646426045348225e-16,
+      0.07326037312904553,
+      0.10996117338276422,
+      0.11508957330683285
+    ],
+    "autonomy_horizon": 4,
+    "cross_subsystem_transfer_rate": 0.0528225656500068,
+    "reduced_model_forecast_error": null,
+    "transient_amplification_score": null,
+    "ensemble_averaged_leakage": null,
+    "leakage_variance": null,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": -0.1514904317450838,
+        "rho_tau": 0.6790759744783059
+      },
+      "L2": {
+        "epsilon_s": -0.7834161139780982,
+        "rho_tau": 2.3778880223547167,
+        "rho_tau_sq": -6.2534744535797655
+      },
+      "L3": {
+        "epsilon_s": -0.7834161139780982,
+        "gamma_rho_tau": 2.3778880223547167,
+        "gamma_rho_tau_sq": -6.2534744535797655
+      }
+    },
+    "transportability_metrics": {
+      "coherent_vs_frozen_horizon_gain": 0.0,
+      "coherent_horizon": 4.0,
+      "frozen_horizon": 4.0,
+      "coherent_mean_leakage": 0.07457777995466074,
+      "frozen_mean_leakage": 0.04893288633224771,
+      "coherent_minus_frozen_leakage": [
+        -4.35392140999389e-17,
+        0.02756230081510727,
+        0.040455416960777646,
+        0.03456185671376724
+      ],
+      "coherent_window_singular_gaps": [
+        0.2795778587917145,
+        0.27174036689942127,
+        0.2794702838078772,
+        0.28301371846251533
+      ],
+      "frozen_window_singular_gaps": [
+        0.28155273917610113,
+        0.28155273917610113,
+        0.28155273917610113,
+        0.28155273917610113
+      ],
+      "coherent_window_leakage": [
+        3.4646426045348225e-16,
+        6.934089447724722e-16,
+        4.497272889443227e-16,
+        6.188013706904659e-16
+      ],
+      "frozen_window_leakage": [
+        3.9000347455342115e-16,
+        3.9000347455342115e-16,
+        3.9000347455342115e-16,
+        3.9000347455342115e-16
+      ],
+      "carrier_tracking": {
+        "mean_deformation": 0.1380588849603833,
+        "max_deformation": 0.1486000992105509,
+        "trajectory": [
+          0.12821514225255287,
+          0.1486000992105509,
+          0.13736141341804609
+        ]
+      },
+      "source_page": "bundled_repository_fixture",
+      "source_archive": "workflow_queue_funnel_q1_2026.json",
+      "derivation_summary": "Aggregate ordered stage-to-stage transitions into four reporting windows before pseudocount smoothing.",
+      "selected_stage_names": [
+        "Intake",
+        "Triage",
+        "Execution",
+        "Closure"
+      ],
+      "selected_stage_ids": [
+        "intake",
+        "triage",
+        "execution",
+        "closure"
+      ],
+      "total_cases": 1430.0,
+      "case_label": "stable_workflow_queue",
+      "base_parameter_id": "reference",
+      "dataset_name": "Bundled workflow queue funnel"
+    },
+    "coordinate_sensitivity_metrics": {
+      "max_relative_change": 0.0,
+      "mean_relative_change": 0.0,
+      "projector_back_error": 0.0
+    },
+    "numerical_refinement_metrics": {
+      "max_relative_span": 0.08016203884909928,
+      "mean": 0.15700417499155642,
+      "refinement_axis": "pseudocount_smoothing",
+      "singular_gap_relative_span": 0.004213873860735519,
+      "carrier_relative_span": 0.0008742776571639163,
+      "residual_relative_span": 0.08016203884909928,
+      "coarse_pseudocount": 0.2,
+      "refined_pseudocount": 0.3
+    },
+    "predicted_autonomy_horizon": 5.905451793206804,
+    "singular_values": [
+      [
+        1.0016292266855158,
+        0.9161665672907892
+      ],
+      [
+        1.0046617148838526,
+        0.9024087323289924
+      ],
+      [
+        1.0135674119679159,
+        0.8912430953015141
+      ],
+      [
+        1.0211662219971291,
+        0.8870652762600117
+      ]
+    ],
+    "transient_coincidence_score": 0.6316243264338542
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.1514904317450838,
+        "rho_tau": 0.6790759744783059
+      },
+      "train_rmse": 0.01615425627290147,
+      "test_rmse": 0.02326416774198957,
+      "residual_mean": 0.005816041935497417,
+      "residual_std": 0.017239461365841015,
+      "selected": false,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.7834161139780982,
+        "rho_tau": 2.3778880223547167,
+        "rho_tau_sq": -6.2534744535797655
+      },
+      "train_rmse": 1.0690892270748217e-16,
+      "test_rmse": 0.0016623908485587785,
+      "residual_mean": -0.00041559771213962074,
+      "residual_std": 0.0007198363529353866,
+      "selected": true,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.7834161139780982,
+        "gamma_rho_tau": 2.3778880223547167,
+        "gamma_rho_tau_sq": -6.2534744535797655
+      },
+      "train_rmse": 1.0690892270748217e-16,
+      "test_rmse": 0.0016623908485587785,
+      "residual_mean": -0.00041559771213962074,
+      "residual_std": 0.0007198363529353866,
+      "selected": false,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L2",
+    "ranked_laws": [
+      "L2",
+      "L3",
+      "L1"
+    ],
+    "improvement_over_l1": 0.02160177689343079
+  },
+  "gate_outcomes": {},
+  "failure_labels": [],
+  "figure_references": [],
+  "notes": [
+    "Bundled workflow-queue fixture extends the application track beyond navigation by modeling intake-to-closure operational transitions as ordered stochastic operators.",
+    "The negative detour variant is retained to preserve explicit rejection evidence when triage loops and rework destroy coherent stage separation."
+  ]
+}

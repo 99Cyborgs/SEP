@@ -1,0 +1,7 @@
+{
+  "gate": "G5",
+  "benchmark_ids": ["BP_Noisy_Metastable_Network", "BP_T5_Stochastic_Stress_Pair"],
+  "max_leakage_variance": 0.25,
+  "max_bootstrap_width": 0.2,
+  "min_autonomy_horizon": 1.0
+}

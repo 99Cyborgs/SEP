@@ -1,0 +1,38 @@
+# G4 Report
+
+- Passed: `True`
+- Summary: Nonlinear extension gate completed.
+- Failure labels: none
+
+## Criteria
+```json
+{
+  "gate": "G4",
+  "benchmark_ids": [
+    "BP_Weakly_Nonlinear_Slow_Manifold",
+    "BP_T4_Local_Validity_Pair"
+  ],
+  "required_best_law": "L2",
+  "max_projector_deformation": 0.35,
+  "min_autonomy_horizon": 1.0
+}
+```
+
+## Metrics
+```json
+{
+  "record_count": 1,
+  "reported_record_count": 3,
+  "best_law": "L2",
+  "projector_deformation": 0.02018559199148565,
+  "autonomy_horizon": 12.0,
+  "local_validity_margin": 0.07848103339063606,
+  "fast_slaving_defect": 0.06479999999999997,
+  "anchor_projector_deformation": 0.571518966609364,
+  "nonlinear_pair_count": 2,
+  "breakdown_local_validity_margin": -0.4317349714699479,
+  "breakdown_fast_slaving_defect": 0.43388800000000016,
+  "breakdown_anchor_projector_deformation": 0.7409543715571213,
+  "nonlinear_pair_margin_delta": 0.5102160048605839
+}
+```

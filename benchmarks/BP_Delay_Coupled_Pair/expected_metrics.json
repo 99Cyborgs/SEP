@@ -1,0 +1,12 @@
+{
+  "benchmark_id": "BP_Delay_Coupled_Pair",
+  "positive_case": {
+    "transient_amplification_score_min": 1.5,
+    "best_law": "L3",
+    "horizon_ratio_min": 0.45,
+    "delay_surrogate_variation_max": 0.3
+  },
+  "negative_case": {
+    "coupling_failure_trigger_above": 0.35
+  }
+}

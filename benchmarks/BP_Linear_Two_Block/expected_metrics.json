@@ -1,0 +1,13 @@
+{
+  "benchmark_id": "BP_Linear_Two_Block",
+  "positive_case": {
+    "spectral_gap_min": 0.5,
+    "projector_deformation_max": 0.3,
+    "block_residual_norm_max": 0.2,
+    "autonomy_horizon_min": 2.0
+  },
+  "negative_case": {
+    "gap_failure_trigger_below": 0.05,
+    "coupling_failure_trigger_above": 0.35
+  }
+}

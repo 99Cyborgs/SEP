@@ -1,0 +1,23 @@
+id: BP_Noisy_Metastable_Network
+branch: stochastic
+theorem_tier: T5
+system_class: stochastic_metastable
+state_dimension: 4
+formal_system: Four-state stochastic network with two metastable sets and low-probability cross-cluster transitions.
+parameter_ranges:
+  trajectories: [200, 2000]
+  steps: [8, 20]
+  slow_count: [2, 2]
+ground_truth_notes:
+  - Metastable sets are {0,1} and {2,3}.
+  - Benchmark supports both exact propagator diagnostics and Monte Carlo estimates.
+expected_failure_modes:
+  - gap_failure
+  - horizon_failure
+  - numerical_artifact_failure
+primary_observables:
+  - spectral_gap
+  - block_residual_norm
+  - ensemble_averaged_leakage
+  - leakage_variance
+  - autonomy_horizon

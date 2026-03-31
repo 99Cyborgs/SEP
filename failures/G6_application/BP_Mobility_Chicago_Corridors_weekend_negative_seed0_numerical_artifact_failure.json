@@ -1,0 +1,9 @@
+{
+  "label": "numerical_artifact_failure",
+  "triggered": true,
+  "metric": 0.4201152023319361,
+  "threshold": 0.3,
+  "direction": "gt",
+  "message": "Observable variation across refinement levels is too large.",
+  "archive_path": "failures\\G6_application\\BP_Mobility_Chicago_Corridors_weekend_negative_seed0_numerical_artifact_failure.json"
+}

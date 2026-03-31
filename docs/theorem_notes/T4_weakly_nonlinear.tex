@@ -1,0 +1,49 @@
+\section{Tier T4: Weakly Nonlinear Perturbations}
+
+\subsection{Problem statement}
+Extend subsystem emergence diagnostics from linear reduced dynamics to locally valid weakly nonlinear fast-slow systems.
+
+\subsection{Assumptions}
+\begin{enumerate}
+\item A slow-manifold or center-manifold style reduction exists locally.
+\item Trajectories remain in a regime where local Jacobians are meaningful.
+\item Curvature and fast-variable slaving defects are explicitly bounded on the analysis horizon.
+\end{enumerate}
+
+\subsection{Expected statement}
+Only a local finite-horizon statement is admissible:
+\[
+\ell(t)
+\le
+C_1 \varepsilon_s
++
+C_2 \rho t
++
+C_3 \kappa t^2
++
+C_4 e^{-\lambda_f t}\|y_0 - y_{\mathrm{slaved}}(z_0)\|,
+\]
+where $\kappa$ is a curvature indicator extracted from the local slow-manifold geometry.
+
+\subsection{Proof ingredients}
+\begin{enumerate}
+\item Local linearization along trajectories.
+\item Slow-manifold graph estimates.
+\item Curvature-aware remainder control.
+\end{enumerate}
+
+\subsection{Obstruction list}
+\begin{enumerate}
+\item Loss of local manifold validity.
+\item Large-amplitude excursions invalidating the local Jacobian picture.
+\item Curvature terms dominating the affine coupling term.
+\end{enumerate}
+
+\subsection{Correspondence to numerics}
+The repository benchmark `BP_Weakly_Nonlinear_Slow_Manifold` remains the accepted local reference, while `BP_T4_Local_Validity_Pair` now adds a matched local branch and an amplitude-breakdown branch. Together they report fast slaving defect, anchor drift, local-validity margin, and L2-versus-L1 behavior as bounded local evidence.
+
+\subsection{Current confidence level}
+Medium confidence for the local benchmarked regime only.
+
+\subsection{Open proof gaps}
+No global nonlinear theorem is claimed. The current note does not prove robustness far from the tracked trajectory family, and the new paired benchmark is explicitly evidence for breakdown of local validity rather than a theorem that classifies all nonlinear excursions.

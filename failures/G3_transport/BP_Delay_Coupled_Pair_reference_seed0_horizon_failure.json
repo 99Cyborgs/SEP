@@ -1,0 +1,9 @@
+{
+  "label": "horizon_failure",
+  "triggered": true,
+  "metric": 0.0,
+  "threshold": 0.45,
+  "direction": "lt",
+  "message": "Observed autonomy horizon is too short relative to the affine prediction.",
+  "archive_path": "failures\\G3_transport\\BP_Delay_Coupled_Pair_reference_seed0_horizon_failure.json"
+}

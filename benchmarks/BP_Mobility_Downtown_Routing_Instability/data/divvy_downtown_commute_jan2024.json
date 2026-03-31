@@ -1,0 +1,80 @@
+{
+  "dataset_name": "Divvy January 2024 downtown Chicago route-instability station slice",
+  "source_page": "https://divvybikes.com/system-data",
+  "source_archive": "202401-divvy-tripdata.zip",
+  "source_url": "https://divvy-tripdata.s3.amazonaws.com/202401-divvy-tripdata.zip",
+  "derivation": {
+    "station_selection": [
+      "Clinton St & Washington Blvd",
+      "Kingsbury St & Kinzie St",
+      "Wells St & Elm St",
+      "State St & Chicago Ave"
+    ],
+    "trip_filter": "Weekday trips whose start and end station names are both in the selected downtown station set.",
+    "window_rule": "Aggregate weekday trips by started_at into ordered commute windows; counts are stored before pseudocount smoothing."
+  },
+  "stations": [
+    {
+      "name": "Clinton St & Washington Blvd",
+      "station_id": "WL-012"
+    },
+    {
+      "name": "Kingsbury St & Kinzie St",
+      "station_id": "KA1503000043"
+    },
+    {
+      "name": "Wells St & Elm St",
+      "station_id": "KA1504000135"
+    },
+    {
+      "name": "State St & Chicago Ave",
+      "station_id": "21544"
+    }
+  ],
+  "parameter_sets": {
+    "reference": {
+      "case_label": "downtown_commute_routing_instability",
+      "window_labels": [
+        "06:00-09:00",
+        "09:00-12:00",
+        "15:00-18:00",
+        "18:00-21:00"
+      ],
+      "eta": 0.45,
+      "pseudocount": 0.2,
+      "refined_pseudocount": 1.0,
+      "coherent_rank": 2,
+      "block_sizes": [
+        1,
+        1
+      ],
+      "total_trips": 393,
+      "raw_window_counts": [
+        [
+          [18, 4, 0, 0],
+          [43, 8, 0, 1],
+          [13, 8, 2, 3],
+          [4, 1, 9, 6]
+        ],
+        [
+          [7, 2, 0, 1],
+          [5, 6, 1, 1],
+          [0, 1, 4, 0],
+          [1, 1, 1, 5]
+        ],
+        [
+          [10, 18, 18, 8],
+          [15, 14, 2, 18],
+          [0, 11, 5, 2],
+          [8, 1, 6, 7]
+        ],
+        [
+          [9, 4, 6, 3],
+          [5, 20, 16, 7],
+          [0, 4, 5, 5],
+          [0, 1, 6, 3]
+        ]
+      ]
+    }
+  }
+}

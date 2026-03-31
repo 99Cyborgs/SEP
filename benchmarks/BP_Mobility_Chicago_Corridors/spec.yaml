@@ -1,0 +1,33 @@
+id: BP_Mobility_Chicago_Corridors
+branch: application
+theorem_tier: T3/G6
+system_class: real_world_windowed_mobility
+state_dimension: 4
+formal_system: Row-stochastic station-to-station mobility operators derived from a bundled Hyde Park slice of Divvy January 2024 trip history.
+parameter_sets:
+  reference:
+    case_label: weekday_commute
+    window_labels: ["06:00-09:00", "09:00-12:00", "15:00-18:00", "18:00-21:00"]
+    total_trips_min: 1000
+  negative_weekend:
+    case_label: weekend_night
+    window_labels: ["19:00-22:00", "22:00-24:00", "00:00-03:00", "03:00-07:00"]
+    total_trips_max: 150
+data_provenance:
+  source_page: https://divvybikes.com/system-data
+  source_archive: 202401-divvy-tripdata.zip
+  derivation_rule: Aggregate trips whose start and end station names are both in the selected Hyde Park station set.
+ground_truth_notes:
+  - The benchmark is real-data and case-study-only; no new universal theorem is claimed.
+  - The reference case is usable because corridor structure is interpretable and reproducible from a bundled fixture.
+  - The weekend-night case is retained as an instructive negative application slice.
+expected_failure_modes:
+  - carrier_failure
+  - coupling_failure
+  - numerical_artifact_failure
+primary_observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon

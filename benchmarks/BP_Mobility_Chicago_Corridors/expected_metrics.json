@@ -1,0 +1,38 @@
+{
+  "benchmark_id": "BP_Mobility_Chicago_Corridors",
+  "threshold_layers": {
+    "global_failure_taxonomy": {
+      "max_block_residual": 0.35,
+      "max_projector_deformation": 0.35,
+      "max_refinement_span": 0.3
+    },
+    "package_acceptance": {
+      "min_singular_gap": 0.4,
+      "max_coherent_projector_deformation": 0.4,
+      "min_autonomy_horizon": 3.0,
+      "max_refinement_span": 0.2,
+      "blocking_failure_labels": [
+        "carrier_failure",
+        "numerical_artifact_failure"
+      ],
+      "advisory_failure_labels": [
+        "coupling_failure"
+      ]
+    }
+  },
+  "positive_case": {
+    "parameter_id": "reference",
+    "total_trips_min": 1000,
+    "singular_gap_min": 0.45,
+    "projector_deformation_max": 0.35,
+    "refinement_span_max": 0.15,
+    "expected_package_status": "accepted"
+  },
+  "negative_case": {
+    "parameter_id": "negative_weekend",
+    "total_trips_max": 150,
+    "projector_deformation_min": 0.5,
+    "numerical_artifact_expected": true,
+    "expected_package_status": "rejected"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "label": "coupling_failure",
+  "triggered": true,
+  "metric": 0.9306149284827114,
+  "threshold": 0.35,
+  "direction": "gt",
+  "message": "Reduced slow dynamics is too strongly coupled for the claimed regime.",
+  "archive_path": "failures\\G1_linear_validity\\BP_Mobility_NYC_East_Corridor_reference_seed0_coupling_failure.json"
+}

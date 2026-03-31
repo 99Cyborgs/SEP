@@ -1,0 +1,26 @@
+id: BP_Linear_Two_Block
+branch: linear
+theorem_tier: T1
+system_class: autonomous_linear
+state_dimension: 8
+formal_system: Q^T (diag(L_slow, L_fast) + R_slow) Q with planted 4-dimensional slow carrier.
+parameter_ranges:
+  gap: [0.5, 2.0]
+  rho: [0.01, 0.12]
+  perturbation: [0.0, 0.08]
+  slow_count: [4, 4]
+  block_sizes: [[2, 2], [2, 2]]
+ground_truth_notes:
+  - Planted slow carrier is known before coordinate mixing.
+  - Subsystem partition is fixed at 2 + 2 within the slow carrier.
+expected_failure_modes:
+  - gap_failure
+  - carrier_failure
+  - coupling_failure
+  - numerical_artifact_failure
+primary_observables:
+  - spectral_gap
+  - projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon

@@ -1,0 +1,55 @@
+\section{Tier T1: Linear Autonomous Semigroup Case}
+
+\subsection{Problem statement}
+Determine when an autonomous linear generator supports a persistent subsystem decomposition whose finite-horizon leakage is controlled by slow-carrier deformation and weak reduced coupling.
+
+\subsection{Assumptions}
+\begin{enumerate}
+\item $L \in \mathbb{C}^{n \times n}$ generates $\dot x = Lx$.
+\item A slow spectral set $\sigma_s(L)$ is separated from the remaining spectrum by gap $\delta > 0$.
+\item The identified carrier projector $P$ approximates the Riesz projector $P_\star$ with
+\[
+\varepsilon_s := \|P - P_\star\|_2.
+\]
+\item In an orthonormal carrier basis $V$, the reduced operator satisfies
+\[
+A = V^\ast L V = D + R,
+\qquad
+\rho := \|R\|_2,
+\]
+with $D$ block diagonal in the proposed subsystem partition.
+\end{enumerate}
+
+\subsection{Expected statement}
+For carrier-restricted data and finite horizons before repeated transfer saturates,
+\[
+\ell(t) \le C_1 \varepsilon_s + C_2 M(t)^2 \rho t + C_3 (\rho t)^2,
+\]
+where $M(t)$ controls semigroup growth on the reduced dynamics. In stable normal or mildly nonnormal settings, this reduces to the affine leading-order law
+\[
+\ell(t) \lesssim \varepsilon_s + \rho t.
+\]
+
+\subsection{Proof ingredients}
+\begin{enumerate}
+\item Riesz projector calculus and gap-based subspace perturbation bounds.
+\item A Duhamel expansion for $e^{t(D+R)} - e^{tD}$.
+\item Stability estimates linking carrier mismatch to observed leakage.
+\item Reduced-model block residual control.
+\end{enumerate}
+
+\subsection{Obstruction list}
+\begin{enumerate}
+\item Vanishing gap or clustered slow/fast spectrum.
+\item Poorly conditioned eigenvectors or severe nonnormality.
+\item Block residuals large enough that $\rho t$ is not perturbative.
+\end{enumerate}
+
+\subsection{Correspondence to numerics}
+Numerical corroboration is currently implemented on `BP_Linear_Two_Block` and `BP_Nearly_Decomposable_Chain` via spectral gap extraction, projector deformation, reduced residuals, leakage trajectories, and horizon comparison.
+
+\subsection{Current confidence level}
+High confidence for finite-dimensional autonomous reference families; medium confidence for broad generality statements beyond the implemented assumptions.
+
+\subsection{Open proof gaps}
+The current note does not prove sharp constants, does not cover strong nonnormality, and does not package a single theorem spanning all Markov and nonnormal edge cases.

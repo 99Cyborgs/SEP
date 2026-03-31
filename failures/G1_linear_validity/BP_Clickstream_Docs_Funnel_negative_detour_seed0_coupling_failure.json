@@ -1,0 +1,9 @@
+{
+  "label": "coupling_failure",
+  "triggered": true,
+  "metric": 0.38167769600252666,
+  "threshold": 0.35,
+  "direction": "gt",
+  "message": "Reduced slow dynamics is too strongly coupled for the claimed regime.",
+  "archive_path": "failures\\G1_linear_validity\\BP_Clickstream_Docs_Funnel_negative_detour_seed0_coupling_failure.json"
+}

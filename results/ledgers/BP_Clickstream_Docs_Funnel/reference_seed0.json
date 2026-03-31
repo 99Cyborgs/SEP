@@ -1,0 +1,269 @@
+{
+  "benchmark_id": "BP_Clickstream_Docs_Funnel",
+  "branch": "application",
+  "theorem_tier": "T3/G6",
+  "parameter_id": "reference",
+  "seed": 0,
+  "parameters": {
+    "windows": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "window_labels": [
+      "launch_week",
+      "onboarding_push",
+      "integration_week",
+      "release_notes_week"
+    ],
+    "eta": 0.45,
+    "coherent_rank": 2,
+    "block_sizes": [
+      1,
+      1
+    ],
+    "page_names": [
+      "Docs Home",
+      "Quickstart",
+      "API Reference",
+      "SDK Guides"
+    ],
+    "page_ids": [
+      "docs_home",
+      "quickstart",
+      "api_reference",
+      "sdk_guides"
+    ],
+    "total_sessions": 1421,
+    "pseudocount": 0.2,
+    "refined_pseudocount": 0.3,
+    "case_label": "stable_docs_funnel",
+    "source_archive": "docs_navigation_funnel_q1_2026.json",
+    "base_parameter_id": "reference",
+    "dataset_name": "Bundled documentation portal clickstream funnel",
+    "page_subset_indices": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.03869520000080229,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": null,
+    "singular_gap": 0.397374090450784,
+    "projector_deformation": null,
+    "coherent_projector_deformation": 0.06104729662141483,
+    "block_residual_norm": 0.09745792624210901,
+    "leakage_trajectory": [
+      2.421483127562161e-16,
+      0.023240538171101412,
+      0.018514410298135754,
+      0.02058599595697577
+    ],
+    "autonomy_horizon": 4,
+    "cross_subsystem_transfer_rate": 0.09745792624210901,
+    "reduced_model_forecast_error": null,
+    "transient_amplification_score": null,
+    "ensemble_averaged_leakage": null,
+    "leakage_variance": null,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": 0.021741685226360618,
+        "rho_tau": 0.058405746888888714
+      },
+      "L2": {
+        "epsilon_s": -0.6489898796923793,
+        "rho_tau": 0.49055371166525497,
+        "rho_tau_sq": -0.8622056118862014
+      },
+      "L3": {
+        "epsilon_s": -0.6489898796923793,
+        "gamma_rho_tau": 0.49055371166525497,
+        "gamma_rho_tau_sq": -0.8622056118862014
+      }
+    },
+    "transportability_metrics": {
+      "coherent_vs_frozen_horizon_gain": 0.0,
+      "coherent_horizon": 4.0,
+      "frozen_horizon": 4.0,
+      "coherent_mean_leakage": 0.015585236106553296,
+      "frozen_mean_leakage": 0.00842971881225265,
+      "coherent_minus_frozen_leakage": [
+        -2.1408123909475726e-16,
+        0.013331050501161203,
+        0.006488161512834203,
+        0.00880285716320739
+      ],
+      "coherent_window_singular_gaps": [
+        0.41476854130007357,
+        0.3878795053297517,
+        0.3863166262907164,
+        0.4005316888825942
+      ],
+      "frozen_window_singular_gaps": [
+        0.4158490142764972,
+        0.4158490142764972,
+        0.4158490142764972,
+        0.4158490142764972
+      ],
+      "coherent_window_leakage": [
+        2.421483127562161e-16,
+        3.590824400087881e-16,
+        1.9427999938047743e-16,
+        5.627443241937345e-16
+      ],
+      "frozen_window_leakage": [
+        4.562295518509734e-16,
+        4.562295518509734e-16,
+        4.562295518509734e-16,
+        4.562295518509734e-16
+      ],
+      "carrier_tracking": {
+        "mean_deformation": 0.06104729662141483,
+        "max_deformation": 0.07201712143038863,
+        "trajectory": [
+          0.06513807512105871,
+          0.045986693312797144,
+          0.07201712143038863
+        ]
+      },
+      "source_page": "bundled_repository_fixture",
+      "source_archive": "docs_navigation_funnel_q1_2026.json",
+      "derivation_summary": "Aggregate ordered page-to-page transitions into four product-lifecycle windows before pseudocount smoothing.",
+      "selected_page_names": [
+        "Docs Home",
+        "Quickstart",
+        "API Reference",
+        "SDK Guides"
+      ],
+      "selected_page_ids": [
+        "docs_home",
+        "quickstart",
+        "api_reference",
+        "sdk_guides"
+      ],
+      "total_sessions": 1421.0,
+      "case_label": "stable_docs_funnel",
+      "base_parameter_id": "reference",
+      "dataset_name": "Bundled documentation portal clickstream funnel"
+    },
+    "coordinate_sensitivity_metrics": {
+      "max_relative_change": 0.0,
+      "mean_relative_change": 0.0,
+      "projector_back_error": 0.0
+    },
+    "numerical_refinement_metrics": {
+      "max_relative_span": 0.02944618218464895,
+      "mean": 0.18547582450812392,
+      "refinement_axis": "pseudocount_smoothing",
+      "singular_gap_relative_span": 0.004470450253328644,
+      "carrier_relative_span": 0.0007185107339120175,
+      "residual_relative_span": 0.02944618218464895,
+      "coarse_pseudocount": 0.2,
+      "refined_pseudocount": 0.3
+    },
+    "predicted_autonomy_horizon": 3.9909807070215386,
+    "singular_values": [
+      [
+        1.000482406057717,
+        0.850295148805812
+      ],
+      [
+        1.0009321864140355,
+        0.8006866996588479
+      ],
+      [
+        1.0017109394719856,
+        0.7967847982307956
+      ],
+      [
+        1.0007898217405566,
+        0.7762549849725012
+      ]
+    ],
+    "transient_coincidence_score": 0.4408039920018163
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.021741685226360618,
+        "rho_tau": 0.058405746888888714
+      },
+      "train_rmse": 0.007581790545700934,
+      "test_rmse": 0.00011083027383487418,
+      "residual_mean": 2.770756845871464e-05,
+      "residual_std": 0.006566198598672578,
+      "selected": true,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.6489898796923793,
+        "rho_tau": 0.49055371166525497,
+        "rho_tau_sq": -0.8622056118862014
+      },
+      "train_rmse": 1.5912158551367978e-17,
+      "test_rmse": 0.011588126525290836,
+      "residual_mean": -0.002897031631322702,
+      "residual_std": 0.005017805976585082,
+      "selected": false,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.6489898796923793,
+        "gamma_rho_tau": 0.49055371166525497,
+        "gamma_rho_tau_sq": -0.8622056118862014
+      },
+      "train_rmse": 1.5912158551367978e-17,
+      "test_rmse": 0.011588126525290836,
+      "residual_mean": -0.002897031631322702,
+      "residual_std": 0.005017805976585082,
+      "selected": false,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L1",
+    "ranked_laws": [
+      "L1",
+      "L2",
+      "L3"
+    ],
+    "improvement_over_l1": 0.0
+  },
+  "gate_outcomes": {},
+  "failure_labels": [],
+  "figure_references": [],
+  "notes": [
+    "Bundled non-mobility clickstream fixture extends the operator-valued application evidence beyond bike-share mobility without claiming a public-data theorem.",
+    "The negative detour variant is retained to show that cross-domain application evidence still preserves explicit rejection labels when carrier geometry collapses."
+  ]
+}

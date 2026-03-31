@@ -1,0 +1,15 @@
+{
+  "benchmark_id": "BP_T3_Window_Sensitivity_Pair",
+  "reference_case": {
+    "parameter_id": "reference",
+    "horizon_gain_max": 0.0,
+    "carrier_deformation_min": 0.5,
+    "regrouped_carrier_deformation_min": 0.7
+  },
+  "matched_positive_case": {
+    "parameter_id": "matched_positive",
+    "horizon_gain_min": 2.0,
+    "carrier_deformation_max": 0.4,
+    "regrouped_horizon_gain_min": 1.0
+  }
+}

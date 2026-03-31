@@ -1,0 +1,10 @@
+{
+  "benchmark_id": "BP_Non_Normal_Shear",
+  "positive_case": {
+    "transient_amplification_score_min": 1.5,
+    "law_selection_expected": "L3"
+  },
+  "negative_case": {
+    "horizon_failure_trigger_below_ratio": 0.45
+  }
+}

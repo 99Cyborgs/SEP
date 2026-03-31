@@ -1,0 +1,11 @@
+{
+  "benchmark_id": "BP_Noisy_Metastable_Network",
+  "positive_case": {
+    "ensemble_averaged_leakage_max": 0.4,
+    "leakage_variance_max": 0.08,
+    "autonomy_horizon_min": 1.0
+  },
+  "negative_case": {
+    "numerical_artifact_failure_trigger_above": 0.3
+  }
+}

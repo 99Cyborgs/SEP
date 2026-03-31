@@ -1,0 +1,132 @@
+{
+  "dataset_name": "Divvy January 2024 Hyde Park station-to-station trip slice",
+  "source_page": "https://divvybikes.com/system-data",
+  "source_archive": "202401-divvy-tripdata.zip",
+  "source_url": "https://divvy-tripdata.s3.amazonaws.com/202401-divvy-tripdata.zip",
+  "derivation": {
+    "station_selection": [
+      "University Ave & 57th St",
+      "Ellis Ave & 60th St",
+      "Ellis Ave & 55th St",
+      "Kimbark Ave & 53rd St"
+    ],
+    "trip_filter": "Trips whose start and end station names are both in the selected Hyde Park set.",
+    "window_rule": "Aggregate trips by started_at into ordered local-time windows; counts are stored before pseudocount smoothing."
+  },
+  "stations": [
+    {
+      "name": "University Ave & 57th St",
+      "station_id": "KA1503000071",
+      "latitude": 41.791484,
+      "longitude": -87.599919
+    },
+    {
+      "name": "Ellis Ave & 60th St",
+      "station_id": "KA1503000014",
+      "latitude": 41.785099,
+      "longitude": -87.601076
+    },
+    {
+      "name": "Ellis Ave & 55th St",
+      "station_id": "KA1504000076",
+      "latitude": 41.794299,
+      "longitude": -87.601449
+    },
+    {
+      "name": "Kimbark Ave & 53rd St",
+      "station_id": "TA1309000037",
+      "latitude": 41.799568,
+      "longitude": -87.594745
+    }
+  ],
+  "parameter_sets": {
+    "reference": {
+      "case_label": "weekday_commute",
+      "window_labels": [
+        "06:00-09:00",
+        "09:00-12:00",
+        "15:00-18:00",
+        "18:00-21:00"
+      ],
+      "eta": 0.45,
+      "pseudocount": 0.2,
+      "refined_pseudocount": 1.0,
+      "coherent_rank": 2,
+      "block_sizes": [
+        1,
+        1
+      ],
+      "total_trips": 1212,
+      "raw_window_counts": [
+        [
+          [1, 15, 12, 2],
+          [58, 1, 18, 0],
+          [6, 11, 1, 2],
+          [9, 5, 2, 2]
+        ],
+        [
+          [7, 17, 3, 6],
+          [34, 3, 28, 2],
+          [20, 28, 2, 8],
+          [28, 9, 31, 3]
+        ],
+        [
+          [14, 47, 28, 47],
+          [72, 3, 51, 5],
+          [6, 60, 5, 30],
+          [15, 14, 14, 3]
+        ],
+        [
+          [15, 106, 18, 19],
+          [54, 5, 73, 3],
+          [6, 69, 7, 20],
+          [10, 8, 9, 2]
+        ]
+      ]
+    },
+    "negative_weekend": {
+      "case_label": "weekend_night",
+      "window_labels": [
+        "19:00-22:00",
+        "22:00-24:00",
+        "00:00-03:00",
+        "03:00-07:00"
+      ],
+      "eta": 0.45,
+      "pseudocount": 0.2,
+      "refined_pseudocount": 1.0,
+      "coherent_rank": 2,
+      "block_sizes": [
+        1,
+        1
+      ],
+      "total_trips": 94,
+      "raw_window_counts": [
+        [
+          [5, 17, 1, 0],
+          [13, 2, 8, 0],
+          [2, 7, 1, 6],
+          [1, 2, 0, 0]
+        ],
+        [
+          [1, 7, 0, 0],
+          [1, 0, 3, 0],
+          [0, 2, 0, 0],
+          [0, 0, 0, 0]
+        ],
+        [
+          [0, 0, 0, 0],
+          [0, 0, 2, 0],
+          [0, 8, 0, 0],
+          [0, 2, 0, 0]
+        ],
+        [
+          [0, 1, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 2, 0, 0]
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,269 @@
+{
+  "benchmark_id": "BP_Support_Portal_Funnel",
+  "branch": "application",
+  "theorem_tier": "T3/G6",
+  "parameter_id": "reference",
+  "seed": 0,
+  "parameters": {
+    "windows": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "window_labels": [
+      "incident_spike",
+      "self_serve_week",
+      "patch_followup",
+      "release_cleanup"
+    ],
+    "eta": 0.45,
+    "coherent_rank": 2,
+    "block_sizes": [
+      1,
+      1
+    ],
+    "page_names": [
+      "Help Home",
+      "Search Results",
+      "Troubleshooting Guide",
+      "Ticket Form"
+    ],
+    "page_ids": [
+      "help_home",
+      "search_results",
+      "troubleshooting_guide",
+      "ticket_form"
+    ],
+    "total_sessions": 1419,
+    "pseudocount": 0.2,
+    "refined_pseudocount": 0.3,
+    "case_label": "stable_support_funnel",
+    "source_archive": "support_navigation_funnel_q1_2026.json",
+    "base_parameter_id": "reference",
+    "dataset_name": "Bundled support portal navigation funnel",
+    "page_subset_indices": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.039774799999577226,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": null,
+    "singular_gap": 0.3681338864017923,
+    "projector_deformation": null,
+    "coherent_projector_deformation": 0.05867497195884055,
+    "block_residual_norm": 0.09803188230664853,
+    "leakage_trajectory": [
+      2.168536790103283e-16,
+      0.026160084467592718,
+      0.023731948003266886,
+      0.019684185301912228
+    ],
+    "autonomy_horizon": 4,
+    "cross_subsystem_transfer_rate": 0.09803188230664853,
+    "reduced_model_forecast_error": null,
+    "transient_amplification_score": null,
+    "ensemble_averaged_leakage": null,
+    "leakage_variance": null,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": 0.05518451010273746,
+        "rho_tau": 0.05265112324517046
+      },
+      "L2": {
+        "epsilon_s": -0.7798686954063896,
+        "rho_tau": 0.5667352009444924,
+        "rho_tau_sq": -1.019676359710171
+      },
+      "L3": {
+        "epsilon_s": -0.7798686954063896,
+        "gamma_rho_tau": 0.5667352009444924,
+        "gamma_rho_tau_sq": -1.019676359710171
+      }
+    },
+    "transportability_metrics": {
+      "coherent_vs_frozen_horizon_gain": 0.0,
+      "coherent_horizon": 4.0,
+      "frozen_horizon": 4.0,
+      "coherent_mean_leakage": 0.017394054443193013,
+      "frozen_mean_leakage": 0.009988657482014652,
+      "coherent_minus_frozen_leakage": [
+        -3.513569472327662e-16,
+        0.015657718839271702,
+        0.0096107071754514,
+        0.0043531618299906885
+      ],
+      "coherent_window_singular_gaps": [
+        0.35820192670241197,
+        0.3630468422872642,
+        0.3884876805090823,
+        0.36279909610841066
+      ],
+      "frozen_window_singular_gaps": [
+        0.3697530418163637,
+        0.3697530418163637,
+        0.3697530418163637,
+        0.3697530418163637
+      ],
+      "coherent_window_leakage": [
+        2.168536790103283e-16,
+        3.6146074876113494e-16,
+        3.6312898524332304e-16,
+        2.9673476591645114e-16
+      ],
+      "frozen_window_leakage": [
+        5.682106262430945e-16,
+        5.682106262430945e-16,
+        5.682106262430945e-16,
+        5.682106262430945e-16
+      ],
+      "carrier_tracking": {
+        "mean_deformation": 0.05867497195884055,
+        "max_deformation": 0.0851028970931775,
+        "trajectory": [
+          0.0851028970931775,
+          0.054778225920193054,
+          0.03614379286315108
+        ]
+      },
+      "source_page": "bundled_repository_fixture",
+      "source_archive": "support_navigation_funnel_q1_2026.json",
+      "derivation_summary": "Aggregate ordered support-navigation transitions into four support-lifecycle windows before pseudocount smoothing.",
+      "selected_page_names": [
+        "Help Home",
+        "Search Results",
+        "Troubleshooting Guide",
+        "Ticket Form"
+      ],
+      "selected_page_ids": [
+        "help_home",
+        "search_results",
+        "troubleshooting_guide",
+        "ticket_form"
+      ],
+      "total_sessions": 1419.0,
+      "case_label": "stable_support_funnel",
+      "base_parameter_id": "reference",
+      "dataset_name": "Bundled support portal navigation funnel"
+    },
+    "coordinate_sensitivity_metrics": {
+      "max_relative_change": 0.0,
+      "mean_relative_change": 0.0,
+      "projector_back_error": 0.0
+    },
+    "numerical_refinement_metrics": {
+      "max_relative_span": 0.19688386694575188,
+      "mean": 0.17173342844701409,
+      "refinement_axis": "pseudocount_smoothing",
+      "singular_gap_relative_span": 0.004438829424986738,
+      "carrier_relative_span": 0.0013522297541743568,
+      "residual_relative_span": 0.19688386694575188,
+      "coarse_pseudocount": 0.2,
+      "refined_pseudocount": 0.3
+    },
+    "predicted_autonomy_horizon": 3.991813875582595,
+    "singular_values": [
+      [
+        1.0012864537346897,
+        0.824257332326768
+      ],
+      [
+        1.0019804437682778,
+        0.8080728712071196
+      ],
+      [
+        1.001732609573513,
+        0.7951652956143536
+      ],
+      [
+        1.0014723063047517,
+        0.776180704163214
+      ]
+    ],
+    "transient_coincidence_score": 0.43601236228661755
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.05518451010273746,
+        "rho_tau": 0.05265112324517046
+      },
+      "train_rmse": 0.009072430272562838,
+      "test_rmse": 0.005009532268576221,
+      "residual_mean": 0.0012523830671440457,
+      "residual_std": 0.008150897700774647,
+      "selected": true,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.7798686954063896,
+        "rho_tau": 0.5667352009444924,
+        "rho_tau_sq": -1.019676359710171
+      },
+      "train_rmse": 2.4120896364278776e-17,
+      "test_rmse": 0.008989531564963186,
+      "residual_mean": -0.00224738289124078,
+      "residual_std": 0.0038925813516900976,
+      "selected": false,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.7798686954063896,
+        "gamma_rho_tau": 0.5667352009444924,
+        "gamma_rho_tau_sq": -1.019676359710171
+      },
+      "train_rmse": 2.4120896364278776e-17,
+      "test_rmse": 0.008989531564963186,
+      "residual_mean": -0.00224738289124078,
+      "residual_std": 0.0038925813516900976,
+      "selected": false,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L1",
+    "ranked_laws": [
+      "L1",
+      "L2",
+      "L3"
+    ],
+    "improvement_over_l1": 0.0
+  },
+  "gate_outcomes": {},
+  "failure_labels": [],
+  "figure_references": [],
+  "notes": [
+    "Bundled support-navigation fixture provides a second non-mobility application domain using the same named-window operator pipeline as the clickstream benchmark.",
+    "The detour-heavy support variant is retained to show that accepted and rejection-labeled cases can coexist inside the same digital-navigation evidence track."
+  ]
+}

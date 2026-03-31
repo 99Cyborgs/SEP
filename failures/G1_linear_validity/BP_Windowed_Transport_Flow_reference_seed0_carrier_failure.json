@@ -1,0 +1,9 @@
+{
+  "label": "carrier_failure",
+  "triggered": true,
+  "metric": 0.4578005501674567,
+  "threshold": 0.35,
+  "direction": "gt",
+  "message": "Estimated carrier is too far from the planted or baseline carrier.",
+  "archive_path": "failures\\G1_linear_validity\\BP_Windowed_Transport_Flow_reference_seed0_carrier_failure.json"
+}

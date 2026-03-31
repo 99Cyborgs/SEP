@@ -1,0 +1,11 @@
+{
+  "gate": "G2",
+  "benchmark_ids": ["BP_Non_Normal_Shear", "BP_Random_Gap_Ensemble", "BP_Delay_Coupled_Pair", "BP_T2_Same_Spectrum_Pair"],
+  "min_transient_amplification": 1.5,
+  "required_best_law": "L3",
+  "min_improvement_over_l1": 0.0,
+  "max_delay_horizon_span": 0.05,
+  "max_delay_transient_span": 0.05,
+  "max_delay_residual_span": 0.05,
+  "max_delay_surrogate_variation": 0.3
+}

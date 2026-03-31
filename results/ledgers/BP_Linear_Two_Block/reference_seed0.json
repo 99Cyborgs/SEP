@@ -1,0 +1,195 @@
+{
+  "benchmark_id": "BP_Linear_Two_Block",
+  "branch": "linear",
+  "theorem_tier": "T1",
+  "parameter_id": "reference",
+  "seed": 0,
+  "parameters": {
+    "gap": 1.05,
+    "rho": 0.06,
+    "perturbation": 0.005,
+    "times": [
+      0.0,
+      0.3333333333333333,
+      0.6666666666666666,
+      1.0,
+      1.3333333333333333,
+      1.6666666666666665,
+      2.0,
+      2.333333333333333,
+      2.6666666666666665,
+      3.0,
+      3.333333333333333,
+      3.6666666666666665,
+      4.0,
+      4.333333333333333,
+      4.666666666666666,
+      5.0,
+      5.333333333333333,
+      5.666666666666666,
+      6.0,
+      6.333333333333333,
+      6.666666666666666,
+      7.0,
+      7.333333333333333,
+      7.666666666666666,
+      8.0
+    ],
+    "eta": 0.35,
+    "slow_count": 4,
+    "block_sizes": [
+      2,
+      2
+    ]
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.1743808999999601,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": 1.0699999999999992,
+    "singular_gap": null,
+    "projector_deformation": 0.006627646528384374,
+    "coherent_projector_deformation": null,
+    "block_residual_norm": 0.013551672786725482,
+    "leakage_trajectory": [
+      2.9328882456184796e-16,
+      0.0043610137351572115,
+      0.008420392673629406,
+      0.012193751994083138,
+      0.015695981807455926,
+      0.01894127981989171,
+      0.021943182454400686,
+      0.024714594515314537,
+      0.027267817473859906,
+      0.029614576447913342,
+      0.03176604594418047,
+      0.03373287442662061,
+      0.03552520777087619,
+      0.03715271166072924,
+      0.03862459297916654,
+      0.03994962024346017,
+      0.04113614313073903,
+      0.04219211113781478,
+      0.04312509141651569,
+      0.04394228582345168,
+      0.04465054722097238,
+      0.04525639506406813,
+      0.04576603030609101,
+      0.04618534965442817,
+      0.04651995920562773
+    ],
+    "autonomy_horizon": 8.0,
+    "cross_subsystem_transfer_rate": 0.013551672786725482,
+    "reduced_model_forecast_error": 9.535500932709369e-05,
+    "transient_amplification_score": 1.2930624979940142,
+    "ensemble_averaged_leakage": null,
+    "leakage_variance": null,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": 1.113826360627392,
+        "rho_tau": 0.446028186965486
+      },
+      "L2": {
+        "epsilon_s": 0.108023013145655,
+        "rho_tau": 0.8801982532526049,
+        "rho_tau_sq": -4.360259766206305
+      },
+      "L3": {
+        "epsilon_s": 0.108023013145655,
+        "gamma_rho_tau": 0.8801982532526049,
+        "gamma_rho_tau_sq": -4.360259766206305
+      }
+    },
+    "transportability_metrics": {
+      "horizon_ratio": 0.31573124975760664
+    },
+    "coordinate_sensitivity_metrics": {
+      "max_relative_change": 0.001424810924023244,
+      "mean_relative_change": 0.0001658099985978221,
+      "projector_back_error": 1.7556266623904482e-15
+    },
+    "numerical_refinement_metrics": {
+      "max_relative_span": 0.0,
+      "mean": 8.0
+    },
+    "predicted_autonomy_horizon": 25.33800504746288,
+    "eigenvector_condition_number": 6.202742008738206,
+    "transient_coincidence_score": 0.6641557155657183
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": 1.113826360627392,
+        "rho_tau": 0.446028186965486
+      },
+      "train_rmse": 0.0037202680309710782,
+      "test_rmse": 0.004941435679641732,
+      "residual_mean": -0.00041265730962818727,
+      "residual_std": 0.004129754680399617,
+      "selected": false,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.108023013145655,
+        "rho_tau": 0.8801982532526049,
+        "rho_tau_sq": -4.360259766206305
+      },
+      "train_rmse": 0.0004082319917922509,
+      "test_rmse": 0.0007495776365968341,
+      "residual_mean": 0.0001571340025400913,
+      "residual_std": 0.0005181028007072493,
+      "selected": true,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.108023013145655,
+        "gamma_rho_tau": 0.8801982532526049,
+        "gamma_rho_tau_sq": -4.360259766206305
+      },
+      "train_rmse": 0.0004082319917922509,
+      "test_rmse": 0.0007495776365968341,
+      "residual_mean": 0.0001571340025400913,
+      "residual_std": 0.0005181028007072493,
+      "selected": false,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L2",
+    "ranked_laws": [
+      "L2",
+      "L3",
+      "L1"
+    ],
+    "improvement_over_l1": 0.004191858043044898
+  },
+  "gate_outcomes": {},
+  "failure_labels": [],
+  "figure_references": [],
+  "notes": []
+}

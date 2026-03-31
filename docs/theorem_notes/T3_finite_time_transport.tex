@@ -1,0 +1,41 @@
+\section{Tier T3: Finite-Time Nonautonomous Transfer Operator Case}
+
+\subsection{Problem statement}
+Diagnose subsystem emergence in nonautonomous settings using singular structure of windowed transfer operators rather than autonomous eigenstructure.
+
+\subsection{Assumptions}
+\begin{enumerate}
+\item A finite sequence of transfer operators $\mathcal{T}_j$ is available.
+\item Dominant singular subspaces define coherent source and target carriers.
+\item Singular gaps remain nondegenerate across the analysis windows.
+\end{enumerate}
+
+\subsection{Expected statement}
+For coherent subsystem leakage over $q$ windows,
+\[
+\ell(q) \le C_1 \varepsilon_c + C_2 \sum_{j=0}^{q-1} \rho_j + O\!\left(\sum_{a<b} \rho_a \rho_b\right),
+\]
+with $\varepsilon_c$ denoting coherent carrier deformation and $\rho_j$ the reduced off-block residual per window.
+
+\subsection{Proof ingredients}
+\begin{enumerate}
+\item Singular-subspace perturbation estimates.
+\item Product expansions for transfer operators.
+\item Window-tracking stability estimates.
+\end{enumerate}
+
+\subsection{Obstruction list}
+\begin{enumerate}
+\item Closing singular gaps across windows.
+\item Window choices that destroy coherent persistence.
+\item Surrogates that wash out time dependence and create false autonomy.
+\end{enumerate}
+
+\subsection{Correspondence to numerics}
+The implemented transport evidence now centers on `BP_Windowed_Transport_Flow` as the accepted moderate-drift reference and `BP_T3_Window_Sensitivity_Pair` as a positive-versus-mixed comparison family. Both explicitly compare coherent-window analysis against frozen surrogates, and both record adjacent-window plus regrouped-window carrier diagnostics. The shared `T2/T3` delay benchmark `BP_Delay_Coupled_Pair` contributes only bounded fixed-lag sampled-history support with explicit semigroup-correspondence diagnostics.
+
+\subsection{Current confidence level}
+Medium confidence for the numerical protocol; theorem packaging remains deferred beyond the implemented benchmark class while the repository expands bounded cross-domain application evidence.
+
+\subsection{Open proof gaps}
+No fully general theorem is claimed here for arbitrary transfer-operator cocycles, and window-selection dependence remains an unresolved proof issue. The current posture is to harden evidence and falsification protocols before upgrading T3 packaging. In particular, the regrouping diagnostics are evidence for finite-window coherent structure, and the delay correspondence bundle is evidence for fixed-lag sampled-history support only, not a proof that arbitrary delay semigroups preserve the same transport law.

@@ -1,0 +1,270 @@
+{
+  "benchmark_id": "BP_Mobility_Downtown_Routing_Instability",
+  "branch": "application",
+  "theorem_tier": "T3/G6",
+  "parameter_id": "reference",
+  "seed": 0,
+  "parameters": {
+    "windows": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "window_labels": [
+      "06:00-09:00",
+      "09:00-12:00",
+      "15:00-18:00",
+      "18:00-21:00"
+    ],
+    "eta": 0.45,
+    "coherent_rank": 2,
+    "block_sizes": [
+      1,
+      1
+    ],
+    "station_names": [
+      "Clinton St & Washington Blvd",
+      "Kingsbury St & Kinzie St",
+      "Wells St & Elm St",
+      "State St & Chicago Ave"
+    ],
+    "station_ids": [
+      "WL-012",
+      "KA1503000043",
+      "KA1504000135",
+      "21544"
+    ],
+    "total_trips": 393,
+    "pseudocount": 0.2,
+    "refined_pseudocount": 1.0,
+    "case_label": "downtown_commute_routing_instability",
+    "source_archive": "202401-divvy-tripdata.zip",
+    "base_parameter_id": "reference",
+    "station_subset_indices": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.042414600000483915,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": null,
+    "singular_gap": 0.2205117224104946,
+    "projector_deformation": null,
+    "coherent_projector_deformation": 0.98424690113966,
+    "block_residual_norm": 0.45510199060917084,
+    "leakage_trajectory": [
+      2.9441214204522637e-16,
+      0.2798999227910961,
+      0.02984697866084708,
+      0.029052692136820008
+    ],
+    "autonomy_horizon": 4,
+    "cross_subsystem_transfer_rate": 0.45510199060917084,
+    "reduced_model_forecast_error": null,
+    "transient_amplification_score": null,
+    "ensemble_averaged_leakage": null,
+    "leakage_variance": null,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": 0.127431049243752,
+        "rho_tau": -0.021131285621553163
+      },
+      "L2": {
+        "epsilon_s": -0.5589203422768617,
+        "rho_tau": 1.5056481295371498,
+        "rho_tau_sq": -0.652323613817578
+      },
+      "L3": {
+        "epsilon_s": -0.5589203422768617,
+        "gamma_rho_tau": 1.5056481295371498,
+        "gamma_rho_tau_sq": -0.652323613817578
+      }
+    },
+    "transportability_metrics": {
+      "coherent_vs_frozen_horizon_gain": 0.0,
+      "coherent_horizon": 4.0,
+      "frozen_horizon": 4.0,
+      "coherent_mean_leakage": 0.08469989839719086,
+      "frozen_mean_leakage": 0.014874303164187166,
+      "coherent_minus_frozen_leakage": [
+        -4.4356701959039124e-18,
+        0.2456252466260838,
+        0.012825711507024024,
+        0.02085142279890702
+      ],
+      "coherent_window_singular_gaps": [
+        0.343092446134582,
+        0.1855837196584551,
+        0.24643948315076453,
+        0.10693124069817683
+      ],
+      "frozen_window_singular_gaps": [
+        0.16451904893200378,
+        0.16451904893200378,
+        0.16451904893200378,
+        0.16451904893200378
+      ],
+      "coherent_window_leakage": [
+        2.9441214204522637e-16,
+        5.492629515758218e-16,
+        2.8989615134563996e-16,
+        3.4186892339043944e-16
+      ],
+      "frozen_window_leakage": [
+        2.988478122411303e-16,
+        2.988478122411303e-16,
+        2.988478122411303e-16,
+        2.988478122411303e-16
+      ],
+      "carrier_tracking": {
+        "mean_deformation": 0.98424690113966,
+        "max_deformation": 0.999536498585558,
+        "trajectory": [
+          0.9841490534301317,
+          0.9690551514032902,
+          0.999536498585558
+        ]
+      },
+      "source_page": "https://divvybikes.com/system-data",
+      "source_archive": "202401-divvy-tripdata.zip",
+      "derivation_summary": "Aggregate weekday trips by started_at into ordered commute windows; counts are stored before pseudocount smoothing.",
+      "selected_station_names": [
+        "Clinton St & Washington Blvd",
+        "Kingsbury St & Kinzie St",
+        "Wells St & Elm St",
+        "State St & Chicago Ave"
+      ],
+      "selected_station_ids": [
+        "WL-012",
+        "KA1503000043",
+        "KA1504000135",
+        "21544"
+      ],
+      "total_trips": 393.0,
+      "case_label": "downtown_commute_routing_instability",
+      "base_parameter_id": "reference"
+    },
+    "coordinate_sensitivity_metrics": {
+      "max_relative_change": 0.0,
+      "mean_relative_change": 0.0,
+      "projector_back_error": 0.0
+    },
+    "numerical_refinement_metrics": {
+      "max_relative_span": 0.2051644286561137,
+      "mean": 0.5388358237675781,
+      "refinement_axis": "pseudocount_smoothing",
+      "singular_gap_relative_span": 0.2051644286561137,
+      "carrier_relative_span": 0.01643284117870695,
+      "residual_relative_span": 0.06730197869112738,
+      "coarse_pseudocount": 0.2,
+      "refined_pseudocount": 1.0
+    },
+    "predicted_autonomy_horizon": 0.0,
+    "singular_values": [
+      [
+        1.3206856873497954,
+        0.5235786699176933
+      ],
+      [
+        1.0143159599092704,
+        0.6976632319278614
+      ],
+      [
+        1.0154265026317697,
+        0.4948872332645664
+      ],
+      [
+        1.0664492815122075,
+        0.37248579318557706
+      ]
+    ],
+    "transient_coincidence_score": 0.2392278271016553
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.127431049243752,
+        "rho_tau": -0.021131285621553163
+      },
+      "train_rmse": 0.12508555950026226,
+      "test_rmse": 0.06672596621479186,
+      "residual_mean": -0.01668149155369797,
+      "residual_std": 0.11211429158670419,
+      "selected": true,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.5589203422768617,
+        "rho_tau": 1.5056481295371498,
+        "rho_tau_sq": -0.652323613817578
+      },
+      "train_rmse": 9.661887449552016e-16,
+      "test_rmse": 0.2597371748425237,
+      "residual_mean": -0.06493429371063165,
+      "residual_std": 0.11246949586041269,
+      "selected": false,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.5589203422768617,
+        "gamma_rho_tau": 1.5056481295371498,
+        "gamma_rho_tau_sq": -0.652323613817578
+      },
+      "train_rmse": 9.661887449552016e-16,
+      "test_rmse": 0.2597371748425237,
+      "residual_mean": -0.06493429371063165,
+      "residual_std": 0.11246949586041269,
+      "selected": false,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L1",
+    "ranked_laws": [
+      "L1",
+      "L2",
+      "L3"
+    ],
+    "improvement_over_l1": 0.0
+  },
+  "gate_outcomes": {},
+  "failure_labels": [
+    "carrier_failure",
+    "coupling_failure"
+  ],
+  "figure_references": [],
+  "notes": [
+    "Derived real-data fixture from 202401-divvy-tripdata.zip using a downtown Chicago station slice selected for route-instability rather than low-count sparsity.",
+    "Coordinate sensitivity is left neutral because arbitrary orthogonal basis changes are not meaningful on named mobility stations in this first application case study."
+  ]
+}

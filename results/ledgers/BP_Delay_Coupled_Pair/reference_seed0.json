@@ -1,0 +1,341 @@
+{
+  "benchmark_id": "BP_Delay_Coupled_Pair",
+  "branch": "nonnormal",
+  "theorem_tier": "T2/T3",
+  "parameter_id": "reference",
+  "seed": 0,
+  "parameters": {
+    "times": [
+      0.0,
+      0.39999999999999997,
+      0.7999999999999999,
+      1.2,
+      1.5999999999999999,
+      1.9999999999999998,
+      2.4,
+      2.8,
+      3.1999999999999997,
+      3.5999999999999996,
+      3.9999999999999996,
+      4.3999999999999995,
+      4.8
+    ],
+    "eta": 0.69,
+    "slow_count": 2,
+    "block_sizes": [
+      1,
+      1
+    ],
+    "delay": 0.4,
+    "history_kind": "nodal_piecewise_linear",
+    "history_grid_size": 6,
+    "step_size": 0.0125,
+    "history_grid_ladder": [
+      6,
+      8,
+      10
+    ],
+    "step_size_ladder": [
+      0.0125,
+      0.00625,
+      0.003125
+    ],
+    "self_decay": 0.9,
+    "shear": 2.2,
+    "cross_coupling": 0.15,
+    "delay_feedback": 1.3,
+    "delay_cross_feedback": 0.25
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.22818000000188476,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": 0.7522414280218073,
+    "singular_gap": 1.5689392615466977,
+    "projector_deformation": 0.20454773525404954,
+    "coherent_projector_deformation": null,
+    "block_residual_norm": 0.5523600020874326,
+    "leakage_trajectory": [
+      6.862482397520648e-17,
+      0.5523600020874326,
+      1.2005123096154826,
+      1.9818518392771833,
+      2.9438628083748406,
+      4.147275423082636,
+      5.670149615982522,
+      7.613165373952103,
+      10.106482556280785,
+      13.318641435667706,
+      17.468115968923385,
+      22.83831472182752,
+      29.797062038918288
+    ],
+    "autonomy_horizon": 0.39999999999999997,
+    "cross_subsystem_transfer_rate": 0.5523600020874326,
+    "reduced_model_forecast_error": 2.6786609579458075e-14,
+    "transient_amplification_score": 1.6311541433043741,
+    "ensemble_averaged_leakage": null,
+    "leakage_variance": null,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": -20.116272974095423,
+        "rho_tau": 10.323041944522274
+      },
+      "L2": {
+        "epsilon_s": 4.572905736577216,
+        "rho_tau": -3.665790358408504,
+        "rho_tau_sq": 5.303954811093616
+      },
+      "L3": {
+        "epsilon_s": 4.4337712390294355,
+        "gamma_rho_tau": -1.7160296681800098,
+        "gamma_rho_tau_sq": 1.872546130552525
+      }
+    },
+    "transportability_metrics": {
+      "horizon_ratio": 0.45513022984988794,
+      "history_operator_dimension": 12.0,
+      "pseudospectral_proxy": 161.65234826319545,
+      "delay_refinement_protocol": {
+        "history_grid_sizes": [
+          6,
+          8,
+          10
+        ],
+        "step_sizes": [
+          0.0125,
+          0.00625,
+          0.003125
+        ],
+        "surrogate_relative_span": 0.26960680145567595,
+        "transient_relative_span": 0.001968326019924121,
+        "block_residual_relative_span": 0.003010262354229746,
+        "adjacent_terminal_projector_deformation_max": 2.236950511288751e-16
+      }
+    },
+    "coordinate_sensitivity_metrics": {
+      "max_relative_change": 0.0,
+      "mean_relative_change": 0.0,
+      "projector_back_error": 0.0
+    },
+    "numerical_refinement_metrics": {
+      "refinement_axis": "history_grid_and_step_ladder",
+      "history_grid_sizes": [
+        6,
+        8,
+        10
+      ],
+      "step_sizes": [
+        0.0125,
+        0.00625,
+        0.003125
+      ],
+      "history_operator_dimensions": [
+        12,
+        16,
+        20
+      ],
+      "levels": [
+        {
+          "history_grid_size": 6,
+          "step_size": 0.0125,
+          "history_operator_dimension": 12,
+          "autonomy_horizon": 0.39999999999999997,
+          "transient_amplification_score": 1.6311541433043741,
+          "block_residual_norm": 0.5523600020874326,
+          "spectral_gap": 0.7522414280218073,
+          "singular_gap": 1.5689392615466977,
+          "constant_history_projector_deformation": 0.20454773525404954
+        },
+        {
+          "history_grid_size": 8,
+          "step_size": 0.00625,
+          "history_operator_dimension": 16,
+          "autonomy_horizon": 0.39999999999999997,
+          "transient_amplification_score": 1.6332195678125445,
+          "block_residual_norm": 0.5534252590811765,
+          "spectral_gap": 0.7506877880629895,
+          "singular_gap": 1.828396547155151,
+          "constant_history_projector_deformation": 0.19635418398650395
+        },
+        {
+          "history_grid_size": 10,
+          "step_size": 0.003125,
+          "history_operator_dimension": 20,
+          "autonomy_horizon": 0.39999999999999997,
+          "transient_amplification_score": 1.6343682503936212,
+          "block_residual_norm": 0.5540254906945955,
+          "spectral_gap": 0.7499694942683924,
+          "singular_gap": 2.0593234075200404,
+          "constant_history_projector_deformation": 0.1916256976945335
+        }
+      ],
+      "max_relative_span": 0.26960680145567595,
+      "mean": 1.0312073759965883,
+      "autonomy_horizon_relative_span": 0.0,
+      "transient_relative_span": 0.001968326019924121,
+      "block_residual_relative_span": 0.003010262354229746,
+      "spectral_gap_relative_span": 0.0030253474019552823,
+      "singular_gap_relative_span": 0.26960680145567595,
+      "surrogate_relative_span": 0.26960680145567595,
+      "constant_history_projector_relative_span": 0.0654249887606484,
+      "adjacent_terminal_projector_deformation_max": 2.236950511288751e-16,
+      "adjacent_horizon_relative_change_max": 0.0,
+      "terminal_state_dimension": 2,
+      "terminal_correspondence_norm_min": 1.0,
+      "terminal_correspondence_norm_max": 1.0000000000000002
+    },
+    "predicted_autonomy_horizon": 0.8788693296244656,
+    "eigenvector_condition_number": 27.765802903642513,
+    "constant_history_projector_deformation": 0.20454773525404954,
+    "pseudospectral_proxy": 161.65234826319545,
+    "delay_semigroup_metrics": {
+      "history_grid_ladder": [
+        6,
+        8,
+        10
+      ],
+      "step_size_ladder": [
+        0.0125,
+        0.00625,
+        0.003125
+      ],
+      "history_operator_dimensions": [
+        12,
+        16,
+        20
+      ],
+      "autonomy_horizon_span": 0.0,
+      "transient_amplification_span": 0.001968326019924121,
+      "reduced_coupling_span": 0.003010262354229746,
+      "sampled_surrogate_span": 0.26960680145567595,
+      "constant_history_projector_span": 0.0654249887606484,
+      "adjacent_terminal_projector_deformation_max": 2.236950511288751e-16,
+      "adjacent_horizon_relative_change_max": 0.0,
+      "bounded_correspondence_summary": {
+        "constant_history_projector_deformation": 0.20454773525404954,
+        "terminal_correspondence_norm_min": 1.0,
+        "terminal_correspondence_norm_max": 1.0000000000000002
+      },
+      "levels": [
+        {
+          "history_grid_size": 6,
+          "step_size": 0.0125,
+          "history_operator_dimension": 12,
+          "autonomy_horizon": 0.39999999999999997,
+          "transient_amplification_score": 1.6311541433043741,
+          "block_residual_norm": 0.5523600020874326,
+          "spectral_gap": 0.7522414280218073,
+          "singular_gap": 1.5689392615466977,
+          "constant_history_projector_deformation": 0.20454773525404954
+        },
+        {
+          "history_grid_size": 8,
+          "step_size": 0.00625,
+          "history_operator_dimension": 16,
+          "autonomy_horizon": 0.39999999999999997,
+          "transient_amplification_score": 1.6332195678125445,
+          "block_residual_norm": 0.5534252590811765,
+          "spectral_gap": 0.7506877880629895,
+          "singular_gap": 1.828396547155151,
+          "constant_history_projector_deformation": 0.19635418398650395
+        },
+        {
+          "history_grid_size": 10,
+          "step_size": 0.003125,
+          "history_operator_dimension": 20,
+          "autonomy_horizon": 0.39999999999999997,
+          "transient_amplification_score": 1.6343682503936212,
+          "block_residual_norm": 0.5540254906945955,
+          "spectral_gap": 0.7499694942683924,
+          "singular_gap": 2.0593234075200404,
+          "constant_history_projector_deformation": 0.1916256976945335
+        }
+      ]
+    },
+    "transient_coincidence_score": 0.9262256114438533
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": -20.116272974095423,
+        "rho_tau": 10.323041944522274
+      },
+      "train_rmse": 3.6562386670446068,
+      "test_rmse": 2.4642947283084586,
+      "residual_mean": -0.5210859653038539,
+      "residual_std": 3.2942120239470842,
+      "selected": false,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 4.572905736577216,
+        "rho_tau": -3.665790358408504,
+        "rho_tau_sq": 5.303954811093616
+      },
+      "train_rmse": 0.9066191408641091,
+      "test_rmse": 0.9547400445402449,
+      "residual_mean": 0.02733029879473112,
+      "residual_std": 0.921287907968918,
+      "selected": false,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 4.4337712390294355,
+        "gamma_rho_tau": -1.7160296681800098,
+        "gamma_rho_tau_sq": 1.872546130552525
+      },
+      "train_rmse": 0.912574260419003,
+      "test_rmse": 0.9455298187170372,
+      "residual_mean": 0.022484776438059847,
+      "residual_std": 0.9225658297177665,
+      "selected": true,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L3",
+    "ranked_laws": [
+      "L3",
+      "L2",
+      "L1"
+    ],
+    "improvement_over_l1": 1.5187649095914213
+  },
+  "gate_outcomes": {},
+  "failure_labels": [
+    "coupling_failure"
+  ],
+  "figure_references": [],
+  "notes": [
+    "True fixed-lag delay benchmark analyzed through a sampled history propagator and treated as discretization-backed evidence rather than a full delay-semigroup theorem.",
+    "A history-grid and step-size refinement ladder is required before the delay benchmark is counted as admissible T2/T3 supporting evidence.",
+    "Delay evidence is cited only with the bounded correspondence metrics and adjacent refinement-stability diagnostics reported together.",
+    "Seed 0 leaves the reference delay configuration deterministic."
+  ]
+}

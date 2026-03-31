@@ -1,0 +1,22 @@
+id: BP_Nearly_Decomposable_Chain
+branch: linear
+theorem_tier: T1/T5
+system_class: markov_chain
+state_dimension: 4
+formal_system: Four-state row-stochastic chain with two metastable clusters and analysis on the generator P - I.
+parameter_ranges:
+  intra_cluster_retention: [0.85, 0.95]
+  inter_cluster_transfer: [0.01, 0.08]
+  slow_count: [2, 2]
+ground_truth_notes:
+  - Clusters are planted as {0,1} and {2,3}.
+  - Slow carrier corresponds to the nearly conserved cluster modes.
+expected_failure_modes:
+  - gap_failure
+  - coupling_failure
+  - coordinate_artifact_failure
+primary_observables:
+  - spectral_gap
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon

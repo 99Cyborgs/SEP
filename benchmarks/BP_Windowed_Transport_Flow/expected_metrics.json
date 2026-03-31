@@ -1,0 +1,11 @@
+{
+  "benchmark_id": "BP_Windowed_Transport_Flow",
+  "positive_case": {
+    "singular_gap_min": 0.01,
+    "coherent_vs_frozen_horizon_gain_min": 0.0,
+    "autonomy_horizon_min": 2
+  },
+  "negative_case": {
+    "gap_failure_trigger_below": 0.005
+  }
+}

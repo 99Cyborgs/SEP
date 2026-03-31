@@ -1,0 +1,205 @@
+{
+  "benchmark_id": "BP_Non_Normal_Shear",
+  "branch": "nonnormal",
+  "theorem_tier": "T2",
+  "parameter_id": "reference",
+  "seed": 0,
+  "parameters": {
+    "times": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.0,
+      3.25,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0
+    ],
+    "eta": 0.45,
+    "slow_count": 2,
+    "block_sizes": [
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.17023390000031213,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": 1.02,
+    "singular_gap": null,
+    "projector_deformation": 0.0,
+    "coherent_projector_deformation": null,
+    "block_residual_norm": 3.2,
+    "leakage_trajectory": [
+      0.0,
+      0.7841589386454043,
+      1.5372631026437176,
+      2.260234880602197,
+      2.9539723084372347,
+      3.619349672143839,
+      4.257218096242356,
+      4.868406118233311,
+      5.4537202493837516,
+      6.01394552216116,
+      6.5498460246238555,
+      7.062165422069813,
+      7.551627466238911,
+      8.018936492357088,
+      8.464777904304126,
+      8.889818648180617,
+      9.294707674543247,
+      9.680076389571493,
+      10.046539095422848,
+      10.39469342002781,
+      10.725120736570227,
+      11.038386572892955,
+      11.33504101106329,
+      11.61561907732744,
+      11.88064112267791
+    ],
+    "autonomy_horizon": 0.0,
+    "cross_subsystem_transfer_rate": 3.2,
+    "reduced_model_forecast_error": 1.0064775975728458e-15,
+    "transient_amplification_score": 19.25194280961093,
+    "ensemble_averaged_leakage": null,
+    "leakage_variance": null,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": 0.0,
+        "rho_tau": 0.7103299655449671
+      },
+      "L2": {
+        "epsilon_s": 0.0,
+        "rho_tau": 0.9645536692168496,
+        "rho_tau_sq": -0.018397430647066178
+      },
+      "L3": {
+        "epsilon_s": 0.0,
+        "gamma_rho_tau": 0.9645536692168496,
+        "gamma_rho_tau_sq": -0.018397430647066178
+      }
+    },
+    "transportability_metrics": {
+      "horizon_ratio": 0.0,
+      "pseudospectral_proxy": 32000.31249694833
+    },
+    "coordinate_sensitivity_metrics": {
+      "max_relative_change": 1.4119614410116572e-08,
+      "mean_relative_change": 1.1933260482242106e-09,
+      "projector_back_error": 1.3970230879765435e-08
+    },
+    "numerical_refinement_metrics": {
+      "max_relative_span": 0.0,
+      "mean": 7.823980936536977,
+      "refined_time_count": 49.0,
+      "refinement_axis": "time_grid_density",
+      "spectral_gap_relative_span": 0.0,
+      "block_residual_relative_span": 0.0,
+      "transient_relative_span": 0.0
+    },
+    "predicted_autonomy_horizon": 0.140625,
+    "eigenvector_condition_number": 5.112837928996234e+16,
+    "pseudospectral_proxy": 32000.31249694833,
+    "transient_coincidence_score": 0.7201824747444089
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.0,
+        "rho_tau": 0.7103299655449671
+      },
+      "train_rmse": 0.6580667735678537,
+      "test_rmse": 1.0074531927573709,
+      "residual_mean": 0.1526829686228087,
+      "residual_std": 0.7719786317288168,
+      "selected": false,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.0,
+        "rho_tau": 0.9645536692168496,
+        "rho_tau_sq": -0.018397430647066178
+      },
+      "train_rmse": 0.034483464446547075,
+      "test_rmse": 0.06857725419443865,
+      "residual_mean": 0.01990911374068556,
+      "residual_std": 0.04378504609490188,
+      "selected": true,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.0,
+        "gamma_rho_tau": 0.9645536692168496,
+        "gamma_rho_tau_sq": -0.018397430647066178
+      },
+      "train_rmse": 0.034483464446547075,
+      "test_rmse": 0.06857725419443865,
+      "residual_mean": 0.01990911374068556,
+      "residual_std": 0.04378504609490188,
+      "selected": false,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L2",
+    "ranked_laws": [
+      "L2",
+      "L3",
+      "L1"
+    ],
+    "improvement_over_l1": 0.9388759385629323
+  },
+  "gate_outcomes": {},
+  "failure_labels": [
+    "coupling_failure",
+    "transient_growth_failure",
+    "horizon_failure"
+  ],
+  "figure_references": [],
+  "notes": [
+    "Nonnormal refinement compares continuous observables across a denser time grid; thresholded autonomy horizon is excluded because near-zero horizon changes discretely under resampling."
+  ]
+}

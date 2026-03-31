@@ -1,0 +1,199 @@
+{
+  "benchmark_id": "BP_T5_Stochastic_Stress_Pair",
+  "branch": "stochastic",
+  "theorem_tier": "T5",
+  "parameter_id": "reference",
+  "seed": 0,
+  "parameters": {
+    "times": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "steps": 12,
+    "eta": 0.28,
+    "slow_count": 2,
+    "source_states": [
+      0,
+      1
+    ],
+    "parameter_id": "sample_stress",
+    "paired_parameter_id": "matched_metastable",
+    "trajectories": 40,
+    "paired_trajectories": 400
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.12825539999903413,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": 0.07376622525628342,
+    "singular_gap": null,
+    "projector_deformation": 0.0,
+    "coherent_projector_deformation": null,
+    "block_residual_norm": 0.004755118483140341,
+    "leakage_trajectory": [
+      0.0,
+      0.03500000000000003,
+      0.06740000000000002,
+      0.09739049999999994,
+      0.1251483899999999,
+      0.15083787884999988,
+      0.1746113646669999,
+      0.1966102500444349,
+      0.2169657051096472,
+      0.23579938133612188,
+      0.25322407888294896,
+      0.26934437010983947,
+      0.2842571817988919
+    ],
+    "autonomy_horizon": 11.0,
+    "cross_subsystem_transfer_rate": 0.004755118483140341,
+    "reduced_model_forecast_error": 6.128985400558474e-16,
+    "transient_amplification_score": 1.0008413619649374,
+    "ensemble_averaged_leakage": 0.4,
+    "leakage_variance": 0.24615384615384614,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": 0.0,
+        "rho_tau": 5.404319083618829
+      },
+      "L2": {
+        "epsilon_s": 0.0,
+        "rho_tau": 7.288862023585441,
+        "rho_tau_sq": -40.82873244584109
+      },
+      "L3": {
+        "epsilon_s": 0.0,
+        "gamma_rho_tau": 7.288862023585441,
+        "gamma_rho_tau_sq": -40.82873244584109
+      }
+    },
+    "transportability_metrics": {
+      "bootstrap_ci_lower": 0.25,
+      "bootstrap_ci_upper": 0.525,
+      "metastability_score": 0.9727925484439068,
+      "stochastic_uncertainty_pair": {
+        "current_branch": "sample_stress",
+        "paired_branch": "matched_metastable",
+        "current_bootstrap_width": 0.275,
+        "paired_bootstrap_width": 0.08756249999999999,
+        "current_confidence_bounded_horizon": 0.0,
+        "paired_confidence_bounded_horizon": 6.0,
+        "current_estimation_error_proxy": 0.07524410678283583,
+        "paired_estimation_error_proxy": 0.036311180985872424,
+        "current_effective_sample_size": 40.0,
+        "paired_effective_sample_size": 400.0
+      }
+    },
+    "coordinate_sensitivity_metrics": {
+      "max_relative_change": 0.0,
+      "mean_relative_change": 0.0,
+      "projector_back_error": 0.0
+    },
+    "numerical_refinement_metrics": {
+      "max_relative_span": 0.0,
+      "mean": 0.2269230769230769
+    },
+    "predicted_autonomy_horizon": 58.88391656123034,
+    "eigenvector_condition_number": 1.2806729483002113,
+    "stochastic_uncertainty_metrics": {
+      "bootstrap_width": 0.275,
+      "ensemble_mean_leakage": 0.4,
+      "metastability_score": 0.9727925484439068,
+      "effective_sample_size": 40.0,
+      "estimated_horizon": 6.0,
+      "confidence_bounded_horizon": 0.0,
+      "estimation_error_proxy": 0.07524410678283583
+    },
+    "transient_coincidence_score": 0.7642495516733959
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.0,
+        "rho_tau": 5.404319083618829
+      },
+      "train_rmse": 0.01607091796211407,
+      "test_rmse": 0.016199323423760868,
+      "residual_mean": 0.007856250066242224,
+      "residual_std": 0.014065159652111841,
+      "selected": false,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.0,
+        "rho_tau": 7.288862023585441,
+        "rho_tau_sq": -40.82873244584109
+      },
+      "train_rmse": 0.001053460440088962,
+      "test_rmse": 0.0012735239528647406,
+      "residual_mean": 0.00024813360326287687,
+      "residual_std": 0.0010980769700388445,
+      "selected": true,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.0,
+        "gamma_rho_tau": 7.288862023585441,
+        "gamma_rho_tau_sq": -40.82873244584109
+      },
+      "train_rmse": 0.001053460440088962,
+      "test_rmse": 0.0012735239528647406,
+      "residual_mean": 0.00024813360326287687,
+      "residual_std": 0.0010980769700388445,
+      "selected": false,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L2",
+    "ranked_laws": [
+      "L2",
+      "L3",
+      "L1"
+    ],
+    "improvement_over_l1": 0.014925799470896128
+  },
+  "gate_outcomes": {},
+  "failure_labels": [],
+  "figure_references": [],
+  "notes": [
+    "This paired T5 family keeps the metastable transition structure fixed and isolates sample stress as the source of wider uncertainty and degraded confidence-bounded horizons.",
+    "The pair is evidence for bounded probabilistic validity, not a finite-sample concentration theorem."
+  ]
+}

@@ -1,0 +1,32 @@
+id: BP_Support_Portal_Funnel
+branch: application
+theorem_tier: T3/G6
+system_class: application_windowed_support_navigation
+state_dimension: 4
+formal_system: Row-stochastic support-portal navigation operators derived from a bundled help-funnel fixture.
+parameter_sets:
+  reference:
+    case_label: stable_support_funnel
+    window_labels: ["incident_spike", "self_serve_week", "patch_followup", "release_cleanup"]
+    total_sessions_min: 900
+  negative_detour:
+    case_label: support_detour_negative
+    window_labels: ["incident_spike", "self_serve_week", "patch_followup", "release_cleanup"]
+    total_sessions_min: 650
+data_provenance:
+  source_page: bundled_repository_fixture
+  source_archive: support_navigation_funnel_q1_2026.json
+  derivation_rule: Aggregate bundled support-navigation counts into ordered support-lifecycle windows; preserve one detour-heavy negative case.
+ground_truth_notes:
+  - This is a bounded cross-domain application fixture, not a public-data theorem claim.
+  - The reference case is intended to show stable coherent structure in a second non-mobility navigation domain.
+  - The negative detour case is retained to preserve explicit rejection evidence driven by gap collapse and carrier deformation; its residual coupling stays below the global coupling-failure cutoff.
+expected_failure_modes:
+  - gap_failure
+  - carrier_failure
+primary_observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon

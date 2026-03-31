@@ -1,0 +1,41 @@
+\section{Tier T5: Stochastic Systems}
+
+\subsection{Problem statement}
+Translate subsystem emergence diagnostics into a stochastic setting where the relevant objects are propagators, generators, metastable decompositions, and uncertainty bounds.
+
+\subsection{Assumptions}
+\begin{enumerate}
+\item A Markov semigroup or transition operator is available or estimable.
+\item Slow modes correspond to metastable or low-lying spectral structure.
+\item Sampling uncertainty is tracked explicitly.
+\end{enumerate}
+
+\subsection{Expected statement}
+Only a probabilistic or expectation-level statement is targeted:
+\[
+\mathbb{E}[\ell(t)] \le C_1 \varepsilon_s + C_2 \rho t + \text{higher-order terms},
+\]
+with autonomy horizon replaced by a confidence-bounded random quantity.
+
+\subsection{Proof ingredients}
+\begin{enumerate}
+\item Perturbation of stochastic propagators or generators.
+\item Concentration or bootstrap control for estimated leakage.
+\item Metastable decomposition consistency.
+\end{enumerate}
+
+\subsection{Obstruction list}
+\begin{enumerate}
+\item Insufficient sampling.
+\item Model misspecification in the estimated propagator.
+\item State aggregation that creates artificial metastability.
+\end{enumerate}
+
+\subsection{Correspondence to numerics}
+`BP_Noisy_Metastable_Network` remains the accepted stochastic reference, while `BP_T5_Stochastic_Stress_Pair` adds a matched-versus-sample-stress comparison that reports bootstrap width, estimation error proxies, and confidence-bounded horizons under the same metastable transition structure.
+
+\subsection{Current confidence level}
+Medium confidence on the implemented stochastic protocol; low confidence on a general theorem without stronger concentration assumptions.
+
+\subsection{Open proof gaps}
+The current note does not prove finite-sample concentration rates or a theorem covering both continuous-time diffusions and discrete-state networks in one package. The new stress pair is bounded protocol evidence for uncertainty sensitivity, not a finite-sample concentration theorem.

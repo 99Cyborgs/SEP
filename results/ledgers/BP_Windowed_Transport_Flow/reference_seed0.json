@@ -1,0 +1,315 @@
+{
+  "benchmark_id": "BP_Windowed_Transport_Flow",
+  "branch": "transport",
+  "theorem_tier": "T3",
+  "parameter_id": "reference",
+  "seed": 0,
+  "parameters": {
+    "windows": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "eta": 0.38,
+    "grid_size": 24,
+    "window_count": 6,
+    "coherent_rank": 2,
+    "block_sizes": [
+      1,
+      1
+    ],
+    "base_shift": 0.8,
+    "phase_increment": 0.9,
+    "diffusion": 2.8,
+    "coherent_strength": 2.4,
+    "window_groups": [
+      [
+        0
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        3
+      ],
+      [
+        4,
+        5
+      ]
+    ]
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.04907100000127684,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": null,
+    "singular_gap": 0.03224704530410183,
+    "projector_deformation": null,
+    "coherent_projector_deformation": 0.30860970760912776,
+    "block_residual_norm": 0.023559006171301893,
+    "leakage_trajectory": [
+      1.328455519539833e-15,
+      0.3619291914101414,
+      0.6308709106761747,
+      0.6945880258907006,
+      0.3023225663962121,
+      0.2888394751123863
+    ],
+    "autonomy_horizon": 6,
+    "cross_subsystem_transfer_rate": 0.023559006171301893,
+    "reduced_model_forecast_error": null,
+    "transient_amplification_score": null,
+    "ensemble_averaged_leakage": null,
+    "leakage_variance": null,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": 0.349999876813775,
+        "rho_tau": 1.579734944623903
+      },
+      "L2": {
+        "epsilon_s": -0.8664630970906237,
+        "rho_tau": 15.522842093063861,
+        "rho_tau_sq": -84.54823753149272
+      },
+      "L3": {
+        "epsilon_s": -0.8664630970906237,
+        "gamma_rho_tau": 15.522842093063861,
+        "gamma_rho_tau_sq": -84.54823753149272
+      }
+    },
+    "transportability_metrics": {
+      "coherent_vs_frozen_horizon_gain": 3.0,
+      "coherent_horizon": 6.0,
+      "frozen_horizon": 3.0,
+      "coherent_mean_leakage": 0.3797583615809361,
+      "frozen_mean_leakage": 0.34219431715720344,
+      "coherent_peak_leakage": 0.6945880258907006,
+      "frozen_peak_leakage": 0.5908684794601027,
+      "coherent_better_window_count": 2.0,
+      "coherent_minus_frozen_leakage": [
+        2.0985137390278618e-16,
+        0.18939022326524826,
+        0.31091271644707913,
+        0.25490704890391425,
+        -0.22779671772612936,
+        -0.3020290043477164
+      ],
+      "coherent_window_leakage": [
+        1.328455519539833e-15,
+        1.1613833458553823e-15,
+        1.1613833458553823e-15,
+        9.510148274357358e-16,
+        7.911210730282425e-16,
+        6.914799753827139e-16
+      ],
+      "frozen_window_leakage": [
+        1.118604145637047e-15,
+        1.118604145637047e-15,
+        1.118604145637047e-15,
+        1.118604145637047e-15,
+        1.118604145637047e-15,
+        1.118604145637047e-15
+      ],
+      "coherent_window_singular_gaps": [
+        0.03297583948828564,
+        0.047570803639447434,
+        0.047570803639447434,
+        0.03297583948828553,
+        0.016194492784572523,
+        0.016194492784572412
+      ],
+      "frozen_window_singular_gaps": [
+        0.03039902554798035,
+        0.03039902554798035,
+        0.03039902554798035,
+        0.03039902554798035,
+        0.03039902554798035,
+        0.03039902554798035
+      ],
+      "source_tracking": {
+        "mean_deformation": 0.21646329486667076,
+        "max_deformation": 0.6602481193190967,
+        "trajectory": [
+          0.21103417750710998,
+          0.0,
+          0.21103417750712428,
+          0.6602481193190967,
+          2.2785997561002628e-14
+        ]
+      },
+      "target_tracking": {
+        "mean_deformation": 0.12856097915507111,
+        "max_deformation": 0.5138666135908365,
+        "trajectory": [
+          0.06446914109224613,
+          0.0,
+          0.06446914109225048,
+          0.5138666135908365,
+          2.2466767321388186e-14
+        ]
+      },
+      "carrier_tracking": {
+        "mean_deformation": 0.30860970760912776,
+        "max_deformation": 0.5100436218507628,
+        "trajectory": [
+          0.39785268170310384,
+          0.40093227166890616,
+          0.20799590458515652,
+          0.5100436218507628,
+          0.026224058237709683
+        ]
+      },
+      "window_sensitivity": {
+        "window_groups": [
+          [
+            0
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "base_window_count": 6,
+        "regrouped_window_count": 4,
+        "regrouped_horizon_gain": 2.0,
+        "regrouped_autonomy_horizon": 4.0,
+        "regrouped_singular_gap": 0.04634094153568305,
+        "regrouped_carrier_mean_deformation": 0.48548832264152547,
+        "regrouped_carrier_max_deformation": 0.5078357687975974,
+        "adjacent_window_carrier_mean_deformation": 0.30860970760912776,
+        "adjacent_window_carrier_max_deformation": 0.5100436218507628,
+        "autonomy_horizon_relative_span": 0.3333333333333333,
+        "horizon_gain_relative_span": 0.3333333333333333,
+        "carrier_deformation_relative_span": 0.5731466336646313
+      }
+    },
+    "coordinate_sensitivity_metrics": {
+      "max_relative_change": 0.0,
+      "mean_relative_change": 0.0,
+      "projector_back_error": 0.0
+    },
+    "numerical_refinement_metrics": {
+      "max_relative_span": 0.0,
+      "mean": 6.0
+    },
+    "predicted_autonomy_horizon": 3.03027605968521,
+    "singular_values": [
+      [
+        1.0068118923813487,
+        0.9785300497681536
+      ],
+      [
+        1.0145217664070925,
+        0.9892799587246799
+      ],
+      [
+        1.0145217664070925,
+        0.9892799587246799
+      ],
+      [
+        1.006811892381349,
+        0.9785300497681543
+      ],
+      [
+        1.0007462990797364,
+        0.9667664709651536
+      ],
+      [
+        1.0007462990797364,
+        0.9667664709651532
+      ]
+    ],
+    "transient_coincidence_score": 0.6223257539685187
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.349999876813775,
+        "rho_tau": 1.579734944623903
+      },
+      "train_rmse": 0.11744937594543292,
+      "test_rmse": 0.424663420234465,
+      "residual_mean": 0.141485553351251,
+      "residual_std": 0.22201595054098253,
+      "selected": false,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.8664630970906237,
+        "rho_tau": 15.522842093063861,
+        "rho_tau_sq": -84.54823753149272
+      },
+      "train_rmse": 0.07061130954123604,
+      "test_rmse": 0.23712100777698114,
+      "residual_mean": 0.07891683956892283,
+      "residual_std": 0.12585002144985427,
+      "selected": true,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": -0.8664630970906237,
+        "gamma_rho_tau": 15.522842093063861,
+        "gamma_rho_tau_sq": -84.54823753149272
+      },
+      "train_rmse": 0.07061130954123604,
+      "test_rmse": 0.23712100777698114,
+      "residual_mean": 0.07891683956892283,
+      "residual_std": 0.12585002144985427,
+      "selected": false,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L2",
+    "ranked_laws": [
+      "L2",
+      "L3",
+      "L1"
+    ],
+    "improvement_over_l1": 0.18754241245748388
+  },
+  "gate_outcomes": {},
+  "failure_labels": [],
+  "figure_references": [],
+  "notes": [
+    "Reference transport case uses moderate phase drift so coherent lobes persist across windows without collapsing into a frozen surrogate.",
+    "The frozen surrogate is retained as a weaker baseline and should lose autonomy horizon relative to coherent-window tracking.",
+    "A fixed regrouping diagnostic is reported to expose finite-window sensitivity without promoting it to a gate-fatal condition yet."
+  ]
+}

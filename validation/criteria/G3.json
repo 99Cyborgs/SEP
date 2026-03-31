@@ -1,0 +1,7 @@
+{
+  "gate": "G3",
+  "benchmark_ids": ["BP_Windowed_Transport_Flow", "BP_T3_Window_Sensitivity_Pair"],
+  "min_singular_gap": 0.01,
+  "min_horizon_gain": 0.0,
+  "min_autonomy_horizon": 2
+}

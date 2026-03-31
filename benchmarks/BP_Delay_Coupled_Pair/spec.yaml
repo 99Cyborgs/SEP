@@ -1,0 +1,24 @@
+id: BP_Delay_Coupled_Pair
+branch: nonnormal
+theorem_tier: T2/T3
+system_class: fixed_lag_delay
+state_dimension: 2
+formal_system: x'(t) = A0 x(t) + A_tau x(t - tau) with sampled history-propagator diagnostics.
+parameter_ranges:
+  delay: [0.2, 0.8]
+  self_decay: [0.7, 1.1]
+  shear: [1.5, 2.6]
+  delay_feedback: [1.0, 1.6]
+  delay_cross_feedback: [0.15, 0.4]
+ground_truth_notes:
+  - Two-module partition is planted.
+  - The physical state stays two-dimensional; the history snapshot space is diagnostic only.
+expected_failure_modes:
+  - transient_growth_failure
+  - coupling_failure
+  - horizon_failure
+primary_observables:
+  - transient_amplification_score
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon

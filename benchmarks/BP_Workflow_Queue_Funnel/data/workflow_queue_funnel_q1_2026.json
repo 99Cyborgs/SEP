@@ -1,0 +1,123 @@
+{
+  "dataset_name": "Bundled workflow queue funnel",
+  "source_page": "bundled_repository_fixture",
+  "source_archive": "workflow_queue_funnel_q1_2026.json",
+  "derivation": {
+    "state_selection": [
+      "Intake",
+      "Triage",
+      "Execution",
+      "Closure"
+    ],
+    "session_filter": "Bundled operational stage-transition counts for a four-stage workflow queue used only as a reproducible non-navigation application fixture.",
+    "window_rule": "Aggregate ordered stage-to-stage transitions into four reporting windows before pseudocount smoothing."
+  },
+  "states": [
+    {
+      "name": "Intake",
+      "state_id": "intake"
+    },
+    {
+      "name": "Triage",
+      "state_id": "triage"
+    },
+    {
+      "name": "Execution",
+      "state_id": "execution"
+    },
+    {
+      "name": "Closure",
+      "state_id": "closure"
+    }
+  ],
+  "parameter_sets": {
+    "reference": {
+      "case_label": "stable_workflow_queue",
+      "window_labels": [
+        "quarter_open",
+        "triage_stabilization",
+        "execution_push",
+        "closure_cleanup"
+      ],
+      "eta": 0.45,
+      "pseudocount": 0.2,
+      "refined_pseudocount": 0.3,
+      "coherent_rank": 2,
+      "block_sizes": [
+        1,
+        1
+      ],
+      "total_flow": 1097,
+      "raw_window_counts": [
+        [
+          [78, 20, 1, 1],
+          [14, 74, 5, 1],
+          [1, 4, 72, 18],
+          [1, 1, 10, 62]
+        ],
+        [
+          [74, 20, 2, 1],
+          [12, 72, 7, 1],
+          [1, 5, 70, 20],
+          [1, 1, 9, 64]
+        ],
+        [
+          [70, 19, 2, 1],
+          [11, 68, 9, 2],
+          [1, 6, 66, 26],
+          [1, 1, 8, 66]
+        ],
+        [
+          [66, 18, 2, 1],
+          [10, 64, 10, 2],
+          [1, 6, 62, 30],
+          [1, 1, 8, 68]
+        ]
+      ]
+    },
+    "negative_detour": {
+      "case_label": "workflow_rework_negative",
+      "window_labels": [
+        "quarter_open",
+        "triage_stabilization",
+        "execution_push",
+        "closure_cleanup"
+      ],
+      "eta": 0.45,
+      "pseudocount": 0.2,
+      "refined_pseudocount": 1.0,
+      "coherent_rank": 2,
+      "block_sizes": [
+        1,
+        1
+      ],
+      "total_flow": 784,
+      "raw_window_counts": [
+        [
+          [18, 17, 10, 5],
+          [15, 16, 12, 7],
+          [9, 13, 14, 13],
+          [6, 8, 17, 15]
+        ],
+        [
+          [16, 14, 13, 8],
+          [14, 13, 13, 10],
+          [10, 14, 12, 13],
+          [8, 10, 15, 14]
+        ],
+        [
+          [14, 12, 15, 10],
+          [12, 12, 14, 12],
+          [11, 13, 11, 14],
+          [10, 11, 14, 13]
+        ],
+        [
+          [12, 11, 15, 13],
+          [11, 11, 13, 15],
+          [12, 12, 10, 15],
+          [11, 10, 14, 13]
+        ]
+      ]
+    }
+  }
+}

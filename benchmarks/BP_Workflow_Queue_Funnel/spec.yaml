@@ -1,0 +1,31 @@
+id: BP_Workflow_Queue_Funnel
+branch: application
+theorem_tier: T3/G6
+system_class: application_windowed_workflow_queue
+state_dimension: 4
+formal_system: Row-stochastic stage-to-stage workflow operators derived from a bundled operational queue fixture.
+parameter_sets:
+  reference:
+    case_label: stable_workflow_queue
+    window_labels: ["quarter_open", "triage_stabilization", "execution_push", "closure_cleanup"]
+    total_cases_min: 1000
+  negative_detour:
+    case_label: workflow_rework_negative
+    window_labels: ["quarter_open", "triage_stabilization", "execution_push", "closure_cleanup"]
+    total_cases_min: 700
+data_provenance:
+  source_page: bundled_repository_fixture
+  source_archive: workflow_queue_funnel_q1_2026.json
+  derivation_rule: Aggregate bundled workflow stage-transition counts into ordered operational windows; preserve one rework-heavy negative case.
+ground_truth_notes:
+  - This is a bounded cross-domain application fixture, not a public-data theorem claim.
+  - The reference case is intended to show stable coherent structure outside mobility and page navigation.
+  - The negative detour case is retained to preserve explicit rejection evidence driven by gap collapse and carrier deformation rather than a taxonomy-level coupling failure.
+expected_failure_modes:
+  - carrier_failure
+primary_observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon

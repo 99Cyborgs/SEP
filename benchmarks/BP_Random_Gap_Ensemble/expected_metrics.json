@@ -1,0 +1,12 @@
+{
+  "benchmark_id": "BP_Random_Gap_Ensemble",
+  "positive_case": {
+    "spectral_gap_min": 0.05,
+    "transient_amplification_score_max": 6.0,
+    "law_selection_expected": "L3"
+  },
+  "negative_case": {
+    "transient_growth_failure_trigger_above": 1.5,
+    "horizon_failure_trigger_below_ratio": 0.45
+  }
+}

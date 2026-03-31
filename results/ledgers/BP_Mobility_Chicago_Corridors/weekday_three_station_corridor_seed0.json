@@ -1,0 +1,262 @@
+{
+  "benchmark_id": "BP_Mobility_Chicago_Corridors",
+  "branch": "application",
+  "theorem_tier": "T3/G6",
+  "parameter_id": "weekday_three_station_corridor",
+  "seed": 0,
+  "parameters": {
+    "windows": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "window_labels": [
+      "06:00-09:00",
+      "09:00-12:00",
+      "15:00-18:00",
+      "18:00-21:00"
+    ],
+    "eta": 0.45,
+    "coherent_rank": 2,
+    "block_sizes": [
+      2,
+      1
+    ],
+    "station_names": [
+      "University Ave & 57th St",
+      "Ellis Ave & 60th St",
+      "Ellis Ave & 55th St"
+    ],
+    "station_ids": [
+      "KA1503000071",
+      "KA1503000014",
+      "KA1504000076"
+    ],
+    "total_trips": 904,
+    "pseudocount": 0.2,
+    "refined_pseudocount": 1.0,
+    "case_label": "weekday_commute_three_station_corridor",
+    "source_archive": "202401-divvy-tripdata.zip",
+    "base_parameter_id": "reference",
+    "station_subset_indices": [
+      0,
+      1,
+      2
+    ]
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.039578400002938,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": null,
+    "singular_gap": 0.4971327279903158,
+    "projector_deformation": null,
+    "coherent_projector_deformation": 0.2746241823969779,
+    "block_residual_norm": 0.0,
+    "leakage_trajectory": [
+      3.043123740666622e-16,
+      0.04030101126751355,
+      0.005266506913156949,
+      0.0002162030416208012
+    ],
+    "autonomy_horizon": 4,
+    "cross_subsystem_transfer_rate": 0.0,
+    "reduced_model_forecast_error": null,
+    "transient_amplification_score": null,
+    "ensemble_averaged_leakage": null,
+    "leakage_variance": null,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": 0.049178983384361684,
+        "rho_tau": 0.0
+      },
+      "L2": {
+        "epsilon_s": 0.049178983384361684,
+        "rho_tau": 0.0,
+        "rho_tau_sq": 0.0
+      },
+      "L3": {
+        "epsilon_s": 0.049178983384361684,
+        "gamma_rho_tau": 0.0,
+        "gamma_rho_tau_sq": 0.0
+      }
+    },
+    "transportability_metrics": {
+      "coherent_vs_frozen_horizon_gain": 0.0,
+      "coherent_horizon": 4.0,
+      "frozen_horizon": 4.0,
+      "coherent_mean_leakage": 0.011445930305572902,
+      "frozen_mean_leakage": 0.01675047041977633,
+      "coherent_minus_frozen_leakage": [
+        -1.677506612286719e-16,
+        0.01228507767437742,
+        -0.014481685211190028,
+        -0.01902155292000095
+      ],
+      "coherent_window_singular_gaps": [
+        0.35707681674080666,
+        0.4264401100582445,
+        0.5445555421266266,
+        0.6604584430355855
+      ],
+      "frozen_window_singular_gaps": [
+        0.4715230810599522,
+        0.4715230810599522,
+        0.4715230810599522,
+        0.4715230810599522
+      ],
+      "coherent_window_leakage": [
+        3.043123740666622e-16,
+        3.465961178492639e-16,
+        7.124114612950288e-17,
+        3.403950015511632e-16
+      ],
+      "frozen_window_leakage": [
+        4.720630352953341e-16,
+        4.720630352953341e-16,
+        4.720630352953341e-16,
+        4.720630352953341e-16
+      ],
+      "carrier_tracking": {
+        "mean_deformation": 0.2746241823969779,
+        "max_deformation": 0.44914506121847525,
+        "trajectory": [
+          0.44914506121847525,
+          0.08942593775828336,
+          0.2853015482141749
+        ]
+      },
+      "source_page": "https://divvybikes.com/system-data",
+      "source_archive": "202401-divvy-tripdata.zip",
+      "derivation_summary": "Aggregate trips by started_at into ordered local-time windows; counts are stored before pseudocount smoothing.",
+      "selected_station_names": [
+        "University Ave & 57th St",
+        "Ellis Ave & 60th St",
+        "Ellis Ave & 55th St"
+      ],
+      "selected_station_ids": [
+        "KA1503000071",
+        "KA1503000014",
+        "KA1504000076"
+      ],
+      "total_trips": 904.0,
+      "case_label": "weekday_commute_three_station_corridor",
+      "base_parameter_id": "reference"
+    },
+    "coordinate_sensitivity_metrics": {
+      "max_relative_change": 0.0,
+      "mean_relative_change": 0.0,
+      "projector_back_error": 0.0
+    },
+    "numerical_refinement_metrics": {
+      "max_relative_span": 0.01986434955425356,
+      "mean": 0.2554184887022724,
+      "refinement_axis": "pseudocount_smoothing",
+      "singular_gap_relative_span": 0.01986434955425356,
+      "carrier_relative_span": 0.004469837183198313,
+      "residual_relative_span": 0.0,
+      "coarse_pseudocount": 0.2,
+      "refined_pseudocount": 1.0
+    },
+    "predicted_autonomy_horizon": Infinity,
+    "singular_values": [
+      [
+        1.0205740584471494,
+        0.6562757048525453
+      ],
+      [
+        1.048821394678116,
+        0.5370521768150073
+      ],
+      [
+        1.0674936704398297,
+        0.6741419960882004
+      ],
+      [
+        1.1651568038539781,
+        0.6621508206584638
+      ]
+    ],
+    "transient_coincidence_score": 0.32037141775354144
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.049178983384361684,
+        "rho_tau": 0.0
+      },
+      "train_rmse": 0.018947324945889195,
+      "test_rmse": 0.008239231189887938,
+      "residual_mean": -0.002059807797471987,
+      "residual_std": 0.01679223827967598,
+      "selected": true,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.049178983384361684,
+        "rho_tau": 0.0,
+        "rho_tau_sq": 0.0
+      },
+      "train_rmse": 0.018947324945889195,
+      "test_rmse": 0.008239231189887938,
+      "residual_mean": -0.002059807797471987,
+      "residual_std": 0.01679223827967598,
+      "selected": false,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.049178983384361684,
+        "gamma_rho_tau": 0.0,
+        "gamma_rho_tau_sq": 0.0
+      },
+      "train_rmse": 0.018947324945889195,
+      "test_rmse": 0.008239231189887938,
+      "residual_mean": -0.002059807797471987,
+      "residual_std": 0.01679223827967598,
+      "selected": false,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L1",
+    "ranked_laws": [
+      "L1",
+      "L2",
+      "L3"
+    ],
+    "improvement_over_l1": 0.0
+  },
+  "gate_outcomes": {},
+  "failure_labels": [],
+  "figure_references": [],
+  "notes": [
+    "Derived real-data fixture from 202401-divvy-tripdata.zip using the Hyde Park station slice documented in the benchmark README.",
+    "Coordinate sensitivity is left neutral because arbitrary orthogonal basis changes are not meaningful on named mobility stations in this first application case study."
+  ]
+}

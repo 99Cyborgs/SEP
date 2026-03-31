@@ -1,0 +1,9 @@
+{
+  "label": "transient_growth_failure",
+  "triggered": true,
+  "metric": 19.25194280961093,
+  "threshold": 6.0,
+  "direction": "gt",
+  "message": "Transient amplification exceeds the admissible gate threshold.",
+  "archive_path": "failures\\G2_nonnormal\\BP_Non_Normal_Shear_reference_seed0_transient_growth_failure.json"
+}

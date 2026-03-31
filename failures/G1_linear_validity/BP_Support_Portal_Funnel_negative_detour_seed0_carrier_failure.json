@@ -1,0 +1,9 @@
+{
+  "label": "carrier_failure",
+  "triggered": true,
+  "metric": 0.8404729723629586,
+  "threshold": 0.35,
+  "direction": "gt",
+  "message": "Estimated carrier is too far from the planted or baseline carrier.",
+  "archive_path": "failures\\G1_linear_validity\\BP_Support_Portal_Funnel_negative_detour_seed0_carrier_failure.json"
+}

@@ -1,0 +1,183 @@
+{
+  "benchmark_id": "BP_Random_Gap_Ensemble",
+  "branch": "linear",
+  "theorem_tier": "T2",
+  "parameter_id": "reference",
+  "seed": 0,
+  "parameters": {
+    "ensemble_size": 8,
+    "times": [
+      0.0,
+      0.29411764705882354,
+      0.5882352941176471,
+      0.8823529411764706,
+      1.1764705882352942,
+      1.4705882352941178,
+      1.7647058823529411,
+      2.058823529411765,
+      2.3529411764705883,
+      2.6470588235294117,
+      2.9411764705882355,
+      3.235294117647059,
+      3.5294117647058822,
+      3.823529411764706,
+      4.11764705882353,
+      4.411764705882353,
+      4.705882352941177,
+      5.0
+    ],
+    "eta": 0.4,
+    "slow_count": 2,
+    "block_sizes": [
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "code_hash": null,
+    "solver": "scipy/numpy reference routines",
+    "runtime_seconds": 0.13496160000067903,
+    "source_of_truth": {
+      "embedded_zip_found": false,
+      "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
+    }
+  },
+  "observables": {
+    "spectral_gap": 0.7488395746185268,
+    "singular_gap": null,
+    "projector_deformation": 0.0,
+    "coherent_projector_deformation": null,
+    "block_residual_norm": 1.0080101987634622,
+    "leakage_trajectory": [
+      1.2608162488587724e-16,
+      0.28062184156721376,
+      0.5314245171452925,
+      0.7550492224193508,
+      0.9539076987463537,
+      1.1302025626094627,
+      1.2859457848098648,
+      1.4229754919647517,
+      1.5429712464627494,
+      1.6474679461970114,
+      1.7378684719961761,
+      1.8154551985647345,
+      1.8814004738010148,
+      1.9367761614693328,
+      1.9825623332605327,
+      2.01965518818978,
+      2.048874269968799,
+      2.0709690463767094
+    ],
+    "autonomy_horizon": 2.5,
+    "cross_subsystem_transfer_rate": 1.0080101987634622,
+    "reduced_model_forecast_error": 5.138351001799804e-16,
+    "transient_amplification_score": 3.9322719323040722,
+    "ensemble_averaged_leakage": null,
+    "leakage_variance": null,
+    "affine_law_regression_coefficients": {
+      "L1": {
+        "epsilon_s": 0.0,
+        "rho_tau": 0.49516438170274746
+      },
+      "L2": {
+        "epsilon_s": 0.0,
+        "rho_tau": 0.8706583197074221,
+        "rho_tau_sq": -0.09304245011173745
+      },
+      "L3": {
+        "epsilon_s": 0.0,
+        "gamma_rho_tau": 0.22141355803876672,
+        "gamma_rho_tau_sq": -0.00601719452221855
+      }
+    },
+    "transportability_metrics": {
+      "ensemble_size": 8.0,
+      "pseudospectral_proxy_mean": 694.5198034031438,
+      "pseudospectral_proxy_max": 2194.088197733065
+    },
+    "coordinate_sensitivity_metrics": {
+      "max_relative_change": 0.0,
+      "mean_relative_change": 0.0,
+      "projector_back_error": 0.0
+    },
+    "numerical_refinement_metrics": {
+      "max_relative_span": 0.0,
+      "mean": 1.3913404141971741
+    },
+    "predicted_autonomy_horizon": 24.668852723805717,
+    "pseudospectral_proxy": 694.5198034031438,
+    "transient_coincidence_score": 0.658652903186222
+  },
+  "law_fits": {
+    "L1": {
+      "law": "L1",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.0,
+        "rho_tau": 0.49516438170274746
+      },
+      "train_rmse": 0.3010406437685367,
+      "test_rmse": 0.25072425877929233,
+      "residual_mean": 0.14351354714521275,
+      "residual_std": 0.2465259808478422,
+      "selected": false,
+      "notes": []
+    },
+    "L2": {
+      "law": "L2",
+      "feature_names": [
+        "epsilon_s",
+        "rho_tau",
+        "rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.0,
+        "rho_tau": 0.8706583197074221,
+        "rho_tau_sq": -0.09304245011173745
+      },
+      "train_rmse": 0.029037892036216213,
+      "test_rmse": 0.041035447568334965,
+      "residual_mean": 0.008255547735402942,
+      "residual_std": 0.03248509452919865,
+      "selected": false,
+      "notes": []
+    },
+    "L3": {
+      "law": "L3",
+      "feature_names": [
+        "epsilon_s",
+        "gamma_rho_tau",
+        "gamma_rho_tau_sq"
+      ],
+      "coefficients": {
+        "epsilon_s": 0.0,
+        "gamma_rho_tau": 0.22141355803876672,
+        "gamma_rho_tau_sq": -0.00601719452221855
+      },
+      "train_rmse": 0.029037892036216265,
+      "test_rmse": 0.04103544756833469,
+      "residual_mean": 0.008255547735405551,
+      "residual_std": 0.0324850945291979,
+      "selected": true,
+      "notes": []
+    }
+  },
+  "law_selection_summary": {
+    "best_law": "L3",
+    "ranked_laws": [
+      "L3",
+      "L2",
+      "L1"
+    ],
+    "improvement_over_l1": 0.20968881121095764
+  },
+  "gate_outcomes": {},
+  "failure_labels": [
+    "coupling_failure"
+  ],
+  "figure_references": [],
+  "notes": []
+}

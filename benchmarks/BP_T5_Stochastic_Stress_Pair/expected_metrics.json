@@ -1,0 +1,13 @@
+{
+  "benchmark_id": "BP_T5_Stochastic_Stress_Pair",
+  "reference_case": {
+    "parameter_id": "reference",
+    "bootstrap_width_min": 0.25,
+    "confidence_bounded_horizon_max": 0.0
+  },
+  "matched_metastable_case": {
+    "parameter_id": "matched_metastable",
+    "bootstrap_width_max": 0.1,
+    "confidence_bounded_horizon_min": 5.0
+  }
+}

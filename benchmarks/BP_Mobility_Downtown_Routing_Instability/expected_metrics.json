@@ -1,0 +1,10 @@
+{
+  "benchmark_id": "BP_Mobility_Downtown_Routing_Instability",
+  "negative_case": {
+    "parameter_id": "reference",
+    "total_trips_min": 300,
+    "singular_gap_max": 0.3,
+    "projector_deformation_min": 0.9,
+    "carrier_failure_expected": true
+  }
+}

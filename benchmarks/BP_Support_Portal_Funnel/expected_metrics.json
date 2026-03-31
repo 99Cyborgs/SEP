@@ -1,0 +1,36 @@
+{
+  "benchmark_id": "BP_Support_Portal_Funnel",
+  "threshold_layers": {
+    "global_failure_taxonomy": {
+      "max_block_residual": 0.35,
+      "max_projector_deformation": 0.35,
+      "min_gap": 0.03
+    },
+    "package_acceptance": {
+      "min_singular_gap": 0.35,
+      "max_coherent_projector_deformation": 0.15,
+      "min_autonomy_horizon": 3.0,
+      "max_refinement_span": 0.2
+    }
+  },
+  "reference_case": {
+    "parameter_id": "reference",
+    "min_singular_gap": 0.35,
+    "max_coherent_projector_deformation": 0.15,
+    "min_autonomy_horizon": 3.0,
+    "expected_package_status": "accepted"
+  },
+  "negative_case": {
+    "parameter_id": "negative_detour",
+    "expected_package_status": "rejected",
+    "expected_failure_labels": [
+      "carrier_failure",
+      "gap_failure"
+    ],
+    "expected_rejection_reasons": [
+      "singular_gap_below_package_floor",
+      "carrier_deformation_above_package_ceiling",
+      "blocking_failure_label:carrier_failure"
+    ]
+  }
+}

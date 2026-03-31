@@ -1,0 +1,11 @@
+{
+  "benchmark_id": "BP_Weakly_Nonlinear_Slow_Manifold",
+  "positive_case": {
+    "projector_deformation_max": 0.35,
+    "autonomy_horizon_min": 1.0,
+    "law_selection_expected": "L2"
+  },
+  "negative_case": {
+    "horizon_failure_trigger_below_ratio": 0.45
+  }
+}
