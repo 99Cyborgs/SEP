@@ -1,5 +1,6 @@
 {
   "benchmark_id": "BP_T5_Stochastic_Stress_Pair",
+  "case_id": "reference",
   "branch": "stochastic",
   "theorem_tier": "T5",
   "parameter_id": "reference",
@@ -33,9 +34,9 @@
     "paired_trajectories": 400
   },
   "metadata": {
-    "code_hash": null,
+    "code_hash": "4adc2af",
     "solver": "scipy/numpy reference routines",
-    "runtime_seconds": 0.12825539999903413,
+    "runtime_seconds": 0.12218169999687234,
     "source_of_truth": {
       "embedded_zip_found": false,
       "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."

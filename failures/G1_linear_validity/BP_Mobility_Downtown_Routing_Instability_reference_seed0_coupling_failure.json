@@ -1,9 +1,17 @@
 {
-  "label": "coupling_failure",
-  "triggered": true,
-  "metric": 0.45510199060917084,
-  "threshold": 0.35,
-  "direction": "gt",
-  "message": "Reduced slow dynamics is too strongly coupled for the claimed regime.",
-  "archive_path": "failures\\G1_linear_validity\\BP_Mobility_Downtown_Routing_Instability_reference_seed0_coupling_failure.json"
+  "benchmark_id": "BP_Mobility_Downtown_Routing_Instability",
+  "case_id": "reference",
+  "parameter_id": "reference",
+  "seed": 0,
+  "branch": "application",
+  "theorem_tier": "T3/G6",
+  "failure": {
+    "label": "coupling_failure",
+    "triggered": true,
+    "metric": 0.45510199060917084,
+    "threshold": 0.35,
+    "direction": "gt",
+    "message": "Reduced slow dynamics is too strongly coupled for the claimed regime.",
+    "archive_path": "failures\\G1_linear_validity\\BP_Mobility_Downtown_Routing_Instability_reference_seed0_coupling_failure.json"
+  }
 }

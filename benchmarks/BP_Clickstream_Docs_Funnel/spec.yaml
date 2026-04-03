@@ -1,33 +1,93 @@
-id: BP_Clickstream_Docs_Funnel
+registry_source: benchmarks/registry.yaml
+family_id: BP_Clickstream_Docs_Funnel
+title: Clickstream Docs Funnel
 branch: application
-theorem_tier: T3/G6
+tier: T3/G6
+phase: 5
+description: Bundled documentation clickstream benchmark selected as non-mobility cross-domain application evidence.
 system_class: application_windowed_clickstream
 state_dimension: 4
 formal_system: Row-stochastic page-to-page clickstream operators derived from a bundled documentation navigation fixture.
-parameter_sets:
-  reference:
-    case_label: stable_docs_funnel
-    window_labels: ["launch_week", "onboarding_push", "integration_week", "release_notes_week"]
-    total_sessions_min: 900
-  negative_detour:
-    case_label: docs_detour_negative
-    window_labels: ["launch_week", "onboarding_push", "integration_week", "release_notes_week"]
-    total_sessions_min: 600
-data_provenance:
+implementation_status: complete
+evidence_class: application_repository_fixture
+claim_refs:
+- T3_finite_time_transport
+- G6_application_identifiability
+observables:
+- singular_gap
+- coherent_projector_deformation
+- block_residual_norm
+- leakage_trajectory
+- autonomy_horizon
+fixtures:
+- kind: named_flow_fixture
+  path: benchmarks/BP_Clickstream_Docs_Funnel/data/docs_navigation_funnel_q1_2026.json
   source_page: bundled_repository_fixture
   source_archive: docs_navigation_funnel_q1_2026.json
-  derivation_rule: Aggregate bundled page-transition counts into ordered product-lifecycle windows; preserve one negative detour case.
-ground_truth_notes:
-  - This is a bounded cross-domain application fixture, not a public-data theorem claim.
-  - The reference case is intended to show stable coherent structure outside mobility.
-  - The negative detour case is retained to preserve explicit rejection evidence.
 expected_failure_modes:
-  - carrier_failure
-  - coupling_failure
-  - numerical_artifact_failure
-primary_observables:
+- carrier_failure
+- coupling_failure
+- numerical_artifact_failure
+cases:
+- family_id: BP_Clickstream_Docs_Funnel
+  case_id: reference
+  title: Stable documentation funnel reference
+  parameter_id: reference
+  base_parameter_id: reference
+  role: reference
+  tier: T3/G6
+  claim_status: supported
+  implementation_status: complete
+  evidence_class: application_repository_fixture
+  observables:
   - singular_gap
   - coherent_projector_deformation
   - block_residual_norm
   - leakage_trajectory
   - autonomy_horizon
+  fixtures:
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Clickstream_Docs_Funnel/data/docs_navigation_funnel_q1_2026.json
+    source_page: bundled_repository_fixture
+    source_archive: docs_navigation_funnel_q1_2026.json
+  acceptance_profile: application_navigation_reference
+  expected_failure_modes: []
+  run_modes:
+  - reference
+  tags:
+  - navigation
+  - accepted
+  overrides: {}
+  notes: []
+- family_id: BP_Clickstream_Docs_Funnel
+  case_id: negative_detour
+  title: Detour-heavy documentation negative control
+  parameter_id: negative_detour
+  base_parameter_id: negative_detour
+  role: negative_control
+  tier: T3/G6
+  claim_status: rejected
+  implementation_status: complete
+  evidence_class: application_repository_fixture
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures:
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Clickstream_Docs_Funnel/data/docs_navigation_funnel_q1_2026.json
+    source_page: bundled_repository_fixture
+    source_archive: docs_navigation_funnel_q1_2026.json
+  acceptance_profile: expected_failure_control
+  expected_failure_modes:
+  - carrier_failure
+  - coupling_failure
+  run_modes:
+  - reference
+  tags:
+  - navigation
+  - negative
+  overrides: {}
+  notes: []

@@ -1,5 +1,6 @@
 {
   "benchmark_id": "BP_Mobility_Chicago_Corridors",
+  "case_id": "negative_weekend",
   "branch": "application",
   "theorem_tier": "T3/G6",
   "parameter_id": "negative_weekend",
@@ -49,9 +50,9 @@
     ]
   },
   "metadata": {
-    "code_hash": null,
+    "code_hash": "4adc2af",
     "solver": "scipy/numpy reference routines",
-    "runtime_seconds": 0.040324599998712074,
+    "runtime_seconds": 0.041480400002910756,
     "source_of_truth": {
       "embedded_zip_found": false,
       "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."

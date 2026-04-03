@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SEP Claim Traceability",
+  "type": "object",
+  "required": ["claim_count", "claims"],
+  "properties": {
+    "claim_count": { "type": "integer" },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim", "cases"],
+        "properties": {
+          "claim": {
+            "type": "object",
+            "required": ["claim_id", "title", "claim_document_path", "gate", "observables"],
+            "additionalProperties": true
+          },
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "benchmark_id",
+                "case_id",
+                "role",
+                "claim_status",
+                "acceptance_profile",
+                "observables",
+                "expected_failure_modes",
+                "decision_status",
+                "artifact_paths"
+              ],
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

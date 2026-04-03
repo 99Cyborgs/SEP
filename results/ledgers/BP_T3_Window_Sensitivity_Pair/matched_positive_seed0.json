@@ -1,5 +1,6 @@
 {
   "benchmark_id": "BP_T3_Window_Sensitivity_Pair",
+  "case_id": "matched_positive",
   "branch": "transport",
   "theorem_tier": "T3",
   "parameter_id": "matched_positive",
@@ -50,9 +51,9 @@
     "paired_coherent_strength": 2.0
   },
   "metadata": {
-    "code_hash": null,
+    "code_hash": "4adc2af",
     "solver": "scipy/numpy reference routines",
-    "runtime_seconds": 0.06246030000329483,
+    "runtime_seconds": 0.12296170000263373,
     "source_of_truth": {
       "embedded_zip_found": false,
       "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."

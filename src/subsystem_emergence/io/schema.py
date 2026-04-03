@@ -6,11 +6,11 @@ import json
 from pathlib import Path
 
 from subsystem_emergence.core.observables import observable_catalog
-from subsystem_emergence.io.ledgers import repository_root
+from subsystem_emergence.io.paths import repository_root
 
 
 def load_schema(path: str | Path | None = None) -> dict:
-    """Load the ledger record schema."""
+    """Load the canonical run-record schema."""
 
     schema_path = Path(path) if path is not None else repository_root() / "observables" / "schema.json"
     return json.loads(schema_path.read_text())

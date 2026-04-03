@@ -10,10 +10,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import finalize_gate, gate_context, main_dump
 
 
-def evaluate() -> dict:
-    root, criteria, records = gate_context("G1")
+def evaluate(root: Path | None = None) -> dict:
+    root, criteria, records = gate_context("G1", root)
     if not records:
-        return finalize_gate(root, "G1", criteria, records, False, {}, "No linear ledgers were found.")
+        return finalize_gate(root, "G1", criteria, records, False, {}, "No linear evidence records were found.")
     gap_ok = all(float(record["observables"]["spectral_gap"]) >= criteria["min_gap"] for record in records)
     deformation_ok = all(
         float(record["observables"]["projector_deformation"] or 0.0) <= criteria["max_projector_deformation"]

@@ -1,33 +1,246 @@
-id: BP_Mobility_Chicago_Corridors
+registry_source: benchmarks/registry.yaml
+family_id: BP_Mobility_Chicago_Corridors
+title: Mobility Chicago Corridors
 branch: application
-theorem_tier: T3/G6
+tier: T3/G6
+phase: 5
+description: Bundled real-data mobility benchmark derived from Divvy Hyde Park station flows.
 system_class: real_world_windowed_mobility
 state_dimension: 4
-formal_system: Row-stochastic station-to-station mobility operators derived from a bundled Hyde Park slice of Divvy January 2024 trip history.
-parameter_sets:
-  reference:
-    case_label: weekday_commute
-    window_labels: ["06:00-09:00", "09:00-12:00", "15:00-18:00", "18:00-21:00"]
-    total_trips_min: 1000
-  negative_weekend:
-    case_label: weekend_night
-    window_labels: ["19:00-22:00", "22:00-24:00", "00:00-03:00", "03:00-07:00"]
-    total_trips_max: 150
-data_provenance:
+formal_system: Row-stochastic station-to-station mobility operators derived from a bundled Hyde Park slice of Divvy January
+  2024 trip history.
+implementation_status: complete
+evidence_class: application_real_data
+claim_refs:
+- T3_finite_time_transport
+- G6_application_identifiability
+observables:
+- singular_gap
+- coherent_projector_deformation
+- block_residual_norm
+- leakage_trajectory
+- autonomy_horizon
+fixtures:
+- kind: named_flow_fixture
+  path: benchmarks/BP_Mobility_Chicago_Corridors/data/divvy_hyde_park_jan2024.json
   source_page: https://divvybikes.com/system-data
   source_archive: 202401-divvy-tripdata.zip
-  derivation_rule: Aggregate trips whose start and end station names are both in the selected Hyde Park station set.
-ground_truth_notes:
-  - The benchmark is real-data and case-study-only; no new universal theorem is claimed.
-  - The reference case is usable because corridor structure is interpretable and reproducible from a bundled fixture.
-  - The weekend-night case is retained as an instructive negative application slice.
 expected_failure_modes:
-  - carrier_failure
-  - coupling_failure
-  - numerical_artifact_failure
-primary_observables:
+- carrier_failure
+- coupling_failure
+- numerical_artifact_failure
+cases:
+- family_id: BP_Mobility_Chicago_Corridors
+  case_id: reference
+  title: Weekday commute reference corridor
+  parameter_id: reference
+  base_parameter_id: reference
+  role: reference
+  tier: T3/G6
+  claim_status: supported
+  implementation_status: complete
+  evidence_class: application_real_data
+  observables:
   - singular_gap
   - coherent_projector_deformation
   - block_residual_norm
   - leakage_trajectory
   - autonomy_horizon
+  fixtures:
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Mobility_Chicago_Corridors/data/divvy_hyde_park_jan2024.json
+    source_page: https://divvybikes.com/system-data
+    source_archive: 202401-divvy-tripdata.zip
+  acceptance_profile: application_mobility_reference
+  expected_failure_modes: []
+  run_modes:
+  - reference
+  tags:
+  - mobility
+  - accepted
+  overrides: {}
+  notes: []
+- family_id: BP_Mobility_Chicago_Corridors
+  case_id: weekday_pseudocount_tight
+  title: Weekday tight-smoothing perturbation
+  parameter_id: weekday_pseudocount_tight
+  base_parameter_id: reference
+  role: reference_variant
+  tier: T3/G6
+  claim_status: supported
+  implementation_status: complete
+  evidence_class: application_real_data
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures:
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Mobility_Chicago_Corridors/data/divvy_hyde_park_jan2024.json
+    source_page: https://divvybikes.com/system-data
+    source_archive: 202401-divvy-tripdata.zip
+  acceptance_profile: application_mobility_reference
+  expected_failure_modes: []
+  run_modes:
+  - validation_matrix
+  tags:
+  - mobility
+  - sensitivity
+  overrides:
+    parameter_id: weekday_pseudocount_tight
+    pseudocount: 0.1
+    refined_pseudocount: 0.5
+    case_label: weekday_commute_tight_smoothing
+  notes: []
+- family_id: BP_Mobility_Chicago_Corridors
+  case_id: weekday_pseudocount_loose
+  title: Weekday loose-smoothing perturbation
+  parameter_id: weekday_pseudocount_loose
+  base_parameter_id: reference
+  role: reference_variant
+  tier: T3/G6
+  claim_status: supported
+  implementation_status: complete
+  evidence_class: application_real_data
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures:
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Mobility_Chicago_Corridors/data/divvy_hyde_park_jan2024.json
+    source_page: https://divvybikes.com/system-data
+    source_archive: 202401-divvy-tripdata.zip
+  acceptance_profile: application_mobility_reference
+  expected_failure_modes: []
+  run_modes:
+  - validation_matrix
+  tags:
+  - mobility
+  - sensitivity
+  overrides:
+    parameter_id: weekday_pseudocount_loose
+    pseudocount: 0.5
+    refined_pseudocount: 1.0
+    case_label: weekday_commute_loose_smoothing
+  notes: []
+- family_id: BP_Mobility_Chicago_Corridors
+  case_id: weekday_three_station_corridor
+  title: Weekday three-station perturbation
+  parameter_id: weekday_three_station_corridor
+  base_parameter_id: reference
+  role: reference_variant
+  tier: T3/G6
+  claim_status: supported
+  implementation_status: complete
+  evidence_class: application_real_data
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures:
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Mobility_Chicago_Corridors/data/divvy_hyde_park_jan2024.json
+    source_page: https://divvybikes.com/system-data
+    source_archive: 202401-divvy-tripdata.zip
+  acceptance_profile: application_mobility_reference
+  expected_failure_modes: []
+  run_modes:
+  - validation_matrix
+  tags:
+  - mobility
+  - sensitivity
+  overrides:
+    parameter_id: weekday_three_station_corridor
+    station_subset_indices:
+    - 0
+    - 1
+    - 2
+    block_sizes:
+    - 2
+    - 1
+    coherent_rank: 2
+    case_label: weekday_commute_three_station_corridor
+  notes: []
+- family_id: BP_Mobility_Chicago_Corridors
+  case_id: weekday_window_coarsened
+  title: Weekday window-coarsening perturbation
+  parameter_id: weekday_window_coarsened
+  base_parameter_id: reference
+  role: reference_variant
+  tier: T3/G6
+  claim_status: supported
+  implementation_status: complete
+  evidence_class: application_real_data
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures:
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Mobility_Chicago_Corridors/data/divvy_hyde_park_jan2024.json
+    source_page: https://divvybikes.com/system-data
+    source_archive: 202401-divvy-tripdata.zip
+  acceptance_profile: application_mobility_reference
+  expected_failure_modes: []
+  run_modes:
+  - validation_matrix
+  tags:
+  - mobility
+  - sensitivity
+  overrides:
+    parameter_id: weekday_window_coarsened
+    window_groups:
+    - - 0
+    - - 1
+      - 2
+    - - 3
+    window_labels:
+    - 06:00-09:00
+    - 09:00-18:00
+    - 18:00-21:00
+    pseudocount: 0.1
+    refined_pseudocount: 0.2
+    case_label: weekday_commute_coarsened_windows
+  notes: []
+- family_id: BP_Mobility_Chicago_Corridors
+  case_id: negative_weekend
+  title: Weekend negative control
+  parameter_id: negative_weekend
+  base_parameter_id: negative_weekend
+  role: negative_control
+  tier: T3/G6
+  claim_status: rejected
+  implementation_status: complete
+  evidence_class: application_real_data
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures:
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Mobility_Chicago_Corridors/data/divvy_hyde_park_jan2024.json
+    source_page: https://divvybikes.com/system-data
+    source_archive: 202401-divvy-tripdata.zip
+  acceptance_profile: expected_failure_control
+  expected_failure_modes:
+  - carrier_failure
+  - numerical_artifact_failure
+  run_modes:
+  - reference
+  - validation_matrix
+  tags:
+  - mobility
+  - negative
+  overrides: {}
+  notes: []

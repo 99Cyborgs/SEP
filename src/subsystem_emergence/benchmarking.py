@@ -10,7 +10,6 @@ from time import perf_counter
 
 import numpy as np
 
-from subsystem_emergence.application.acceptance import evaluate_application_acceptance
 from subsystem_emergence.application.mobility import (
     build_windowed_mobility_operators,
     mobility_evaluation_cases,
@@ -43,8 +42,21 @@ from subsystem_emergence.core.identifiability import (
 from subsystem_emergence.delay import analyze_delay_system, delay_refinement_diagnostics
 from subsystem_emergence.core.law_fits import fit_all_laws, law_selection_summary
 from subsystem_emergence.core.observables import empty_observables
-from subsystem_emergence.io.ledgers import current_code_hash, repo_relative_path, repository_root, write_ledger
-from subsystem_emergence.io.registry import benchmark_definitions
+from subsystem_emergence.evidence import refresh_indexes, write_evidence_bundle
+from subsystem_emergence.io.ledgers import write_legacy_ledger
+from subsystem_emergence.io.paths import (
+    application_validation_root,
+    artifact_root,
+    current_code_hash,
+    repo_relative_path,
+    resolve_mutation_root,
+)
+from subsystem_emergence.io.registry import (
+    benchmark_case_definition,
+    benchmark_definition,
+    benchmark_definitions,
+    default_case_id,
+)
 from subsystem_emergence.linear.pseudospectra import pseudospectral_proxy, semigroup_growth_profile
 from subsystem_emergence.linear.spectral import analyze_linear_generator
 from subsystem_emergence.nonlinear.continuation import continue_family
@@ -66,6 +78,7 @@ from subsystem_emergence.stochastic.propagators import (
 )
 from subsystem_emergence.transport.transport_leakage import analyze_windowed_transport
 from subsystem_emergence.transport.ulam import build_windowed_transport_flow
+from subsystem_emergence.policy import evaluate_case_acceptance
 
 
 def _rng(seed: int) -> np.random.Generator:
@@ -88,6 +101,7 @@ def _invoke_runner(runner, seed: int, parameter_id: str) -> tuple[dict, dict]:
 
 def _base_record(
     benchmark_id: str,
+    case_id: str,
     branch: str,
     theorem_tier: str,
     parameter_id: str,
@@ -96,6 +110,7 @@ def _base_record(
 ) -> dict:
     return {
         "benchmark_id": benchmark_id,
+        "case_id": case_id,
         "branch": branch,
         "theorem_tier": theorem_tier,
         "parameter_id": parameter_id,
@@ -120,7 +135,7 @@ def _base_record(
     }
 
 
-def _fit_and_finalize(record: dict, analysis: dict, root: Path) -> dict:
+def _fit_and_finalize(record: dict, analysis: dict, root: Path) -> tuple[dict, list]:
     gamma = np.asarray(
         analysis.pop(
             "fit_gamma",
@@ -168,11 +183,12 @@ def _fit_and_finalize(record: dict, analysis: dict, root: Path) -> dict:
     reports = evaluate_failure_signatures(record, dict(DEFAULT_FAILURE_TAXONOMY_THRESHOLDS))
     record["failure_labels"] = [report.label for report in reports if report.triggered]
     archive_failure_reports(root, record["branch"], record, reports)
-    return record
+    return record, reports
 
 
 def _persist_record(
     benchmark_id: str,
+    case_id: str,
     branch: str,
     theorem_tier: str,
     seed: int,
@@ -181,16 +197,37 @@ def _persist_record(
     analysis: dict,
     root: Path,
     started: float,
+    *,
+    emit_compatibility_ledgers: bool = False,
 ) -> dict:
-    """Persist a completed benchmark analysis through the shared ledger path."""
+    """Persist a completed benchmark analysis through the canonical evidence path."""
 
-    record = _base_record(benchmark_id, branch, theorem_tier, parameter_id, seed, parameters)
-    record = _fit_and_finalize(record, analysis, root)
+    record = _base_record(benchmark_id, case_id, branch, theorem_tier, parameter_id, seed, parameters)
+    record["metadata"]["artifact_root"] = str(root)
+    record["metadata"]["compatibility_mode"] = (
+        "legacy_ledgers_opt_in" if emit_compatibility_ledgers else "disabled"
+    )
+    record, failure_reports = _fit_and_finalize(record, analysis, root)
     record["metadata"]["runtime_seconds"] = perf_counter() - started
     record["metadata"]["solver"] = "scipy/numpy reference routines"
-    json_path, md_path = write_ledger(root, record)
-    record["metadata"]["ledger_json"] = repo_relative_path(json_path, root)
-    record["metadata"]["ledger_markdown"] = repo_relative_path(md_path, root)
+    family_definition = benchmark_definition(benchmark_id)
+    case_definition = benchmark_case_definition(benchmark_id, case_id)
+    decision = evaluate_case_acceptance(record, case_definition)
+    record["acceptance_decision"] = decision.to_dict()
+    compatibility_artifacts: dict[str, str] = {}
+    if emit_compatibility_ledgers:
+        json_path, md_path = write_legacy_ledger(root, record)
+        compatibility_artifacts = {
+            "legacy_ledger_json": repo_relative_path(json_path, root),
+            "legacy_ledger_markdown": repo_relative_path(md_path, root),
+        }
+        record["metadata"]["ledger_json"] = compatibility_artifacts["legacy_ledger_json"]
+        record["metadata"]["ledger_markdown"] = compatibility_artifacts["legacy_ledger_markdown"]
+    record["metadata"]["compatibility_artifacts"] = compatibility_artifacts
+    artifact_paths = write_evidence_bundle(root, family_definition, case_definition, record, decision, failure_reports)
+    index_paths = refresh_indexes(root)
+    record["metadata"]["artifact_paths"] = artifact_paths
+    record["metadata"]["index_paths"] = index_paths
     return record
 
 
@@ -1623,28 +1660,55 @@ def _workflow_queue_funnel(
     return params, analysis
 
 
-def _mobility_application_status(record: dict) -> dict:
-    """Evaluate Paper E application acceptance on one mobility run."""
+def _acceptance_status(record: dict) -> dict:
+    """Return the canonical acceptance decision already attached to the record."""
 
-    return evaluate_application_acceptance(record)
-
-
-def _clickstream_application_status(record: dict) -> dict:
-    """Evaluate acceptance on the cross-domain clickstream application."""
-
-    return evaluate_application_acceptance(record)
+    return dict(record["acceptance_decision"])
 
 
-def _support_application_status(record: dict) -> dict:
-    """Evaluate acceptance on the support-navigation application."""
+def run_benchmark_case(
+    benchmark_id: str,
+    *,
+    case_id: str | None = None,
+    seed: int = 0,
+    root: str | Path | None = None,
+    dangerously_allow_repo_root: bool = False,
+    emit_compatibility_ledgers: bool = False,
+) -> dict:
+    """Run one registered benchmark case by canonical case id."""
 
-    return evaluate_application_acceptance(record)
-
-
-def _workflow_application_status(record: dict) -> dict:
-    """Evaluate acceptance on the workflow-queue application."""
-
-    return evaluate_application_acceptance(record)
+    resolved_case_id = case_id or default_case_id(benchmark_id)
+    repo_root = resolve_mutation_root(
+        root,
+        purpose=f"benchmark evidence for {benchmark_id}:{resolved_case_id}",
+        scratch_label=f"benchmark_{benchmark_id}_{resolved_case_id}",
+        allow_repository_root=dangerously_allow_repo_root,
+        recommended_action="Pass `root=<scratch path>` or omit `root` to use an auto-created scratch root.",
+    )
+    case_definition = benchmark_case_definition(benchmark_id, resolved_case_id)
+    branch, theorem_tier, runner = RUNNERS[benchmark_id]
+    started = perf_counter()
+    if branch == "application":
+        parameters, analysis = runner(
+            seed,
+            parameter_id=case_definition.base_parameter_id,
+            overrides=dict(case_definition.overrides),
+        )
+    else:
+        parameters, analysis = _invoke_runner(runner, seed, case_definition.base_parameter_id)
+    return _persist_record(
+        benchmark_id,
+        case_definition.case_id,
+        branch,
+        theorem_tier,
+        seed,
+        case_definition.parameter_id,
+        parameters,
+        analysis,
+        repo_root,
+        started,
+        emit_compatibility_ledgers=emit_compatibility_ledgers,
+    )
 
 
 def run_application_case(
@@ -1654,16 +1718,38 @@ def run_application_case(
     parameter_id: str = "reference",
     root: str | Path | None = None,
     overrides: dict | None = None,
+    dangerously_allow_repo_root: bool = False,
+    emit_compatibility_ledgers: bool = False,
 ) -> dict:
     """Run and persist one application case, including benchmark-local variants."""
 
-    repo_root = repository_root(Path(root) if root is not None else None)
+    repo_root = resolve_mutation_root(
+        root,
+        purpose=f"application evidence for {benchmark_id}:{parameter_id}",
+        scratch_label=f"application_{benchmark_id}_{parameter_id}",
+        allow_repository_root=dangerously_allow_repo_root,
+        recommended_action="Pass `root=<scratch path>` or omit `root` to use an auto-created scratch root.",
+    )
+    if overrides is None:
+        try:
+            return run_benchmark_case(
+                benchmark_id,
+                case_id=parameter_id,
+                seed=seed,
+                root=repo_root,
+                dangerously_allow_repo_root=dangerously_allow_repo_root,
+                emit_compatibility_ledgers=emit_compatibility_ledgers,
+            )
+        except KeyError:
+            pass
     started = perf_counter()
     _, theorem_tier, runner = RUNNERS[benchmark_id]
     parameters, analysis = runner(seed, parameter_id=parameter_id, overrides=overrides)
     resolved_parameter_id = str((overrides or {}).get("parameter_id", parameter_id))
+    resolved_case_definition = benchmark_case_definition(benchmark_id, resolved_parameter_id)
     return _persist_record(
         benchmark_id,
+        resolved_case_definition.case_id,
         "application",
         theorem_tier,
         seed,
@@ -1672,6 +1758,7 @@ def run_application_case(
         analysis,
         repo_root,
         started,
+        emit_compatibility_ledgers=emit_compatibility_ledgers,
     )
 
 
@@ -1682,6 +1769,8 @@ def run_mobility_case(
     parameter_id: str = "reference",
     root: str | Path | None = None,
     overrides: dict | None = None,
+    dangerously_allow_repo_root: bool = False,
+    emit_compatibility_ledgers: bool = False,
 ) -> dict:
     """Backward-compatible wrapper for mobility application runs."""
 
@@ -1691,36 +1780,53 @@ def run_mobility_case(
         parameter_id=parameter_id,
         root=root,
         overrides=overrides,
+        dangerously_allow_repo_root=dangerously_allow_repo_root,
+        emit_compatibility_ledgers=emit_compatibility_ledgers,
     )
 
 
-def run_mobility_application_evaluation(*, seed: int = 0, root: str | Path | None = None) -> dict:
-    """Run the fixed Paper E robustness sweep and write a compact summary artifact."""
+def run_mobility_application_evaluation(
+    *,
+    seed: int = 0,
+    root: str | Path | None = None,
+    dangerously_allow_repo_root: bool = False,
+    emit_compatibility_ledgers: bool = False,
+) -> dict:
+    """Run the fixed mobility validation matrix and write a structured summary artifact."""
 
-    repo_root = repository_root(Path(root) if root is not None else None)
-    summary_dir = repo_root / "results" / "application" / "BP_Mobility_Chicago_Corridors"
+    repo_root = resolve_mutation_root(
+        root,
+        purpose="mobility application validation summaries",
+        scratch_label="application_validation",
+        allow_repository_root=dangerously_allow_repo_root,
+        recommended_action="Pass `root=<scratch path>` or omit `root` to use an auto-created scratch root.",
+    )
+    summary_dir = application_validation_root(repo_root)
     summary_dir.mkdir(parents=True, exist_ok=True)
     case_results = []
     weekday_records = []
     for case in mobility_evaluation_cases():
-        record = run_mobility_case(
+        record = run_application_case(
+            benchmark_id="BP_Mobility_Chicago_Corridors",
             seed=seed,
             parameter_id=str(case["base_parameter_id"]),
             root=repo_root,
             overrides=dict(case["overrides"]),
+            dangerously_allow_repo_root=dangerously_allow_repo_root,
+            emit_compatibility_ledgers=emit_compatibility_ledgers,
         )
-        status = _mobility_application_status(record)
+        status = _acceptance_status(record)
         case_results.append(
             {
-                "case_id": case["case_id"],
+                "case_id": record["case_id"],
                 "profile": case["profile"],
                 "description": case["description"],
                 "base_parameter_id": case["base_parameter_id"],
-                "accepted": status["accepted"],
-                "application_status": status,
+                "decision_status": status["decision_status"],
+                "success": status["success"],
+                "acceptance_decision": status,
                 "failure_labels": record["failure_labels"],
-                "ledger_json": record["metadata"]["ledger_json"],
-                "ledger_markdown": record["metadata"]["ledger_markdown"],
+                "artifact_paths": record["metadata"]["artifact_paths"],
             }
         )
         if case["profile"] == "accepted":
@@ -1729,18 +1835,12 @@ def run_mobility_application_evaluation(*, seed: int = 0, root: str | Path | Non
     summary = {
         "benchmark_id": "BP_Mobility_Chicago_Corridors",
         "seed": seed,
-        "summary_kind": "paper_e_application_evaluation",
-        "acceptance_criteria": case_results[0]["application_status"]["package_acceptance_thresholds"],
-        "threshold_layers": {
-            "taxonomy_thresholds": case_results[0]["application_status"]["taxonomy_thresholds"],
-            "package_acceptance_thresholds": case_results[0]["application_status"]["package_acceptance_thresholds"],
-            "blocking_failure_labels": case_results[0]["application_status"]["blocking_failure_labels"],
-            "advisory_failure_labels": case_results[0]["application_status"]["advisory_failure_labels"],
-        },
+        "summary_kind": "application_validation_matrix",
+        "artifact_root": str(repo_root),
         "cases": case_results,
-        "aggregate_stability_summary": {
+        "aggregate_validation_summary": {
             "weekday_case_count": len(weekday_records),
-            "weekday_all_cases_accepted": all(entry["accepted"] for entry in case_results if entry["profile"] == "accepted"),
+            "weekday_all_cases_successful": all(entry["success"] for entry in case_results if entry["profile"] == "accepted"),
             "weekday_min_singular_gap": float(min(record["observables"]["singular_gap"] for record in weekday_records)),
             "weekday_max_coherent_projector_deformation": float(
                 max(record["observables"]["coherent_projector_deformation"] for record in weekday_records)
@@ -1749,32 +1849,32 @@ def run_mobility_application_evaluation(*, seed: int = 0, root: str | Path | Non
             "weekday_max_refinement_span": float(
                 max(record["observables"]["numerical_refinement_metrics"]["max_relative_span"] for record in weekday_records)
             ),
-            "negative_case_rejected": not negative_entry["accepted"],
+            "negative_case_expected_failure_confirmed": negative_entry["decision_status"] == "expected_failure_confirmed",
             "negative_failure_labels": negative_entry["failure_labels"],
         },
         "notes": [
-            "The weekday commute profile is treated as usable only if all fixed local perturbations remain above the declared package floors while avoiding benchmark-local blocking failures.",
-            "A global coupling_failure can remain visible in accepted Hyde Park weekday runs because the Paper E package treats it as advisory rather than blocking.",
-            "The weekend-night profile is retained as a negative case and is expected to remain rejection-labeled rather than being tuned into acceptance.",
+            "The mobility matrix is canonical evidence, not a manuscript package.",
+            "Each case entry points to its evidence bundle and centralized acceptance decision instead of a paper-specific summary path.",
+            "The weekend-night slice is preserved as an expected-failure control and remains queryable in the generated indexes.",
         ],
     }
-    json_path = summary_dir / "paper_e_application_summary.json"
-    md_path = summary_dir / "paper_e_application_summary.md"
+    json_path = summary_dir / "BP_Mobility_Chicago_Corridors_validation_matrix.json"
+    md_path = summary_dir / "BP_Mobility_Chicago_Corridors_validation_matrix.md"
     json_path.write_text(json.dumps(summary, indent=2))
     md_path.write_text(
         "\n".join(
             [
-                "# BP_Mobility_Chicago_Corridors Application Evaluation",
+                "# BP_Mobility_Chicago_Corridors Validation Matrix",
                 "",
                 f"- Seed: `{seed}`",
-                f"- Weekday sweep accepted: `{summary['aggregate_stability_summary']['weekday_all_cases_accepted']}`",
-                f"- Negative case rejected: `{summary['aggregate_stability_summary']['negative_case_rejected']}`",
-                f"- Summary JSON: `results/application/BP_Mobility_Chicago_Corridors/paper_e_application_summary.json`",
+                f"- Weekday sweep successful: `{summary['aggregate_validation_summary']['weekday_all_cases_successful']}`",
+                f"- Negative control confirmed: `{summary['aggregate_validation_summary']['negative_case_expected_failure_confirmed']}`",
+                f"- Summary JSON: `results/indexes/application_validation/BP_Mobility_Chicago_Corridors_validation_matrix.json`",
                 "",
                 "## Cases",
             ]
             + [
-                f"- `{entry['case_id']}`: accepted=`{entry['accepted']}`, ledger=`{entry['ledger_json']}`"
+                f"- `{entry['case_id']}`: decision=`{entry['decision_status']}`, manifest=`{entry['artifact_paths']['run_manifest']}`"
                 for entry in case_results
             ]
         )
@@ -1815,8 +1915,16 @@ def list_benchmarks() -> list[dict]:
 def sample_parameters(benchmark_id: str, *, seed: int = 0, parameter_id: str = "reference") -> dict:
     """Return the reference parameter set without writing outputs."""
 
+    case_definition = benchmark_case_definition(benchmark_id, parameter_id)
     _, _, runner = RUNNERS[benchmark_id]
-    parameters, _ = _invoke_runner(runner, seed, parameter_id)
+    if RUNNERS[benchmark_id][0] == "application":
+        parameters, _ = runner(
+            seed,
+            parameter_id=case_definition.base_parameter_id,
+            overrides=dict(case_definition.overrides),
+        )
+    else:
+        parameters, _ = _invoke_runner(runner, seed, case_definition.base_parameter_id)
     return parameters
 
 
@@ -1826,16 +1934,19 @@ def run_reference_benchmark(
     seed: int = 0,
     parameter_id: str = "reference",
     root: str | Path | None = None,
+    dangerously_allow_repo_root: bool = False,
+    emit_compatibility_ledgers: bool = False,
 ) -> dict:
-    """Run a concrete benchmark reference configuration and persist its ledger."""
+    """Run a concrete benchmark configuration and persist its evidence bundle."""
 
-    repo_root = repository_root(Path(root) if root is not None else None)
-    branch, theorem_tier, runner = RUNNERS[benchmark_id]
-    if branch == "application":
-        return run_application_case(benchmark_id=benchmark_id, seed=seed, parameter_id=parameter_id, root=repo_root)
-    started = perf_counter()
-    parameters, analysis = _invoke_runner(runner, seed, parameter_id)
-    return _persist_record(benchmark_id, branch, theorem_tier, seed, parameter_id, parameters, analysis, repo_root, started)
+    return run_benchmark_case(
+        benchmark_id,
+        case_id=parameter_id,
+        seed=seed,
+        root=root,
+        dangerously_allow_repo_root=dangerously_allow_repo_root,
+        emit_compatibility_ledgers=emit_compatibility_ledgers,
+    )
 
 
 def main() -> None:
@@ -1844,10 +1955,20 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
     subparsers.add_parser("list", help="List benchmark registry entries")
+    run_case_parser = subparsers.add_parser("run-case", help="Run a registered benchmark case")
+    run_case_parser.add_argument("benchmark_id", choices=sorted(RUNNERS))
+    run_case_parser.add_argument("--case-id", default=None)
+    run_case_parser.add_argument("--seed", type=int, default=0)
+    run_case_parser.add_argument("--root", default=None)
+    run_case_parser.add_argument("--dangerously-use-repo-root", action="store_true")
+    run_case_parser.add_argument("--emit-compatibility-ledgers", action="store_true")
     run_parser = subparsers.add_parser("run-reference", help="Run a reference benchmark")
     run_parser.add_argument("benchmark_id", choices=sorted(RUNNERS))
     run_parser.add_argument("--seed", type=int, default=0)
     run_parser.add_argument("--parameter-id", default="reference")
+    run_parser.add_argument("--root", default=None)
+    run_parser.add_argument("--dangerously-use-repo-root", action="store_true")
+    run_parser.add_argument("--emit-compatibility-ledgers", action="store_true")
     sample_parser = subparsers.add_parser("sample-parameters", help="Print reference parameters")
     sample_parser.add_argument("benchmark_id", choices=sorted(RUNNERS))
     sample_parser.add_argument("--seed", type=int, default=0)
@@ -1856,10 +1977,30 @@ def main() -> None:
     if args.command == "list":
         for item in list_benchmarks():
             print(item["benchmark_id"])
+    elif args.command == "run-case":
+        print(
+            run_benchmark_case(
+                args.benchmark_id,
+                case_id=args.case_id,
+                seed=args.seed,
+                root=args.root,
+                dangerously_allow_repo_root=args.dangerously_use_repo_root,
+                emit_compatibility_ledgers=args.emit_compatibility_ledgers,
+            )
+        )
     elif args.command == "sample-parameters":
         print(sample_parameters(args.benchmark_id, seed=args.seed, parameter_id=args.parameter_id))
     else:
-        print(run_reference_benchmark(args.benchmark_id, seed=args.seed, parameter_id=args.parameter_id))
+        print(
+            run_reference_benchmark(
+                args.benchmark_id,
+                seed=args.seed,
+                parameter_id=args.parameter_id,
+                root=args.root,
+                dangerously_allow_repo_root=args.dangerously_use_repo_root,
+                emit_compatibility_ledgers=args.emit_compatibility_ledgers,
+            )
+        )
 
 
 if __name__ == "__main__":

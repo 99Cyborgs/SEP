@@ -1,39 +1,41 @@
-# BP Workflow Queue Funnel
+# Workflow Queue Funnel
 
-## Formal System Definition
-A bundled workflow-queue benchmark with four named operational stages and four ordered reporting windows. Raw stage-to-stage counts are converted into row-stochastic operators with a documented pseudocount smoother.
+This document is generated from `benchmarks/registry.yaml`. The registry is authoritative; this README is a derived view.
 
-## Data Provenance
-- source page: `bundled_repository_fixture`
-- source archive: `workflow_queue_funnel_q1_2026.json`
-- domain: operational workflow queues
-- bundled fixture: repository-curated stage-transition counts used only as reproducible non-navigation application evidence
+## Family Contract
+- benchmark_id: `BP_Workflow_Queue_Funnel`
+- branch: `application`
+- tier: `T3/G6`
+- implementation_status: `complete`
+- evidence_class: `application_repository_fixture`
+- run_modes: `sample_parameters, run_case`
 
-## Stage Slice
-- `Intake`
-- `Triage`
-- `Execution`
-- `Closure`
+## Formal System
+Row-stochastic stage-to-stage workflow operators derived from a bundled operational queue fixture.
 
-## Parameter Sets
-- `reference`: stable queue with persistent intake-versus-execution structure
-- `negative_detour`: rework-heavy queue pattern retained as an explicit rejection case
+## Claim Links
+- `T3_finite_time_transport`: `docs/theorem_notes/T3_finite_time_transport.tex` via gate `G3`
+- `G6_application_identifiability`: `docs/protocols/external_application_evidence.md` via gate `G6`
 
-## Cross-Domain Application Claim
-- This benchmark extends application evidence beyond mobility and digital navigation without claiming a public-data theorem.
-- The `reference` case is accepted only as a bounded transport-style workflow slice.
-- The `negative_detour` case is expected to remain rejection-labeled because rework loops collapse the singular gap and destroy the stable carrier geometry.
+## Primary Observables
+- `singular_gap`
+- `coherent_projector_deformation`
+- `block_residual_norm`
+- `leakage_trajectory`
+- `autonomy_horizon`
 
-## Acceptance Layer Notes
-- package acceptance uses benchmark-local workflow floors rather than the global taxonomy alone
-- the negative detour case is rejected without a taxonomy-level `coupling_failure`; the blocking evidence is gap collapse plus carrier deformation
+## Fixtures
+- `named_flow_fixture`: `benchmarks/BP_Workflow_Queue_Funnel/data/workflow_queue_funnel_q1_2026.json`, source_archive=`workflow_queue_funnel_q1_2026.json`
 
-## Expected Failure Modes
-- current negative fixture: `carrier_failure`
-- the package overlay would also block `coupling_failure` or `numerical_artifact_failure` if later workflow variants triggered them
+## Cases
+- `reference`: role=`reference`, claim_status=`supported`, acceptance_profile=`application_workflow_reference`, expected_failure_modes=`none`
+- `negative_detour`: role=`negative_control`, claim_status=`rejected`, acceptance_profile=`expected_failure_control`, expected_failure_modes=`carrier_failure`
 
-## Reference Commands
-- `python benchmarks/BP_Workflow_Queue_Funnel/generate.py`
-- `python benchmarks/BP_Workflow_Queue_Funnel/run_reference.py`
-- `python benchmarks/BP_Workflow_Queue_Funnel/run_negative_detour.py`
-- `python benchmarks/BP_Workflow_Queue_Funnel/figure_recipe.py`
+## Ground Truth Notes
+- This is a bounded cross-domain application fixture, not a public-data theorem claim.
+- The reference case is intended to show stable coherent structure outside mobility and page navigation.
+- The negative detour case is retained to preserve explicit rejection evidence driven by gap collapse and carrier deformation rather than a taxonomy-level coupling failure.
+
+## Canonical Commands
+- `python -m subsystem_emergence.benchmarking run-case BP_Workflow_Queue_Funnel`
+- `python -m subsystem_emergence.benchmarking sample-parameters BP_Workflow_Queue_Funnel`

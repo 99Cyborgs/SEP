@@ -1,25 +1,77 @@
-id: BP_T5_Stochastic_Stress_Pair
+registry_source: benchmarks/registry.yaml
+family_id: BP_T5_Stochastic_Stress_Pair
+title: T5 Stochastic Stress Pair
 branch: stochastic
-theorem_tier: T5
+tier: T5
+phase: 4
+description: Paired stochastic benchmark isolating sample-stress effects on uncertainty width and confidence-bounded horizons.
 system_class: stochastic_sample_stress_pair
 state_dimension: 4
-formal_system: Paired four-state metastable networks with identical transition structure and different Monte Carlo sample counts.
-parameter_sets:
-  reference:
-    case_label: sample_stress
-    trajectories: 40
-  matched_metastable:
-    case_label: matched_metastable
-    trajectories: 400
-ground_truth_notes:
-  - Both branches keep the same metastable network and source-state partition.
-  - The matched branch uses enough trajectories to keep bootstrap width and confidence-bounded horizon stable.
-  - The sample-stress branch widens uncertainty and degrades the confidence-bounded horizon without introducing a new stochastic model class.
+formal_system: Paired four-state metastable networks with identical transition structure and different Monte Carlo sample
+  counts.
+implementation_status: complete
+evidence_class: synthetic_counterexample
+claim_refs:
+- T5_stochastic
+observables:
+- ensemble_averaged_leakage
+- leakage_variance
+- autonomy_horizon
+- stochastic_uncertainty_metrics
+fixtures: []
 expected_failure_modes:
-  - horizon_failure
-  - numerical_artifact_failure
-primary_observables:
+- horizon_failure
+- numerical_artifact_failure
+cases:
+- family_id: BP_T5_Stochastic_Stress_Pair
+  case_id: reference
+  title: Sample-stress branch
+  parameter_id: reference
+  base_parameter_id: reference
+  role: negative_control
+  tier: T5
+  claim_status: counterexample
+  implementation_status: complete
+  evidence_class: synthetic_counterexample
+  observables:
   - ensemble_averaged_leakage
   - leakage_variance
   - autonomy_horizon
   - stochastic_uncertainty_metrics
+  fixtures: []
+  acceptance_profile: stochastic_stress_counterexample
+  expected_failure_modes:
+  - horizon_failure
+  - numerical_artifact_failure
+  run_modes:
+  - reference
+  tags:
+  - negative
+  - stress
+  overrides: {}
+  notes: []
+- family_id: BP_T5_Stochastic_Stress_Pair
+  case_id: matched_metastable
+  title: Adequately sampled control branch
+  parameter_id: matched_metastable
+  base_parameter_id: matched_metastable
+  role: positive_control
+  tier: T5
+  claim_status: supported
+  implementation_status: complete
+  evidence_class: synthetic_stochastic
+  observables:
+  - ensemble_averaged_leakage
+  - leakage_variance
+  - autonomy_horizon
+  - stochastic_uncertainty_metrics
+  fixtures: []
+  acceptance_profile: stochastic_reference
+  expected_failure_modes: []
+  run_modes:
+  - reference
+  tags:
+  - positive
+  - control
+  overrides: {}
+  notes: []

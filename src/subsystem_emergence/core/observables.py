@@ -1,4 +1,8 @@
-"""Observable catalog and record templates."""
+"""Canonical observable catalog and schema-complete record templates.
+
+The catalog is the repository's stable vocabulary for ledgers, gate criteria,
+and reports. Additions here change serialization surfaces across modules.
+"""
 
 from __future__ import annotations
 
@@ -186,18 +190,18 @@ OBSERVABLE_CATALOG = [
 
 
 def observable_catalog() -> list[ObservableDefinition]:
-    """Return the observable catalog."""
+    """Return a shallow copy of the canonical observable catalog."""
 
     return OBSERVABLE_CATALOG.copy()
 
 
 def observable_catalog_dicts() -> list[dict[str, str | None]]:
-    """Serialized observable catalog."""
+    """Return the catalog in JSON-serializable form, preserving declaration order."""
 
     return [item.to_dict() for item in OBSERVABLE_CATALOG]
 
 
 def empty_observables() -> dict[str, object]:
-    """Default observable record with all standard keys present."""
+    """Return a schema-complete observable record with explicit null placeholders."""
 
     return {definition.key: None for definition in OBSERVABLE_CATALOG}

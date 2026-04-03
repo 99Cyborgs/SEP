@@ -1,9 +1,17 @@
 {
-  "label": "carrier_failure",
-  "triggered": true,
-  "metric": 0.5716880737599902,
-  "threshold": 0.35,
-  "direction": "gt",
-  "message": "Estimated carrier is too far from the planted or baseline carrier.",
-  "archive_path": "failures\\G1_linear_validity\\BP_Mobility_Chicago_Corridors_negative_weekend_seed0_carrier_failure.json"
+  "benchmark_id": "BP_Mobility_Chicago_Corridors",
+  "case_id": "negative_weekend",
+  "parameter_id": "negative_weekend",
+  "seed": 0,
+  "branch": "application",
+  "theorem_tier": "T3/G6",
+  "failure": {
+    "label": "carrier_failure",
+    "triggered": true,
+    "metric": 0.5716880737599902,
+    "threshold": 0.35,
+    "direction": "gt",
+    "message": "Estimated carrier is too far from the planted or baseline carrier.",
+    "archive_path": "failures\\G1_linear_validity\\BP_Mobility_Chicago_Corridors_negative_weekend_seed0_carrier_failure.json"
+  }
 }

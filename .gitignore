@@ -5,4 +5,7 @@ build/
 dist/
 tmp/
 results/scratch/
+results/evidence/
+results/indexes/
+results/validation_gates/
 *.egg-info/

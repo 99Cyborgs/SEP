@@ -1,26 +1,79 @@
-id: BP_T2_Same_Spectrum_Pair
+registry_source: benchmarks/registry.yaml
+family_id: BP_T2_Same_Spectrum_Pair
+title: T2 Same Spectrum Pair
 branch: nonnormal
-theorem_tier: T2
+tier: T2
+phase: 2
+description: Same-spectrum normal versus nonnormal pair exposing transient-growth failure geometry.
 system_class: matched_spectrum_nonnormal_pair
 state_dimension: 4
 formal_system: Two autonomous linear systems with matched retained slow eigenvalues but different slow-block geometry.
-parameter_sets:
-  reference:
-    case_label: matched_nonnormal
-    pairing_rule: same retained eigenvalues, upper-triangular slow block
-  matched_normal:
-    case_label: matched_normal
-    pairing_rule: same retained eigenvalues, rotated normal slow block
-ground_truth_notes:
-  - The retained slow eigenvalues are held fixed across the pair.
-  - The paired systems differ in slow-block geometry rather than nominal gap scale.
-  - The purpose is to expose failure geometry for Paper C, not to close T2.
+implementation_status: complete
+evidence_class: synthetic_counterexample
+claim_refs:
+- T2_nonnormal
+observables:
+- spectral_gap
+- transient_amplification_score
+- pseudospectral_proxy
+- leakage_trajectory
+- autonomy_horizon
+fixtures: []
 expected_failure_modes:
-  - transient_growth_failure
-  - horizon_failure
-primary_observables:
+- transient_growth_failure
+- horizon_failure
+cases:
+- family_id: BP_T2_Same_Spectrum_Pair
+  case_id: reference
+  title: Matched nonnormal counterexample branch
+  parameter_id: reference
+  base_parameter_id: reference
+  role: negative_control
+  tier: T2
+  claim_status: counterexample
+  implementation_status: complete
+  evidence_class: synthetic_counterexample
+  observables:
   - spectral_gap
   - transient_amplification_score
   - pseudospectral_proxy
   - leakage_trajectory
   - autonomy_horizon
+  fixtures: []
+  acceptance_profile: same_spectrum_counterexample
+  expected_failure_modes:
+  - transient_growth_failure
+  - horizon_failure
+  run_modes:
+  - reference
+  tags:
+  - negative
+  - same-spectrum
+  overrides: {}
+  notes: []
+- family_id: BP_T2_Same_Spectrum_Pair
+  case_id: matched_normal
+  title: Matched normal control branch
+  parameter_id: matched_normal
+  base_parameter_id: matched_normal
+  role: positive_control
+  tier: T2
+  claim_status: supported
+  implementation_status: complete
+  evidence_class: synthetic_constructive
+  observables:
+  - spectral_gap
+  - transient_amplification_score
+  - pseudospectral_proxy
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures: []
+  acceptance_profile: linear_reference_relaxed
+  expected_failure_modes: []
+  run_modes:
+  - reference
+  tags:
+  - positive
+  - control
+  overrides: {}
+  notes: []

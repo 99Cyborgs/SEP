@@ -1,25 +1,37 @@
-# BP Non Normal Shear
+# Non Normal Shear
 
-## Formal System Definition
-A small nonnormal linear system with a slow two-dimensional shear block and a fast two-dimensional stable block. The spectrum alone suggests stability, while the slow shear creates transient amplification.
+This document is generated from `benchmarks/registry.yaml`. The registry is authoritative; this README is a derived view.
 
-## Parameter Ranges
-- shear amplitude: `1.0` to `5.0`
-- slow-fast coupling: `0.01` to `0.10`
-- sampled times: `0` to `6`
+## Family Contract
+- benchmark_id: `BP_Non_Normal_Shear`
+- branch: `nonnormal`
+- tier: `T2`
+- implementation_status: `complete`
+- evidence_class: `synthetic_nonnormal`
+- run_modes: `sample_parameters, run_case`
+
+## Formal System
+Two-dimensional slow shear block weakly coupled to a fast stable block.
+
+## Claim Links
+- `T2_nonnormal`: `docs/theorem_notes/T2_nonnormal.tex` via gate `G2`
+
+## Primary Observables
+- `spectral_gap`
+- `transient_amplification_score`
+- `block_residual_norm`
+- `leakage_trajectory`
+
+## Fixtures
+- `synthetic_generator`: runtime-generated benchmark fixture
+
+## Cases
+- `reference`: role=`reference`, claim_status=`supported`, acceptance_profile=`nonnormal_reference`, expected_failure_modes=`none`
 
 ## Ground Truth Notes
-- The slow subsystem partition is planted.
-- Transient amplification is known to be the dominant threat model.
+- Slow subsystem partition is planted.
+- Transient amplification is intentionally strong despite stable eigenvalues.
 
-## Theorem Tier
-`T2`
-
-## Expected Failure Modes
-- `transient_growth_failure`
-- `horizon_failure`
-
-## Reference Commands
-- `python benchmarks/BP_Non_Normal_Shear/generate.py`
-- `python benchmarks/BP_Non_Normal_Shear/run_reference.py`
-- `python benchmarks/BP_Non_Normal_Shear/figure_recipe.py`
+## Canonical Commands
+- `python -m subsystem_emergence.benchmarking run-case BP_Non_Normal_Shear`
+- `python -m subsystem_emergence.benchmarking sample-parameters BP_Non_Normal_Shear`

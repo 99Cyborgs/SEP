@@ -41,7 +41,7 @@
     "required_cases": [
       {
         "benchmark_id": "BP_Mobility_Chicago_Corridors",
-        "parameter_id": "weekday_reference",
+        "parameter_id": "reference",
         "seed": 0,
         "expected_status": "accepted"
       },
@@ -71,7 +71,7 @@
       },
       {
         "benchmark_id": "BP_Mobility_Chicago_Corridors",
-        "parameter_id": "weekend_negative",
+        "parameter_id": "negative_weekend",
         "seed": 0,
         "expected_status": "rejected"
       },

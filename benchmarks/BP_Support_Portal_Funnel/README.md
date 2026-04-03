@@ -1,39 +1,41 @@
-# BP Support Portal Funnel
+# Support Portal Funnel
 
-## Formal System Definition
-A bundled support-portal navigation benchmark with four named pages and four ordered support-lifecycle windows. Raw page-to-page counts are converted into row-stochastic operators with a documented pseudocount smoother.
+This document is generated from `benchmarks/registry.yaml`. The registry is authoritative; this README is a derived view.
 
-## Data Provenance
-- source page: `bundled_repository_fixture`
-- source archive: `support_navigation_funnel_q1_2026.json`
-- domain: support and help navigation
-- bundled fixture: repository-curated support-session transitions used only as reproducible cross-domain application evidence
+## Family Contract
+- benchmark_id: `BP_Support_Portal_Funnel`
+- branch: `application`
+- tier: `T3/G6`
+- implementation_status: `complete`
+- evidence_class: `application_repository_fixture`
+- run_modes: `sample_parameters, run_case`
 
-## Page Slice
-- `Help Home`
-- `Search Results`
-- `Troubleshooting Guide`
-- `Ticket Form`
+## Formal System
+Row-stochastic support-portal navigation operators derived from a bundled help-funnel fixture.
 
-## Parameter Sets
-- `reference`: stable support funnel with persistent self-serve versus escalation structure
-- `negative_detour`: detour-heavy support routing pattern retained as an explicit rejection case
+## Claim Links
+- `T3_finite_time_transport`: `docs/theorem_notes/T3_finite_time_transport.tex` via gate `G3`
+- `G6_application_identifiability`: `docs/protocols/external_application_evidence.md` via gate `G6`
 
-## Cross-Domain Application Claim
-- This benchmark adds a second non-mobility navigation domain without changing the named-window operator workflow.
-- The `reference` case is accepted only as a bounded transport-style application slice.
-- The `negative_detour` case is expected to remain rejection-labeled because its singular gap collapses and its carrier geometry deforms too far.
+## Primary Observables
+- `singular_gap`
+- `coherent_projector_deformation`
+- `block_residual_norm`
+- `leakage_trajectory`
+- `autonomy_horizon`
 
-## Acceptance Layer Notes
-- package acceptance uses stricter benchmark-local floors than the repository-wide failure taxonomy
-- the negative detour case is rejected by package criteria even though its residual coupling stays just below the global `coupling_failure` cutoff
+## Fixtures
+- `named_flow_fixture`: `benchmarks/BP_Support_Portal_Funnel/data/support_navigation_funnel_q1_2026.json`, source_archive=`support_navigation_funnel_q1_2026.json`
 
-## Expected Failure Modes
-- current negative fixture: `gap_failure`, `carrier_failure`
-- the package overlay would also block `coupling_failure` or `numerical_artifact_failure` if later variants triggered them
+## Cases
+- `reference`: role=`reference`, claim_status=`supported`, acceptance_profile=`application_navigation_reference`, expected_failure_modes=`none`
+- `negative_detour`: role=`negative_control`, claim_status=`rejected`, acceptance_profile=`expected_failure_control`, expected_failure_modes=`carrier_failure, gap_failure`
 
-## Reference Commands
-- `python benchmarks/BP_Support_Portal_Funnel/generate.py`
-- `python benchmarks/BP_Support_Portal_Funnel/run_reference.py`
-- `python benchmarks/BP_Support_Portal_Funnel/run_negative_detour.py`
-- `python benchmarks/BP_Support_Portal_Funnel/figure_recipe.py`
+## Ground Truth Notes
+- This is a bounded cross-domain application fixture, not a public-data theorem claim.
+- The reference case is intended to show stable coherent structure in a second non-mobility navigation domain.
+- The negative detour case is retained to preserve explicit rejection evidence driven by gap collapse and carrier deformation; its residual coupling stays below the global coupling-failure cutoff.
+
+## Canonical Commands
+- `python -m subsystem_emergence.benchmarking run-case BP_Support_Portal_Funnel`
+- `python -m subsystem_emergence.benchmarking sample-parameters BP_Support_Portal_Funnel`

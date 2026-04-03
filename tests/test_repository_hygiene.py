@@ -28,3 +28,13 @@ def test_docs_avoid_absolute_local_paths() -> None:
     for path in text_files:
         contents = path.read_text()
         assert not absolute_path_pattern.search(contents), path
+
+
+def test_paper_docs_are_archived() -> None:
+    root = Path(__file__).resolve().parents[1]
+    assert not (root / "docs" / "papers").exists()
+    assert (root / "reports" / "archive" / "papers").exists()
+    assert not (root / "figures").exists()
+    assert not (root / "results" / "application").exists()
+    assert (root / "reports" / "archive" / "figures").exists()
+    assert (root / "reports" / "archive" / "generated" / "application").exists()

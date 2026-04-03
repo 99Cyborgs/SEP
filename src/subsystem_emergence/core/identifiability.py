@@ -1,4 +1,8 @@
-"""Identifiability and artifact-challenging diagnostics."""
+"""Diagnostics for coordinate artifacts, coarse-graining bias, and post-hoc fits.
+
+These routines do not certify subsystem structure. They probe whether an
+apparent signal survives simple adversarial transformations and reductions.
+"""
 
 from __future__ import annotations
 
@@ -10,7 +14,7 @@ from .projectors import projector_deformation
 
 
 def random_orthogonal(dimension: int, seed: int) -> np.ndarray:
-    """Sample a deterministic orthogonal matrix."""
+    """Sample a deterministic orthogonal matrix with QR sign normalization."""
 
     rng = np.random.default_rng(seed)
     matrix = rng.normal(size=(dimension, dimension))
@@ -26,7 +30,12 @@ def coordinate_sensitivity(
     trials: int = 4,
     seed: int = 0,
 ) -> dict[str, float]:
-    """Measure coordinate robustness under orthogonal transforms."""
+    """Measure observable robustness under orthogonal coordinate transforms.
+
+    The analyzer contract is intentionally narrow: numeric diagnostics are read
+    from a small known key set, and the optional ``projector`` entry is used to
+    test whether the identified carrier is equivariant under basis changes.
+    """
 
     baseline = analyzer(matrix)
     numeric_keys = [
@@ -46,6 +55,8 @@ def coordinate_sensitivity(
         for key in numeric_keys:
             baseline_value = float(baseline[key])
             transformed_value = float(transformed_result[key])
+            # The additive floor prevents near-zero reference metrics from
+            # spuriously dominating the relative-change statistic.
             scale = abs(baseline_value) + 1.0e-12
             relative_changes.append(abs(transformed_value - baseline_value) / scale)
         transformed_projector = transformed_result.get("projector")
@@ -60,7 +71,7 @@ def coordinate_sensitivity(
 
 
 def numerical_refinement_metric(values: list[float]) -> dict[str, float]:
-    """Relative spread across refinement levels."""
+    """Relative spread across refinement levels for one observable family."""
 
     array = np.asarray(values, dtype=float)
     if array.size == 0:
@@ -73,7 +84,11 @@ def numerical_refinement_metric(values: list[float]) -> dict[str, float]:
 
 
 def coarse_graining_bias(matrix: np.ndarray, groups: list[list[int]]) -> dict[str, float]:
-    """Compare a fine transition matrix against a simple coarse-grained reduction."""
+    """Compare a fine transition matrix against a mean-aggregated coarse reduction.
+
+    This diagnostic assumes a row-stochastic interpretation and reports how much
+    that contract and the leading singular-gap signal drift after aggregation.
+    """
 
     coarse = np.zeros((len(groups), len(groups)))
     for i, source_group in enumerate(groups):
@@ -93,7 +108,7 @@ def coarse_graining_bias(matrix: np.ndarray, groups: list[list[int]]) -> dict[st
 
 
 def transient_coincidence_score(times: list[float], leakage: list[float]) -> float:
-    """Score sensitivity of the law fit to dropping the earliest transient points."""
+    """Score sensitivity of a leakage trace to removing the earliest transient points."""
 
     if len(times) < 4:
         return 0.0
@@ -105,7 +120,7 @@ def transient_coincidence_score(times: list[float], leakage: list[float]) -> flo
 def post_hoc_projection_score(
     operator: np.ndarray, candidate_projector: np.ndarray, held_out_projector: np.ndarray
 ) -> float:
-    """Compare candidate and held-out projectors on the same operator."""
+    """Compare candidate and held-out projectors on the same held-out operator."""
 
     leakage_candidate = np.linalg.norm((np.eye(operator.shape[0]) - candidate_projector) @ operator @ candidate_projector, 2)
     leakage_held_out = np.linalg.norm((np.eye(operator.shape[0]) - held_out_projector) @ operator @ held_out_projector, 2)

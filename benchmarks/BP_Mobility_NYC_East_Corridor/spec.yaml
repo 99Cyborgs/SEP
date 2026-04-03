@@ -1,28 +1,63 @@
-id: BP_Mobility_NYC_East_Corridor
+registry_source: benchmarks/registry.yaml
+family_id: BP_Mobility_NYC_East_Corridor
+title: Mobility NYC East Corridor
 branch: application
-theorem_tier: T3/G6
+tier: T3/G6
+phase: 5
+description: Bundled real-data New York City mobility benchmark selected as a mixed external corridor case.
 system_class: real_world_windowed_mobility
 state_dimension: 4
-formal_system: Row-stochastic station-to-station mobility operators derived from a bundled Manhattan east-side slice of Citi Bike January 2024 trip history.
-parameter_sets:
-  reference:
-    case_label: nyc_east_side_mixed
-    window_labels: ["06:00-09:00", "09:00-12:00", "15:00-18:00", "18:00-21:00"]
-    total_trips_min: 1000
-data_provenance:
+formal_system: Row-stochastic station-to-station mobility operators derived from a bundled Manhattan east-side slice of Citi
+  Bike January 2024 trip history.
+implementation_status: complete
+evidence_class: application_real_data
+claim_refs:
+- T3_finite_time_transport
+- G6_application_identifiability
+observables:
+- singular_gap
+- coherent_projector_deformation
+- block_residual_norm
+- leakage_trajectory
+- autonomy_horizon
+fixtures:
+- kind: named_flow_fixture
+  path: benchmarks/BP_Mobility_NYC_East_Corridor/data/citibike_east_corridor_jan2024.json
   source_page: https://citibikenyc.com/system-data
   source_archive: 202401-citibike-tripdata.zip
-  derivation_rule: Aggregate weekday trips whose start and end station names are both in the selected Manhattan station set.
-ground_truth_notes:
-  - The benchmark is real-data and intended as a mixed external application case.
-  - The case shows stable refinement and substantial traffic, but not carrier stability or weak coupling.
-  - The benchmark broadens Paper E beyond the Chicago Divvy archive without claiming a second accepted application case.
 expected_failure_modes:
-  - carrier_failure
-  - coupling_failure
-primary_observables:
+- carrier_failure
+- coupling_failure
+cases:
+- family_id: BP_Mobility_NYC_East_Corridor
+  case_id: reference
+  title: Mixed external corridor slice
+  parameter_id: reference
+  base_parameter_id: reference
+  role: negative_control
+  tier: T3/G6
+  claim_status: rejected
+  implementation_status: complete
+  evidence_class: application_real_data
+  observables:
   - singular_gap
   - coherent_projector_deformation
   - block_residual_norm
   - leakage_trajectory
   - autonomy_horizon
+  fixtures:
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Mobility_NYC_East_Corridor/data/citibike_east_corridor_jan2024.json
+    source_page: https://citibikenyc.com/system-data
+    source_archive: 202401-citibike-tripdata.zip
+  acceptance_profile: expected_failure_control
+  expected_failure_modes:
+  - carrier_failure
+  - coupling_failure
+  run_modes:
+  - reference
+  tags:
+  - mobility
+  - mixed
+  overrides: {}
+  notes: []

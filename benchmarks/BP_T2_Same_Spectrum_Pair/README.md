@@ -1,23 +1,40 @@
-# BP T2 Same Spectrum Pair
+# T2 Same Spectrum Pair
 
-## Formal System Definition
-A paired autonomous linear benchmark where both branches share the same retained slow eigenvalues and fast decay scales, but the slow block geometry changes from rotated normal to upper-triangular nonnormal.
+This document is generated from `benchmarks/registry.yaml`. The registry is authoritative; this README is a derived view.
 
-## Parameter Sets
-- `reference`: `matched_nonnormal`
-- `matched_normal`: rotated normal control branch
+## Family Contract
+- benchmark_id: `BP_T2_Same_Spectrum_Pair`
+- branch: `nonnormal`
+- tier: `T2`
+- implementation_status: `complete`
+- evidence_class: `synthetic_counterexample`
+- run_modes: `sample_parameters, run_case`
 
-## Intended Use
-- make Paper C failure geometry concrete
-- show that nominal spectral separation can stay fixed while transient amplification and held-out law behavior diverge
-- retain both branches as first-class evidence rather than treating the normal branch as disposable setup
+## Formal System
+Two autonomous linear systems with matched retained slow eigenvalues but different slow-block geometry.
 
-## Expected Reading
-- `matched_normal` should have low transient amplification, small pseudospectral proxy, and weak need for correction
-- `matched_nonnormal` should have similar spectral gap but much larger transient amplification, larger pseudospectral proxy, and a substantially stronger L3-vs-L1 gap
+## Claim Links
+- `T2_nonnormal`: `docs/theorem_notes/T2_nonnormal.tex` via gate `G2`
 
-## Reference Commands
-- `python benchmarks/BP_T2_Same_Spectrum_Pair/generate.py`
-- `python benchmarks/BP_T2_Same_Spectrum_Pair/run_reference.py`
-- `python benchmarks/BP_T2_Same_Spectrum_Pair/run_matched_normal.py`
-- `python benchmarks/BP_T2_Same_Spectrum_Pair/figure_recipe.py`
+## Primary Observables
+- `spectral_gap`
+- `transient_amplification_score`
+- `pseudospectral_proxy`
+- `leakage_trajectory`
+- `autonomy_horizon`
+
+## Fixtures
+- `synthetic_generator`: runtime-generated benchmark fixture
+
+## Cases
+- `reference`: role=`negative_control`, claim_status=`counterexample`, acceptance_profile=`same_spectrum_counterexample`, expected_failure_modes=`transient_growth_failure, horizon_failure`
+- `matched_normal`: role=`positive_control`, claim_status=`supported`, acceptance_profile=`linear_reference_relaxed`, expected_failure_modes=`none`
+
+## Ground Truth Notes
+- The retained slow eigenvalues are held fixed across the pair.
+- The paired systems differ in slow-block geometry rather than nominal gap scale.
+- The purpose is to expose failure geometry for Paper C, not to close T2.
+
+## Canonical Commands
+- `python -m subsystem_emergence.benchmarking run-case BP_T2_Same_Spectrum_Pair`
+- `python -m subsystem_emergence.benchmarking sample-parameters BP_T2_Same_Spectrum_Pair`

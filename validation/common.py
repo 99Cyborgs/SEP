@@ -9,25 +9,21 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from subsystem_emergence.core.types import GateResult
-from subsystem_emergence.core.validation import (
-    filter_ledgers,
-    load_gate_criteria,
-    load_ledgers,
-    write_gate_artifacts,
-)
-from subsystem_emergence.io.ledgers import repository_root
+from subsystem_emergence.core.validation import filter_records, load_gate_criteria, load_records, write_gate_artifacts
+from subsystem_emergence.io.paths import artifact_root, evidence_root, repository_root
 
 
-def gate_context(gate: str) -> tuple[Path, dict, list[dict]]:
+def gate_context(gate: str, root: Path | None = None) -> tuple[Path, dict, list[dict]]:
     """Load repo root, gate criteria, and filtered records."""
 
-    root = repository_root(Path(__file__).resolve())
-    criteria = load_gate_criteria(root / "validation" / "criteria" / f"{gate}.json")
-    records = filter_ledgers(
-        load_ledgers(root / "results" / "ledgers"),
+    source_root = repository_root(Path(__file__).resolve())
+    repo_root = artifact_root(root) if root is not None else source_root
+    criteria = load_gate_criteria(source_root / "validation" / "criteria" / f"{gate}.json")
+    records = filter_records(
+        load_records(evidence_root(repo_root)),
         benchmark_ids=set(criteria["benchmark_ids"]),
     )
-    return root, criteria, records
+    return repo_root, criteria, records
 
 
 def finalize_gate(

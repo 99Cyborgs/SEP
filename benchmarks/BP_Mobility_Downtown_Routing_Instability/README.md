@@ -1,33 +1,40 @@
-# BP Mobility Downtown Routing Instability
+# Mobility Downtown Routing Instability
 
-## Formal System Definition
-A bundled real-data mobility benchmark derived from Divvy January 2024 weekday trip history on a four-station downtown Chicago slice. Trips are aggregated into ordered commute windows and converted into row-stochastic station-to-station operators with a documented pseudocount smoother.
+This document is generated from `benchmarks/registry.yaml`. The registry is authoritative; this README is a derived view.
 
-## Data Provenance
-- source page: `https://divvybikes.com/system-data`
-- source archive: `202401-divvy-tripdata.zip`
-- domain: public bike-share trip history in Chicago
-- bundled fixture: derived counts for four downtown stations so the benchmark is reproducible without a download step
+## Family Contract
+- benchmark_id: `BP_Mobility_Downtown_Routing_Instability`
+- branch: `application`
+- tier: `T3/G6`
+- implementation_status: `complete`
+- evidence_class: `application_real_data`
+- run_modes: `sample_parameters, run_case`
 
-## Station Slice
-- `Clinton St & Washington Blvd`
-- `Kingsbury St & Kinzie St`
-- `Wells St & Elm St`
-- `State St & Chicago Ave`
+## Formal System
+Row-stochastic station-to-station mobility operators derived from a bundled downtown Chicago slice of Divvy January 2024 trip history.
 
-## Parameter Set
-- `reference`: weekday commute windows `06:00-09:00`, `09:00-12:00`, `15:00-18:00`, `18:00-21:00`
+## Claim Links
+- `T3_finite_time_transport`: `docs/theorem_notes/T3_finite_time_transport.tex` via gate `G3`
+- `G6_application_identifiability`: `docs/protocols/external_application_evidence.md` via gate `G6`
 
-## Negative Application Claim
-- This benchmark is intentionally negative.
-- The failure mode is routing and geometry instability under a dense downtown coarse graining, not low-count sparsity.
-- The selected station set has a few hundred weekday trips, but its coherent carriers drift enough to keep the case rejection-labeled.
+## Primary Observables
+- `singular_gap`
+- `coherent_projector_deformation`
+- `block_residual_norm`
+- `leakage_trajectory`
+- `autonomy_horizon`
 
-## Expected Failure Modes
-- `carrier_failure`
-- `coupling_failure`
+## Fixtures
+- `named_flow_fixture`: `benchmarks/BP_Mobility_Downtown_Routing_Instability/data/divvy_downtown_commute_jan2024.json`, source_archive=`202401-divvy-tripdata.zip`
 
-## Reference Commands
-- `python benchmarks/BP_Mobility_Downtown_Routing_Instability/generate.py`
-- `python benchmarks/BP_Mobility_Downtown_Routing_Instability/run_reference.py`
-- `python benchmarks/BP_Mobility_Downtown_Routing_Instability/figure_recipe.py`
+## Cases
+- `reference`: role=`negative_control`, claim_status=`rejected`, acceptance_profile=`expected_failure_control`, expected_failure_modes=`carrier_failure, coupling_failure`
+
+## Ground Truth Notes
+- The benchmark is real-data and intentionally negative.
+- The failure mode is route-instability under coarse graining rather than low sample count.
+- The benchmark broadens the governed mobility failure atlas with a second external rejection case.
+
+## Canonical Commands
+- `python -m subsystem_emergence.benchmarking run-case BP_Mobility_Downtown_Routing_Instability`
+- `python -m subsystem_emergence.benchmarking sample-parameters BP_Mobility_Downtown_Routing_Instability`

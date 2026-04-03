@@ -1,9 +1,17 @@
 {
-  "label": "carrier_failure",
-  "triggered": true,
-  "metric": 0.5522009870293002,
-  "threshold": 0.35,
-  "direction": "gt",
-  "message": "Estimated carrier is too far from the planted or baseline carrier.",
-  "archive_path": "failures\\G1_linear_validity\\BP_Clickstream_Docs_Funnel_negative_detour_seed0_carrier_failure.json"
+  "benchmark_id": "BP_Clickstream_Docs_Funnel",
+  "case_id": "negative_detour",
+  "parameter_id": "negative_detour",
+  "seed": 0,
+  "branch": "application",
+  "theorem_tier": "T3/G6",
+  "failure": {
+    "label": "carrier_failure",
+    "triggered": true,
+    "metric": 0.5522009870293002,
+    "threshold": 0.35,
+    "direction": "gt",
+    "message": "Estimated carrier is too far from the planted or baseline carrier.",
+    "archive_path": "failures\\G1_linear_validity\\BP_Clickstream_Docs_Funnel_negative_detour_seed0_carrier_failure.json"
+  }
 }

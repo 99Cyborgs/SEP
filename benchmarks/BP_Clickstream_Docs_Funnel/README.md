@@ -1,36 +1,41 @@
-# BP Clickstream Docs Funnel
+# Clickstream Docs Funnel
 
-## Formal System Definition
-A bundled documentation-portal clickstream benchmark with four named pages and four ordered lifecycle windows. Raw page-to-page counts are converted into row-stochastic operators with a documented pseudocount smoother.
+This document is generated from `benchmarks/registry.yaml`. The registry is authoritative; this README is a derived view.
 
-## Data Provenance
-- source page: `bundled_repository_fixture`
-- source archive: `docs_navigation_funnel_q1_2026.json`
-- domain: documentation navigation clickstreams
-- bundled fixture: repository-curated page-transition counts used only as reproducible cross-domain application evidence
+## Family Contract
+- benchmark_id: `BP_Clickstream_Docs_Funnel`
+- branch: `application`
+- tier: `T3/G6`
+- implementation_status: `complete`
+- evidence_class: `application_repository_fixture`
+- run_modes: `sample_parameters, run_case`
 
-## Page Slice
-- `Docs Home`
-- `Quickstart`
-- `API Reference`
-- `SDK Guides`
+## Formal System
+Row-stochastic page-to-page clickstream operators derived from a bundled documentation navigation fixture.
 
-## Parameter Sets
-- `reference`: stable documentation funnel with persistent guide/API separation
-- `negative_detour`: detour-heavy navigation pattern retained as an explicit rejection case
+## Claim Links
+- `T3_finite_time_transport`: `docs/theorem_notes/T3_finite_time_transport.tex` via gate `G3`
+- `G6_application_identifiability`: `docs/protocols/external_application_evidence.md` via gate `G6`
 
-## Cross-Domain Application Claim
-- This benchmark extends application evidence beyond bike-share mobility without claiming a public-data theorem.
-- The `reference` case is accepted only as a bounded transport-style application slice.
-- The `negative_detour` case is expected to remain rejection-labeled because carrier geometry and reduced coupling both degrade.
+## Primary Observables
+- `singular_gap`
+- `coherent_projector_deformation`
+- `block_residual_norm`
+- `leakage_trajectory`
+- `autonomy_horizon`
 
-## Expected Failure Modes
-- `carrier_failure`
-- `coupling_failure`
-- `numerical_artifact_failure`
+## Fixtures
+- `named_flow_fixture`: `benchmarks/BP_Clickstream_Docs_Funnel/data/docs_navigation_funnel_q1_2026.json`, source_archive=`docs_navigation_funnel_q1_2026.json`
 
-## Reference Commands
-- `python benchmarks/BP_Clickstream_Docs_Funnel/generate.py`
-- `python benchmarks/BP_Clickstream_Docs_Funnel/run_reference.py`
-- `python benchmarks/BP_Clickstream_Docs_Funnel/run_negative_detour.py`
-- `python benchmarks/BP_Clickstream_Docs_Funnel/figure_recipe.py`
+## Cases
+- `reference`: role=`reference`, claim_status=`supported`, acceptance_profile=`application_navigation_reference`, expected_failure_modes=`none`
+- `negative_detour`: role=`negative_control`, claim_status=`rejected`, acceptance_profile=`expected_failure_control`, expected_failure_modes=`carrier_failure, coupling_failure`
+
+## Ground Truth Notes
+- This is a bounded cross-domain application fixture, not a public-data theorem claim.
+- The reference case is intended to show stable coherent structure outside mobility.
+- The negative detour case is retained to preserve explicit rejection evidence.
+
+## Canonical Commands
+- `python -m subsystem_emergence.benchmarking run-case BP_Clickstream_Docs_Funnel`
+- `python -m subsystem_emergence.benchmarking sample-parameters BP_Clickstream_Docs_Funnel`

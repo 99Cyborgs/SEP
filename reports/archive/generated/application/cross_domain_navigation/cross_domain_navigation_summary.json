@@ -1,0 +1,252 @@
+{
+  "summary_kind": "cross_domain_navigation_package",
+  "canonical_source": "results/evidence run manifests plus centralized acceptance profiles",
+  "acceptance_profile": "application_navigation_reference",
+  "threshold_layers": {
+    "clickstream_and_support": {
+      "failure_taxonomy_thresholds": {
+        "min_gap": 0.03,
+        "max_projector_deformation": 0.35,
+        "max_block_residual": 0.35,
+        "max_transient_amplification": 6.0,
+        "min_horizon_ratio": 0.45,
+        "max_coordinate_sensitivity": 0.5,
+        "max_refinement_span": 0.3
+      },
+      "acceptance_profile": {
+        "profile_id": "application_navigation_reference",
+        "decision_mode": "positive",
+        "metric_rules": [
+          {
+            "metric_id": "singular_gap",
+            "path": "observables.singular_gap",
+            "operator": "gte",
+            "threshold": 0.35
+          },
+          {
+            "metric_id": "coherent_projector_deformation",
+            "path": "observables.coherent_projector_deformation",
+            "operator": "lte",
+            "threshold": 0.15
+          },
+          {
+            "metric_id": "autonomy_horizon",
+            "path": "observables.autonomy_horizon",
+            "operator": "gte",
+            "threshold": 3.0
+          },
+          {
+            "metric_id": "max_relative_span",
+            "path": "observables.numerical_refinement_metrics.max_relative_span",
+            "operator": "lte",
+            "threshold": 0.2
+          }
+        ],
+        "blocking_failure_labels": [
+          "carrier_failure",
+          "coupling_failure",
+          "numerical_artifact_failure"
+        ],
+        "advisory_failure_labels": [],
+        "notes": [
+          "Non-mobility navigation references are accepted only when all package thresholds clear without advisory exceptions."
+        ]
+      }
+    },
+    "workflow": {
+      "failure_taxonomy_thresholds": {
+        "min_gap": 0.03,
+        "max_projector_deformation": 0.35,
+        "max_block_residual": 0.35,
+        "max_transient_amplification": 6.0,
+        "min_horizon_ratio": 0.45,
+        "max_coordinate_sensitivity": 0.5,
+        "max_refinement_span": 0.3
+      },
+      "acceptance_profile": {
+        "profile_id": "application_workflow_reference",
+        "decision_mode": "positive",
+        "metric_rules": [
+          {
+            "metric_id": "singular_gap",
+            "path": "observables.singular_gap",
+            "operator": "gte",
+            "threshold": 0.27
+          },
+          {
+            "metric_id": "coherent_projector_deformation",
+            "path": "observables.coherent_projector_deformation",
+            "operator": "lte",
+            "threshold": 0.18
+          },
+          {
+            "metric_id": "autonomy_horizon",
+            "path": "observables.autonomy_horizon",
+            "operator": "gte",
+            "threshold": 3.0
+          },
+          {
+            "metric_id": "max_relative_span",
+            "path": "observables.numerical_refinement_metrics.max_relative_span",
+            "operator": "lte",
+            "threshold": 0.2
+          }
+        ],
+        "blocking_failure_labels": [
+          "carrier_failure",
+          "coupling_failure",
+          "numerical_artifact_failure"
+        ],
+        "advisory_failure_labels": [],
+        "notes": [
+          "Workflow references use the same evidence contract as navigation fixtures with a slightly lower singular-gap floor."
+        ]
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "docs_reference",
+      "benchmark_id": "BP_Clickstream_Docs_Funnel",
+      "parameter_id": "reference",
+      "decision_status": "accepted",
+      "accepted": true,
+      "acceptance_profile": "application_navigation_reference",
+      "metrics": {
+        "singular_gap": 0.397374090450784,
+        "coherent_projector_deformation": 0.06104729662141483,
+        "max_relative_span": 0.02944618218464895
+      },
+      "failure_labels": [],
+      "blocking_failures_present": [],
+      "advisory_failures_present": [],
+      "rejection_reasons": [],
+      "run_manifest": "results/evidence/BP_Clickstream_Docs_Funnel/reference/seed_0/run_manifest.json",
+      "acceptance_decision": "results/evidence/BP_Clickstream_Docs_Funnel/reference/seed_0/acceptance_decision.json",
+      "observables_summary": "results/evidence/BP_Clickstream_Docs_Funnel/reference/seed_0/observables_summary.json"
+    },
+    {
+      "case_id": "docs_negative",
+      "benchmark_id": "BP_Clickstream_Docs_Funnel",
+      "parameter_id": "negative_detour",
+      "decision_status": "expected_failure_confirmed",
+      "accepted": false,
+      "acceptance_profile": "expected_failure_control",
+      "metrics": {
+        "singular_gap": 0.06218421417966025,
+        "coherent_projector_deformation": 0.5522009870293002,
+        "max_relative_span": 0.09926308376024906
+      },
+      "failure_labels": [
+        "carrier_failure",
+        "coupling_failure"
+      ],
+      "blocking_failures_present": [],
+      "advisory_failures_present": [],
+      "rejection_reasons": [],
+      "run_manifest": "results/evidence/BP_Clickstream_Docs_Funnel/negative_detour/seed_0/run_manifest.json",
+      "acceptance_decision": "results/evidence/BP_Clickstream_Docs_Funnel/negative_detour/seed_0/acceptance_decision.json",
+      "observables_summary": "results/evidence/BP_Clickstream_Docs_Funnel/negative_detour/seed_0/observables_summary.json"
+    },
+    {
+      "case_id": "support_reference",
+      "benchmark_id": "BP_Support_Portal_Funnel",
+      "parameter_id": "reference",
+      "decision_status": "accepted",
+      "accepted": true,
+      "acceptance_profile": "application_navigation_reference",
+      "metrics": {
+        "singular_gap": 0.3681338864017923,
+        "coherent_projector_deformation": 0.05867497195884055,
+        "max_relative_span": 0.19688386694575188
+      },
+      "failure_labels": [],
+      "blocking_failures_present": [],
+      "advisory_failures_present": [],
+      "rejection_reasons": [],
+      "run_manifest": "results/evidence/BP_Support_Portal_Funnel/reference/seed_0/run_manifest.json",
+      "acceptance_decision": "results/evidence/BP_Support_Portal_Funnel/reference/seed_0/acceptance_decision.json",
+      "observables_summary": "results/evidence/BP_Support_Portal_Funnel/reference/seed_0/observables_summary.json"
+    },
+    {
+      "case_id": "support_negative",
+      "benchmark_id": "BP_Support_Portal_Funnel",
+      "parameter_id": "negative_detour",
+      "decision_status": "expected_failure_confirmed",
+      "accepted": false,
+      "acceptance_profile": "expected_failure_control",
+      "metrics": {
+        "singular_gap": 0.026166628171083138,
+        "coherent_projector_deformation": 0.8404729723629586,
+        "max_relative_span": 0.0896284762978004
+      },
+      "failure_labels": [
+        "carrier_failure",
+        "gap_failure"
+      ],
+      "blocking_failures_present": [],
+      "advisory_failures_present": [],
+      "rejection_reasons": [],
+      "run_manifest": "results/evidence/BP_Support_Portal_Funnel/negative_detour/seed_0/run_manifest.json",
+      "acceptance_decision": "results/evidence/BP_Support_Portal_Funnel/negative_detour/seed_0/acceptance_decision.json",
+      "observables_summary": "results/evidence/BP_Support_Portal_Funnel/negative_detour/seed_0/observables_summary.json"
+    },
+    {
+      "case_id": "workflow_reference",
+      "benchmark_id": "BP_Workflow_Queue_Funnel",
+      "parameter_id": "reference",
+      "decision_status": "accepted",
+      "accepted": true,
+      "acceptance_profile": "application_workflow_reference",
+      "metrics": {
+        "singular_gap": 0.27845055699038207,
+        "coherent_projector_deformation": 0.1380588849603833,
+        "max_relative_span": 0.08016203884909928
+      },
+      "failure_labels": [],
+      "blocking_failures_present": [],
+      "advisory_failures_present": [],
+      "rejection_reasons": [],
+      "run_manifest": "results/evidence/BP_Workflow_Queue_Funnel/reference/seed_0/run_manifest.json",
+      "acceptance_decision": "results/evidence/BP_Workflow_Queue_Funnel/reference/seed_0/acceptance_decision.json",
+      "observables_summary": "results/evidence/BP_Workflow_Queue_Funnel/reference/seed_0/observables_summary.json"
+    },
+    {
+      "case_id": "workflow_negative",
+      "benchmark_id": "BP_Workflow_Queue_Funnel",
+      "parameter_id": "negative_detour",
+      "decision_status": "expected_failure_confirmed",
+      "accepted": false,
+      "acceptance_profile": "expected_failure_control",
+      "metrics": {
+        "singular_gap": 0.11700418285419555,
+        "coherent_projector_deformation": 0.5847329133437102,
+        "max_relative_span": 0.11925099110861925
+      },
+      "failure_labels": [
+        "carrier_failure"
+      ],
+      "blocking_failures_present": [],
+      "advisory_failures_present": [],
+      "rejection_reasons": [],
+      "run_manifest": "results/evidence/BP_Workflow_Queue_Funnel/negative_detour/seed_0/run_manifest.json",
+      "acceptance_decision": "results/evidence/BP_Workflow_Queue_Funnel/negative_detour/seed_0/acceptance_decision.json",
+      "observables_summary": "results/evidence/BP_Workflow_Queue_Funnel/negative_detour/seed_0/observables_summary.json"
+    }
+  ],
+  "aggregate_summary": {
+    "accepted_case_count": 3,
+    "rejected_case_count": 3,
+    "benchmarks": [
+      "BP_Clickstream_Docs_Funnel",
+      "BP_Support_Portal_Funnel",
+      "BP_Workflow_Queue_Funnel"
+    ]
+  },
+  "notes": [
+    "The cross-domain package keeps Paper E mobility-only and treats non-mobility evidence as a separate bounded application track.",
+    "Package acceptance is benchmark-local and stricter than the repository-wide failure taxonomy on singular-gap, deformation, horizon, and refinement bounds.",
+    "Archive summaries now read canonical evidence manifests and centralized acceptance decisions instead of raw ledgers.",
+    "The supported claim is structural only: the coherent transport machinery is not tied to a single mobility, navigation, or workflow fixture."
+  ]
+}

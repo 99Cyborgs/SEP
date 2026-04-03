@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SEP Benchmark Registry",
+  "type": "object",
+  "required": ["schema_version", "registry_role", "claims", "benchmarks"],
+  "properties": {
+    "schema_version": { "type": "integer" },
+    "registry_role": { "type": "string" },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim_id", "title", "claim_document_path", "gate", "observables"],
+        "properties": {
+          "claim_id": { "type": "string" },
+          "title": { "type": "string" },
+          "claim_document_path": { "type": "string" },
+          "gate": { "type": "string" },
+          "observables": { "type": "array", "items": { "type": "string" } },
+          "tags": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": true
+      }
+    },
+    "benchmarks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "family_id",
+          "title",
+          "branch",
+          "tier",
+          "phase",
+          "description",
+          "system_class",
+          "state_dimension",
+          "formal_system",
+          "implementation_status",
+          "evidence_class",
+          "claim_refs",
+          "observables",
+          "fixtures",
+          "expected_failure_modes",
+          "run_modes",
+          "tags",
+          "ground_truth_notes",
+          "spec_path",
+          "readme_path",
+          "reference_script",
+          "cases"
+        ],
+        "properties": {
+          "family_id": { "type": "string" },
+          "title": { "type": "string" },
+          "branch": { "type": "string" },
+          "tier": { "type": "string" },
+          "phase": { "type": "integer" },
+          "description": { "type": "string" },
+          "system_class": { "type": "string" },
+          "state_dimension": { "type": ["integer", "string"] },
+          "formal_system": { "type": "string" },
+          "implementation_status": { "type": "string" },
+          "evidence_class": { "type": "string" },
+          "claim_refs": { "type": "array", "items": { "type": "string" } },
+          "observables": { "type": "array", "items": { "type": "string" } },
+          "fixtures": { "type": "array", "items": { "type": "object" } },
+          "expected_failure_modes": { "type": "array", "items": { "type": "string" } },
+          "run_modes": { "type": "array", "items": { "type": "string" } },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "ground_truth_notes": { "type": "array", "items": { "type": "string" } },
+          "spec_path": { "type": "string" },
+          "readme_path": { "type": "string" },
+          "reference_script": { "type": "string" },
+          "legacy_expected_metrics_path": { "type": "string" },
+          "legacy_figure_recipe_path": { "type": "string" },
+          "cases": {
+            "type": "array",
+            "items": { "$ref": "./benchmark_case.schema.json" }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  }
+}

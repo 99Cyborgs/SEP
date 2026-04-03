@@ -1,0 +1,302 @@
+failure_taxonomy_profiles:
+  default:
+    min_gap: 0.03
+    max_projector_deformation: 0.35
+    max_block_residual: 0.35
+    max_transient_amplification: 6.0
+    min_horizon_ratio: 0.45
+    max_coordinate_sensitivity: 0.5
+    max_refinement_span: 0.3
+
+acceptance_profiles:
+  linear_reference_strict:
+    decision_mode: positive
+    metric_rules:
+      - metric_id: spectral_gap
+        path: observables.spectral_gap
+        operator: gte
+        threshold: 0.5
+      - metric_id: projector_deformation
+        path: observables.projector_deformation
+        operator: lte
+        threshold: 0.3
+      - metric_id: block_residual_norm
+        path: observables.block_residual_norm
+        operator: lte
+        threshold: 0.2
+      - metric_id: autonomy_horizon
+        path: observables.autonomy_horizon
+        operator: gte
+        threshold: 2.0
+    blocking_failure_labels:
+      - gap_failure
+      - carrier_failure
+      - coupling_failure
+      - numerical_artifact_failure
+    notes:
+      - Exact linear planted references are expected to clear all primary numerical checks without advisory exceptions.
+
+  linear_reference_relaxed:
+    decision_mode: positive
+    metric_rules:
+      - metric_id: spectral_gap
+        path: observables.spectral_gap
+        operator: gte
+        threshold: 0.02
+      - metric_id: autonomy_horizon
+        path: observables.autonomy_horizon
+        operator: gte
+        threshold: 1.0
+    blocking_failure_labels:
+      - gap_failure
+      - numerical_artifact_failure
+    advisory_failure_labels:
+      - coupling_failure
+      - transient_growth_failure
+      - horizon_failure
+    notes:
+      - Ensemble and nearly-decomposable references are treated as diagnostic positives; coupling and transient-growth labels remain advisory.
+
+  transport_reference:
+    decision_mode: positive
+    metric_rules:
+      - metric_id: singular_gap
+        path: observables.singular_gap
+        operator: gte
+        threshold: 0.01
+      - metric_id: autonomy_horizon
+        path: observables.autonomy_horizon
+        operator: gte
+        threshold: 2.0
+    blocking_failure_labels:
+      - carrier_failure
+      - numerical_artifact_failure
+    advisory_failure_labels:
+      - horizon_failure
+    notes:
+      - Positive transport references must preserve coherent separation and avoid numerical instability.
+
+  nonnormal_reference:
+    decision_mode: positive
+    metric_rules:
+      - metric_id: max_relative_span
+        path: observables.numerical_refinement_metrics.max_relative_span
+        operator: lte
+        threshold: 0.3
+    blocking_failure_labels:
+      - numerical_artifact_failure
+    advisory_failure_labels:
+      - coupling_failure
+      - transient_growth_failure
+      - horizon_failure
+    notes:
+      - Nonnormal references are allowed to exhibit strong transient effects; the hard requirement is reproducible numerics.
+
+  delay_surrogate_reference:
+    decision_mode: qualified
+    metric_rules:
+      - metric_id: max_relative_span
+        path: observables.numerical_refinement_metrics.max_relative_span
+        operator: lte
+        threshold: 0.3
+    blocking_failure_labels:
+      - numerical_artifact_failure
+    advisory_failure_labels:
+      - coupling_failure
+      - transient_growth_failure
+      - horizon_failure
+    notes:
+      - The sampled-history delay surrogate is retained as qualified evidence rather than a theorem-grade positive.
+
+  nonlinear_reference:
+    decision_mode: positive
+    metric_rules:
+      - metric_id: projector_deformation
+        path: observables.projector_deformation
+        operator: lte
+        threshold: 0.35
+      - metric_id: local_validity_margin
+        path: observables.local_validity_metrics.local_validity_margin
+        operator: gte
+        threshold: 0.0
+      - metric_id: fast_slaving_defect
+        path: observables.local_validity_metrics.fast_slaving_defect
+        operator: lte
+        threshold: 0.1
+    blocking_failure_labels:
+      - carrier_failure
+      - numerical_artifact_failure
+    advisory_failure_labels:
+      - coupling_failure
+      - horizon_failure
+    notes:
+      - Weakly nonlinear positives must retain local validity and bounded fast-slaving error.
+
+  stochastic_reference:
+    decision_mode: positive
+    metric_rules:
+      - metric_id: bootstrap_width
+        path: observables.stochastic_uncertainty_metrics.bootstrap_width
+        operator: lte
+        threshold: 0.1
+      - metric_id: confidence_bounded_horizon
+        path: observables.stochastic_uncertainty_metrics.confidence_bounded_horizon
+        operator: gte
+        threshold: 5.0
+    blocking_failure_labels:
+      - numerical_artifact_failure
+    advisory_failure_labels:
+      - horizon_failure
+    notes:
+      - Positive stochastic references must preserve bounded uncertainty and a nontrivial confidence horizon.
+
+  application_mobility_reference:
+    decision_mode: positive
+    metric_rules:
+      - metric_id: singular_gap
+        path: observables.singular_gap
+        operator: gte
+        threshold: 0.4
+      - metric_id: coherent_projector_deformation
+        path: observables.coherent_projector_deformation
+        operator: lte
+        threshold: 0.4
+      - metric_id: autonomy_horizon
+        path: observables.autonomy_horizon
+        operator: gte
+        threshold: 3.0
+      - metric_id: max_relative_span
+        path: observables.numerical_refinement_metrics.max_relative_span
+        operator: lte
+        threshold: 0.2
+    blocking_failure_labels:
+      - carrier_failure
+      - numerical_artifact_failure
+    advisory_failure_labels:
+      - coupling_failure
+    notes:
+      - The accepted Chicago weekday corridor is a bounded application reference and allows coupling failure to remain advisory.
+
+  application_navigation_reference:
+    decision_mode: positive
+    metric_rules:
+      - metric_id: singular_gap
+        path: observables.singular_gap
+        operator: gte
+        threshold: 0.35
+      - metric_id: coherent_projector_deformation
+        path: observables.coherent_projector_deformation
+        operator: lte
+        threshold: 0.15
+      - metric_id: autonomy_horizon
+        path: observables.autonomy_horizon
+        operator: gte
+        threshold: 3.0
+      - metric_id: max_relative_span
+        path: observables.numerical_refinement_metrics.max_relative_span
+        operator: lte
+        threshold: 0.2
+    blocking_failure_labels:
+      - carrier_failure
+      - coupling_failure
+      - numerical_artifact_failure
+    notes:
+      - Non-mobility navigation references are accepted only when all package thresholds clear without advisory exceptions.
+
+  application_workflow_reference:
+    decision_mode: positive
+    metric_rules:
+      - metric_id: singular_gap
+        path: observables.singular_gap
+        operator: gte
+        threshold: 0.27
+      - metric_id: coherent_projector_deformation
+        path: observables.coherent_projector_deformation
+        operator: lte
+        threshold: 0.18
+      - metric_id: autonomy_horizon
+        path: observables.autonomy_horizon
+        operator: gte
+        threshold: 3.0
+      - metric_id: max_relative_span
+        path: observables.numerical_refinement_metrics.max_relative_span
+        operator: lte
+        threshold: 0.2
+    blocking_failure_labels:
+      - carrier_failure
+      - coupling_failure
+      - numerical_artifact_failure
+    notes:
+      - Workflow references use the same evidence contract as navigation fixtures with a slightly lower singular-gap floor.
+
+  expected_failure_control:
+    decision_mode: expected_failure
+    metric_rules: []
+    blocking_failure_labels: []
+    advisory_failure_labels: []
+    notes:
+      - Counterexamples, rejected application slices, and stress cases succeed only when the expected failure geometry is actually observed.
+
+  transport_counterexample:
+    decision_mode: expected_failure
+    metric_rules:
+      - metric_id: horizon_gain
+        path: observables.transportability_metrics.coherent_vs_frozen_horizon_gain
+        operator: lte
+        threshold: 0.0
+      - metric_id: carrier_deformation
+        path: observables.transportability_metrics.carrier_tracking.mean_deformation
+        operator: gte
+        threshold: 0.5
+    blocking_failure_labels: []
+    advisory_failure_labels: []
+    notes:
+      - Mixed transport counterexamples are confirmed through collapsed horizon gain and elevated carrier deformation.
+
+  same_spectrum_counterexample:
+    decision_mode: expected_failure
+    metric_rules:
+      - metric_id: transient_amplification
+        path: observables.transient_amplification_score
+        operator: gte
+        threshold: 8.0
+      - metric_id: pseudospectral_proxy
+        path: observables.pseudospectral_proxy
+        operator: gte
+        threshold: 1000.0
+    blocking_failure_labels: []
+    advisory_failure_labels: []
+    notes:
+      - Same-spectrum nonnormal counterexamples are confirmed by transient growth and pseudospectral inflation rather than spectral-gap loss.
+
+  local_validity_counterexample:
+    decision_mode: expected_failure
+    metric_rules:
+      - metric_id: local_validity_margin
+        path: observables.local_validity_metrics.local_validity_margin
+        operator: lte
+        threshold: 0.0
+      - metric_id: fast_slaving_defect
+        path: observables.local_validity_metrics.fast_slaving_defect
+        operator: gte
+        threshold: 0.3
+    blocking_failure_labels: []
+    advisory_failure_labels: []
+    notes:
+      - Local-validity breakdown is confirmed by a nonpositive margin and a large fast-slaving defect.
+
+  stochastic_stress_counterexample:
+    decision_mode: expected_failure
+    metric_rules:
+      - metric_id: bootstrap_width
+        path: observables.stochastic_uncertainty_metrics.bootstrap_width
+        operator: gte
+        threshold: 0.25
+      - metric_id: confidence_bounded_horizon
+        path: observables.stochastic_uncertainty_metrics.confidence_bounded_horizon
+        operator: lte
+        threshold: 0.0
+    blocking_failure_labels: []
+    advisory_failure_labels: []
+    notes:
+      - Sample-stress counterexamples are confirmed by wide uncertainty and a collapsed confidence-bounded horizon.

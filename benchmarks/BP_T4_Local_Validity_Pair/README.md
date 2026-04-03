@@ -1,23 +1,39 @@
-# BP T4 Local Validity Pair
+# T4 Local Validity Pair
 
-## Formal System Definition
-A paired weakly nonlinear fast-slow benchmark using the same three-dimensional template as `BP_Weakly_Nonlinear_Slow_Manifold`, but split into a locally valid branch and an amplitude-driven local-validity breakdown branch.
+This document is generated from `benchmarks/registry.yaml`. The registry is authoritative; this README is a derived view.
 
-## Parameter Sets
-- `reference`: `amplitude_breakdown`
-- `matched_local`: accepted local control branch
+## Family Contract
+- benchmark_id: `BP_T4_Local_Validity_Pair`
+- branch: `nonlinear`
+- tier: `T4`
+- implementation_status: `complete`
+- evidence_class: `synthetic_counterexample`
+- run_modes: `sample_parameters, run_case`
 
-## Intended Use
-- harden Paper D with explicit nonlinear local-validity failure geometry
-- show that bounded local validity can degrade even when the same benchmark structure is retained
-- surface fast slaving defect, anchor drift, and local-validity margin directly in the ledger
+## Formal System
+Paired weakly nonlinear fast-slow systems with the same structural template but different local-validity posture.
 
-## Expected Reading
-- `matched_local` should keep `L2` competitive with `L1`, preserve a positive local-validity margin, and retain smaller fast slaving defect
-- `amplitude_breakdown` should show worse anchor drift, worse fast slaving defect, and a weaker `L2` advantage
+## Claim Links
+- `T4_weakly_nonlinear`: `docs/theorem_notes/T4_weakly_nonlinear.tex` via gate `G4`
 
-## Reference Commands
-- `python benchmarks/BP_T4_Local_Validity_Pair/generate.py`
-- `python benchmarks/BP_T4_Local_Validity_Pair/run_reference.py`
-- `python benchmarks/BP_T4_Local_Validity_Pair/run_matched_local.py`
-- `python benchmarks/BP_T4_Local_Validity_Pair/figure_recipe.py`
+## Primary Observables
+- `projector_deformation`
+- `leakage_trajectory`
+- `autonomy_horizon`
+- `local_validity_metrics`
+
+## Fixtures
+- `synthetic_generator`: runtime-generated benchmark fixture
+
+## Cases
+- `reference`: role=`negative_control`, claim_status=`counterexample`, acceptance_profile=`local_validity_counterexample`, expected_failure_modes=`carrier_failure, coupling_failure, horizon_failure`
+- `matched_local`: role=`positive_control`, claim_status=`supported`, acceptance_profile=`nonlinear_reference`, expected_failure_modes=`none`
+
+## Ground Truth Notes
+- Both branches use the same three-dimensional fast-slow template.
+- The matched local branch stays closer to the slaved fast-variable relation and keeps the local-validity margin positive.
+- The amplitude-breakdown branch increases anchor drift and fast slaving defect without claiming a global nonlinear instability theorem.
+
+## Canonical Commands
+- `python -m subsystem_emergence.benchmarking run-case BP_T4_Local_Validity_Pair`
+- `python -m subsystem_emergence.benchmarking sample-parameters BP_T4_Local_Validity_Pair`

@@ -70,22 +70,27 @@ def test_delay_benchmark_parameters_expose_true_delay_fields() -> None:
     assert "delay_steps" not in parameters
 
 
-def test_delay_reference_run_writes_true_delay_ledger() -> None:
-    record = run_reference_benchmark("BP_Delay_Coupled_Pair", seed=0)
+def test_delay_reference_run_writes_true_delay_canonical_manifest(tmp_path) -> None:
+    record = run_reference_benchmark("BP_Delay_Coupled_Pair", seed=0, root=tmp_path)
     assert record["law_selection_summary"]["best_law"] == "L3"
     assert record["observables"]["transient_amplification_score"] >= 1.5
     assert "surrogate_warning" not in record["observables"]["transportability_metrics"]
     assert record["observables"]["numerical_refinement_metrics"]["surrogate_relative_span"] <= 0.3
-    assert not any("surrogate" in note.lower() for note in record["notes"])
+    assert record["acceptance_decision"]["decision_status"] == "qualified"
+    assert record["metadata"]["artifact_paths"]["run_manifest"].endswith("run_manifest.json")
+    assert record["metadata"]["compatibility_mode"] == "disabled"
+    assert record["metadata"]["compatibility_artifacts"] == {}
 
 
-def test_gate_g2_executes_after_delay_path_runs() -> None:
+def test_gate_g2_executes_after_delay_path_runs(tmp_path) -> None:
     for benchmark_id in ("BP_Non_Normal_Shear", "BP_Random_Gap_Ensemble", "BP_Delay_Coupled_Pair"):
-        run_reference_benchmark(benchmark_id, seed=0)
-    result = evaluate_g2()
+        run_reference_benchmark(benchmark_id, seed=0, root=tmp_path)
+    result = evaluate_g2(tmp_path)
     assert result["gate"] == "G2"
     assert result["passed"] is True
     assert result["metrics"]["delay_refinement_ok"] is True
+    assert result["metrics"]["delay_decision_statuses"] == ["qualified"]
+    assert result["metrics"]["delay_implementation_statuses"] == ["surrogate"]
 
 
 def test_delay_refinement_diagnostics_report_stable_reference_ladder() -> None:

@@ -1,33 +1,38 @@
-# BP Linear Two Block
+# Linear Two Block
 
-## Formal System Definition
-An 8-dimensional autonomous linear ODE with a planted 4-dimensional slow carrier and two 2-dimensional subsystem blocks:
+This document is generated from `benchmarks/registry.yaml`. The registry is authoritative; this README is a derived view.
 
-`L = Q^T (diag(L_slow, L_fast) + R_slow) Q`
+## Family Contract
+- benchmark_id: `BP_Linear_Two_Block`
+- branch: `linear`
+- tier: `T1`
+- implementation_status: `complete`
+- evidence_class: `synthetic_constructive`
+- run_modes: `sample_parameters, run_case`
 
-where `L_fast` is strongly stable, `L_slow` is weakly damped, and `R_slow` is an off-block perturbation controlling `rho`.
+## Formal System
+Q^T (diag(L_slow, L_fast) + R_slow) Q with planted 4-dimensional slow carrier.
 
-## Parameter Ranges
-- `gap`: `0.5` to `2.0`
-- `rho`: `0.01` to `0.12`
-- `perturbation`: `0.0` to `0.08`
-- `times`: `0` to `8`
+## Claim Links
+- `T1_linear_autonomous`: `docs/theorem_notes/T1_linear_autonomous.tex` via gate `G1`
+
+## Primary Observables
+- `spectral_gap`
+- `projector_deformation`
+- `block_residual_norm`
+- `leakage_trajectory`
+- `autonomy_horizon`
+
+## Fixtures
+- `synthetic_generator`: runtime-generated benchmark fixture
+
+## Cases
+- `reference`: role=`reference`, claim_status=`supported`, acceptance_profile=`linear_reference_strict`, expected_failure_modes=`none`
 
 ## Ground Truth Notes
-- Planted slow carrier is known before mixing.
-- Ground-truth subsystem partition is `2 + 2` inside the slow carrier.
-- Coordinate sensitivity is tested with orthogonal changes of basis only.
+- Planted slow carrier is known before coordinate mixing.
+- Subsystem partition is fixed at 2 + 2 within the slow carrier.
 
-## Theorem Tier
-`T1`
-
-## Expected Failure Modes
-- `gap_failure`
-- `carrier_failure`
-- `coupling_failure`
-- `numerical_artifact_failure`
-
-## Reference Commands
-- `python benchmarks/BP_Linear_Two_Block/generate.py`
-- `python benchmarks/BP_Linear_Two_Block/run_reference.py`
-- `python benchmarks/BP_Linear_Two_Block/figure_recipe.py`
+## Canonical Commands
+- `python -m subsystem_emergence.benchmarking run-case BP_Linear_Two_Block`
+- `python -m subsystem_emergence.benchmarking sample-parameters BP_Linear_Two_Block`

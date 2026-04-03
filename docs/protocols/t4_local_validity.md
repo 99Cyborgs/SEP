@@ -15,7 +15,7 @@ Interpret `T4` evidence as a bounded local-validity statement rather than a glob
 - the resulting fast slaving defect and anchor drift
 
 ## Diagnostic Contract
-`T4` ledgers should now expose:
+`T4` evidence bundles should now expose:
 - `adjacent_projector_deformation`
 - `anchor_projector_deformation`
 - `fast_slaving_defect`

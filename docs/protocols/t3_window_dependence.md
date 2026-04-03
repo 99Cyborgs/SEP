@@ -20,7 +20,7 @@ Interpret `T3` evidence as a bounded finite-window claim rather than as a genera
 - `BP_T3_Window_Sensitivity_Pair/reference` is mixed or negative evidence retained to show that coherent advantage can disappear under faster drift without collapsing the transport construction into noise
 
 ## Diagnostic Contract
-Transport ledgers should now expose:
+Transport evidence bundles should now expose:
 - adjacent-window carrier deformation
 - regrouped-window carrier deformation
 - coherent-versus-frozen horizon gain under the native windowing

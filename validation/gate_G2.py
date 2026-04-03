@@ -10,10 +10,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import finalize_gate, gate_context, main_dump
 
 
-def evaluate() -> dict:
-    root, criteria, records = gate_context("G2")
+def evaluate(root: Path | None = None) -> dict:
+    root, criteria, records = gate_context("G2", root)
     if not records:
-        return finalize_gate(root, "G2", criteria, records, False, {}, "No nonnormal ledgers were found.")
+        return finalize_gate(root, "G2", criteria, records, False, {}, "No nonnormal evidence records were found.")
     evaluation_records = [
         record
         for record in records
@@ -64,6 +64,11 @@ def evaluate() -> dict:
         "law_ok": law_ok,
         "improvement_ok": improvement_ok,
         "delay_record_count": len(delay_records),
+        "delay_decision_statuses": sorted({record["acceptance_decision"]["decision_status"] for record in delay_records}),
+        "delay_implementation_statuses": sorted(
+            {record["case_snapshot"]["case"]["implementation_status"] for record in delay_records}
+        ),
+        "delay_evidence_classes": sorted({record["case_snapshot"]["case"]["evidence_class"] for record in delay_records}),
         "delay_refinement_ok": delay_refinement_ok,
         "delay_horizon_span_max": float(
             max((metric.get("autonomy_horizon_span", 0.0) for metric in delay_metrics), default=0.0)
@@ -106,7 +111,7 @@ def evaluate() -> dict:
         records,
         passed,
         metrics,
-        "Nonnormal correction gate completed, including delay semigroup correspondence evidence for the fixed-lag sampled-history path.",
+        "Nonnormal correction gate completed, including qualified delay-surrogate evidence for the fixed-lag sampled-history path.",
     )
 
 

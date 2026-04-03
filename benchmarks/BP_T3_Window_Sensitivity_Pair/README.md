@@ -1,24 +1,40 @@
-# BP T3 Window Sensitivity Pair
+# T3 Window Sensitivity Pair
 
-## Formal System Definition
-A paired transport benchmark built from the same row-stochastic ring flow construction used by `BP_Windowed_Transport_Flow`, but with one moderate-drift positive branch and one fast-drift mixed branch.
+This document is generated from `benchmarks/registry.yaml`. The registry is authoritative; this README is a derived view.
 
-## Parameter Sets
-- `reference`: `fast_drift_mixed`
-- `matched_positive`: moderate-drift positive control
+## Family Contract
+- benchmark_id: `BP_T3_Window_Sensitivity_Pair`
+- branch: `transport`
+- tier: `T3`
+- implementation_status: `complete`
+- evidence_class: `synthetic_counterexample`
+- run_modes: `sample_parameters, run_case`
 
-## Intended Use
-- harden Paper B protocol evidence with a positive-versus-mixed transport comparison
-- show that finite-window coherent advantage can disappear even when the flow remains structured and the singular gap stays plausible
-- make window regrouping sensitivity explicit in the ledger rather than leaving it implicit in narrative text
+## Formal System
+Paired windowed row-stochastic transport flows with matched geometry but different drift persistence across analysis windows.
 
-## Expected Reading
-- `matched_positive` should retain a positive coherent-versus-frozen horizon gain and lower carrier deformation
-- `fast_drift_mixed` should show weaker or zero horizon advantage together with worse adjacent-window and regrouped carrier tracking
-- the regrouped-window diagnostics are evidence only in this slice and are not gate-fatal
+## Claim Links
+- `T3_finite_time_transport`: `docs/theorem_notes/T3_finite_time_transport.tex` via gate `G3`
 
-## Reference Commands
-- `python benchmarks/BP_T3_Window_Sensitivity_Pair/generate.py`
-- `python benchmarks/BP_T3_Window_Sensitivity_Pair/run_reference.py`
-- `python benchmarks/BP_T3_Window_Sensitivity_Pair/run_matched_positive.py`
-- `python benchmarks/BP_T3_Window_Sensitivity_Pair/figure_recipe.py`
+## Primary Observables
+- `singular_gap`
+- `coherent_projector_deformation`
+- `autonomy_horizon`
+- `transportability_metrics`
+
+## Fixtures
+- `synthetic_generator`: runtime-generated benchmark fixture
+
+## Cases
+- `reference`: role=`negative_control`, claim_status=`counterexample`, acceptance_profile=`transport_counterexample`, expected_failure_modes=`carrier_failure, horizon_failure`
+- `matched_positive`: role=`positive_control`, claim_status=`supported`, acceptance_profile=`transport_reference`, expected_failure_modes=`none`
+
+## Ground Truth Notes
+- Both branches use the same ring transport construction and coarse subsystem partition.
+- The positive branch preserves coherent carriers across adjacent windows strongly enough to beat the frozen surrogate.
+- The fast-drift branch keeps plausible transport structure while degrading coherent persistence and regrouping stability.
+- The pair is intended as Paper B protocol evidence, not as a general cocycle theorem.
+
+## Canonical Commands
+- `python -m subsystem_emergence.benchmarking run-case BP_T3_Window_Sensitivity_Pair`
+- `python -m subsystem_emergence.benchmarking sample-parameters BP_T3_Window_Sensitivity_Pair`

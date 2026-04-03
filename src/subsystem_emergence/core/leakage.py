@@ -1,4 +1,9 @@
-"""Leakage observables for autonomous and windowed dynamics."""
+"""Leakage observables for autonomous, reduced, and windowed dynamics.
+
+All leakage scores use operator-norm spillover from a retained carrier into its
+complement. The functions differ only in how the carrier and propagator are
+assembled across autonomous versus finite-window settings.
+"""
 
 from __future__ import annotations
 
@@ -35,7 +40,7 @@ def autonomous_leakage_trajectory(
 
 
 def reduced_block_leakage(reduced_operator: np.ndarray, block_sizes: Sequence[int], time: float) -> float:
-    """Maximal cross-block propagation in the reduced carrier."""
+    """Return the worst cross-block propagation over the declared reduced blocks."""
 
     slices = _block_slices(block_sizes)
     propagated = expm(float(time) * reduced_operator)
@@ -78,7 +83,11 @@ def transport_leakage(
 def transport_leakage_trajectory(
     operators: Sequence[np.ndarray], projectors: Sequence[np.ndarray]
 ) -> list[float]:
-    """Cumulative coherent leakage across windows."""
+    """Cumulative coherent leakage across windows.
+
+    The trajectory is anchored to the initial source carrier and evaluated after
+    each cumulative product against the corresponding target carrier.
+    """
 
     if len(projectors) != len(operators) + 1:
         raise ValueError("expected len(projectors) = len(operators) + 1")
@@ -112,7 +121,7 @@ def reduced_model_forecast_error(
     reduced_operator: np.ndarray,
     times: Iterable[float],
 ) -> float:
-    """Mean propagated mismatch between full and reduced dynamics."""
+    """Mean propagated mismatch between projected full and reduced dynamics."""
 
     projector = basis @ basis.conj().T
     errors = []

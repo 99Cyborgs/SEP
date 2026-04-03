@@ -1,33 +1,40 @@
-# BP Mobility NYC East Corridor
+# Mobility NYC East Corridor
 
-## Formal System Definition
-A bundled real-data mobility benchmark derived from Citi Bike January 2024 weekday trip history on a four-station Manhattan east-side slice. Trips are aggregated into ordered commute windows and converted into row-stochastic station-to-station operators with a documented pseudocount smoother.
+This document is generated from `benchmarks/registry.yaml`. The registry is authoritative; this README is a derived view.
 
-## Data Provenance
-- source page: `https://citibikenyc.com/system-data`
-- source archive: `202401-citibike-tripdata.zip`
-- domain: public bike-share trip history in New York City
-- bundled fixture: derived counts for four Manhattan stations so the benchmark is reproducible without a download step
+## Family Contract
+- benchmark_id: `BP_Mobility_NYC_East_Corridor`
+- branch: `application`
+- tier: `T3/G6`
+- implementation_status: `complete`
+- evidence_class: `application_real_data`
+- run_modes: `sample_parameters, run_case`
 
-## Station Slice
-- `1 Ave & E 68 St`
-- `1 Ave & E 62 St`
-- `E 44 St & Lexington Ave`
-- `E 47 St & Park Ave`
+## Formal System
+Row-stochastic station-to-station mobility operators derived from a bundled Manhattan east-side slice of Citi Bike January 2024 trip history.
 
-## Parameter Set
-- `reference`: weekday commute windows `06:00-09:00`, `09:00-12:00`, `15:00-18:00`, `18:00-21:00`
+## Claim Links
+- `T3_finite_time_transport`: `docs/theorem_notes/T3_finite_time_transport.tex` via gate `G3`
+- `G6_application_identifiability`: `docs/protocols/external_application_evidence.md` via gate `G6`
 
-## Mixed External Application Claim
-- This benchmark is intended as a mixed external case, not a clean positive and not a pure sparse failure.
-- The station slice has enough weekday traffic and stable numerical refinement, but its carrier deformation and coupling remain too large for acceptance under the Hyde Park Paper E criteria.
-- The point of this benchmark is to show bounded cross-dataset evidence rather than another Chicago-only negative.
+## Primary Observables
+- `singular_gap`
+- `coherent_projector_deformation`
+- `block_residual_norm`
+- `leakage_trajectory`
+- `autonomy_horizon`
 
-## Expected Failure Modes
-- `carrier_failure`
-- `coupling_failure`
+## Fixtures
+- `named_flow_fixture`: `benchmarks/BP_Mobility_NYC_East_Corridor/data/citibike_east_corridor_jan2024.json`, source_archive=`202401-citibike-tripdata.zip`
 
-## Reference Commands
-- `python benchmarks/BP_Mobility_NYC_East_Corridor/generate.py`
-- `python benchmarks/BP_Mobility_NYC_East_Corridor/run_reference.py`
-- `python benchmarks/BP_Mobility_NYC_East_Corridor/figure_recipe.py`
+## Cases
+- `reference`: role=`negative_control`, claim_status=`rejected`, acceptance_profile=`expected_failure_control`, expected_failure_modes=`carrier_failure, coupling_failure`
+
+## Ground Truth Notes
+- The benchmark is real-data and intended as a mixed external application case.
+- The case shows stable refinement and substantial traffic, but not carrier stability or weak coupling.
+- The benchmark broadens the external mobility evidence set beyond the Chicago Divvy archive without claiming a second accepted application case.
+
+## Canonical Commands
+- `python -m subsystem_emergence.benchmarking run-case BP_Mobility_NYC_East_Corridor`
+- `python -m subsystem_emergence.benchmarking sample-parameters BP_Mobility_NYC_East_Corridor`

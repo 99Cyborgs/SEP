@@ -1,23 +1,52 @@
-id: BP_Noisy_Metastable_Network
+registry_source: benchmarks/registry.yaml
+family_id: BP_Noisy_Metastable_Network
+title: Noisy Metastable Network
 branch: stochastic
-theorem_tier: T5
+tier: T5
+phase: 4
+description: Noisy metastable network with propagator estimation and bootstrap uncertainty.
 system_class: stochastic_metastable
 state_dimension: 4
 formal_system: Four-state stochastic network with two metastable sets and low-probability cross-cluster transitions.
-parameter_ranges:
-  trajectories: [200, 2000]
-  steps: [8, 20]
-  slow_count: [2, 2]
-ground_truth_notes:
-  - Metastable sets are {0,1} and {2,3}.
-  - Benchmark supports both exact propagator diagnostics and Monte Carlo estimates.
+implementation_status: complete
+evidence_class: synthetic_stochastic
+claim_refs:
+- T5_stochastic
+observables:
+- spectral_gap
+- block_residual_norm
+- ensemble_averaged_leakage
+- leakage_variance
+- autonomy_horizon
+fixtures: []
 expected_failure_modes:
-  - gap_failure
-  - horizon_failure
-  - numerical_artifact_failure
-primary_observables:
+- gap_failure
+- horizon_failure
+- numerical_artifact_failure
+cases:
+- family_id: BP_Noisy_Metastable_Network
+  case_id: reference
+  title: Bootstrap-stable stochastic reference
+  parameter_id: reference
+  base_parameter_id: reference
+  role: reference
+  tier: T5
+  claim_status: supported
+  implementation_status: complete
+  evidence_class: synthetic_stochastic
+  observables:
   - spectral_gap
   - block_residual_norm
   - ensemble_averaged_leakage
   - leakage_variance
   - autonomy_horizon
+  fixtures: []
+  acceptance_profile: stochastic_reference
+  expected_failure_modes: []
+  run_modes:
+  - reference
+  tags:
+  - stochastic
+  - positive
+  overrides: {}
+  notes: []

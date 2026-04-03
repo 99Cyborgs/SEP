@@ -1,28 +1,63 @@
-id: BP_Mobility_Downtown_Routing_Instability
+registry_source: benchmarks/registry.yaml
+family_id: BP_Mobility_Downtown_Routing_Instability
+title: Mobility Downtown Routing Instability
 branch: application
-theorem_tier: T3/G6
+tier: T3/G6
+phase: 5
+description: Bundled real-data downtown mobility benchmark selected for routing-instability under coarse graining.
 system_class: real_world_windowed_mobility
 state_dimension: 4
-formal_system: Row-stochastic station-to-station mobility operators derived from a bundled downtown Chicago slice of Divvy January 2024 trip history.
-parameter_sets:
-  reference:
-    case_label: downtown_commute_routing_instability
-    window_labels: ["06:00-09:00", "09:00-12:00", "15:00-18:00", "18:00-21:00"]
-    total_trips_min: 300
-data_provenance:
+formal_system: Row-stochastic station-to-station mobility operators derived from a bundled downtown Chicago slice of Divvy
+  January 2024 trip history.
+implementation_status: complete
+evidence_class: application_real_data
+claim_refs:
+- T3_finite_time_transport
+- G6_application_identifiability
+observables:
+- singular_gap
+- coherent_projector_deformation
+- block_residual_norm
+- leakage_trajectory
+- autonomy_horizon
+fixtures:
+- kind: named_flow_fixture
+  path: benchmarks/BP_Mobility_Downtown_Routing_Instability/data/divvy_downtown_commute_jan2024.json
   source_page: https://divvybikes.com/system-data
   source_archive: 202401-divvy-tripdata.zip
-  derivation_rule: Aggregate weekday trips whose start and end station names are both in the selected downtown station set.
-ground_truth_notes:
-  - The benchmark is real-data and intentionally negative.
-  - The failure mode is route-instability under coarse graining rather than low sample count.
-  - The benchmark is meant to broaden the Paper E failure atlas with a second external rejection case.
 expected_failure_modes:
-  - carrier_failure
-  - coupling_failure
-primary_observables:
+- carrier_failure
+- coupling_failure
+cases:
+- family_id: BP_Mobility_Downtown_Routing_Instability
+  case_id: reference
+  title: Downtown routing-instability slice
+  parameter_id: reference
+  base_parameter_id: reference
+  role: negative_control
+  tier: T3/G6
+  claim_status: rejected
+  implementation_status: complete
+  evidence_class: application_real_data
+  observables:
   - singular_gap
   - coherent_projector_deformation
   - block_residual_norm
   - leakage_trajectory
   - autonomy_horizon
+  fixtures:
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Mobility_Downtown_Routing_Instability/data/divvy_downtown_commute_jan2024.json
+    source_page: https://divvybikes.com/system-data
+    source_archive: 202401-divvy-tripdata.zip
+  acceptance_profile: expected_failure_control
+  expected_failure_modes:
+  - carrier_failure
+  - coupling_failure
+  run_modes:
+  - reference
+  tags:
+  - mobility
+  - negative
+  overrides: {}
+  notes: []

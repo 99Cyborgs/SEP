@@ -1,38 +1,38 @@
-# BP Delay Coupled Pair
+# Delay Coupled Pair
 
-## Formal System Definition
-A true fixed-lag linear delay-differential system for a two-module pair,
-\[
-x'(t) = A_0 x(t) + A_\tau x(t-\tau),
-\]
-analyzed through a sampled history propagator on a nodal history grid.
+This document is generated from `benchmarks/registry.yaml`. The registry is authoritative; this README is a derived view.
 
-## Parameter Ranges
-- delay: `0.2` to `0.8`
-- self decay: `0.7` to `1.1`
-- shear coupling: `1.5` to `2.6`
-- delayed self feedback: `1.0` to `1.6`
-- delayed cross feedback: `0.15` to `0.4`
+## Family Contract
+- benchmark_id: `BP_Delay_Coupled_Pair`
+- branch: `nonnormal`
+- tier: `T2/T3`
+- implementation_status: `surrogate`
+- evidence_class: `surrogate_delay`
+- run_modes: `sample_parameters, run_case`
+
+## Formal System
+x'(t) = A0 x(t) + A_tau x(t - tau) with sampled history-propagator diagnostics.
+
+## Claim Links
+- `T2_nonnormal`: `docs/theorem_notes/T2_nonnormal.tex` via gate `G2`
+- `T3_finite_time_transport`: `docs/theorem_notes/T3_finite_time_transport.tex` via gate `G3`
+
+## Primary Observables
+- `transient_amplification_score`
+- `block_residual_norm`
+- `leakage_trajectory`
+- `autonomy_horizon`
+
+## Fixtures
+- `synthetic_generator`: runtime-generated benchmark fixture
+
+## Cases
+- `reference`: role=`reference`, claim_status=`qualified`, acceptance_profile=`delay_surrogate_reference`, expected_failure_modes=`none`
 
 ## Ground Truth Notes
-- The two slow modules are planted.
-- The state is the physical two-module state; the higher-dimensional history operator exists only inside the diagnostic layer.
-- Slow carriers are extracted from the sampled history propagator rather than from a lifted surrogate matrix.
-- The benchmark now carries a required refinement ladder, so it should be cited as discretization-backed evidence rather than as a closed delay-semigroup theorem.
+- Two-module partition is planted.
+- The physical state stays two-dimensional; the history snapshot space is diagnostic only.
 
-## Theorem Tier
-`T2/T3`
-
-## Expected Failure Modes
-- `transient_growth_failure`
-- `horizon_failure`
-
-## Completion Contract
-- Integrate the fixed-lag DDE with a fixed-step method of steps.
-- Build a one-window history propagator from nodal history basis states.
-- Revalidate `L3`, transient-growth, and refinement-ladder diagnostics on the true delayed dynamics without changing the public benchmark ID.
-
-## Reference Commands
-- `python benchmarks/BP_Delay_Coupled_Pair/generate.py`
-- `python benchmarks/BP_Delay_Coupled_Pair/run_reference.py`
-- `python benchmarks/BP_Delay_Coupled_Pair/figure_recipe.py`
+## Canonical Commands
+- `python -m subsystem_emergence.benchmarking run-case BP_Delay_Coupled_Pair`
+- `python -m subsystem_emergence.benchmarking sample-parameters BP_Delay_Coupled_Pair`

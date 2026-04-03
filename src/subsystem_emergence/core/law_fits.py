@@ -1,4 +1,8 @@
-"""Law fitting for L1, L2, and L3 leakage models."""
+"""Deterministic least-squares fitting for the L1/L2/L3 leakage laws.
+
+The fitting path is intentionally lightweight and reproducible so benchmark
+artifacts can be regenerated bit-for-bit from the same samples.
+"""
 
 from __future__ import annotations
 
@@ -53,7 +57,11 @@ class LawSelectionSummary:
 
 
 def _split_indices(size: int) -> tuple[np.ndarray, np.ndarray]:
+    """Return deterministic train/test indices for small benchmark sample sets."""
+
     if size <= 3:
+        # Tiny benchmark sweeps do not support a meaningful hold-out split; reuse
+        # the full sample on both sides rather than producing empty design blocks.
         indices = np.arange(size)
         return indices, indices
     rng = np.random.default_rng(0)
@@ -75,6 +83,8 @@ def _fit_model(
     design: np.ndarray,
     leakage: np.ndarray,
 ) -> FitResult:
+    """Fit one candidate law and report held-out and residual diagnostics."""
+
     train_index, test_index = _split_indices(design.shape[0])
     train_design = design[train_index]
     train_leakage = leakage[train_index]
@@ -155,7 +165,11 @@ def fit_all_laws(
     leakage: Iterable[float],
     gamma: Iterable[float] | None = None,
 ) -> dict[str, FitResult]:
-    """Fit and compare all supported leakage laws."""
+    """Fit all supported laws under a shared sample set and selection rule.
+
+    When `gamma` is omitted, L3 falls back to `gamma = 1`, making it comparable
+    to the other laws without requiring branch-specific transient diagnostics.
+    """
 
     leakage_array = _as_array(leakage)
     gamma_array = _as_array(gamma if gamma is not None else np.ones_like(leakage_array))
@@ -170,7 +184,7 @@ def fit_all_laws(
 
 
 def law_selection_summary(results: dict[str, FitResult]) -> LawSelectionSummary:
-    """Return the held-out ranking across laws."""
+    """Rank candidate laws by held-out error, then in-sample error as a tiebreak."""
 
     ranked = sorted(results.values(), key=lambda result: (result.test_rmse, result.train_rmse))
     l1_rmse = results["L1"].test_rmse

@@ -1,23 +1,39 @@
-# BP T5 Stochastic Stress Pair
+# T5 Stochastic Stress Pair
 
-## Formal System Definition
-A paired stochastic benchmark using the same four-state metastable transition structure as `BP_Noisy_Metastable_Network`, but comparing an adequately sampled branch against a sample-stressed branch.
+This document is generated from `benchmarks/registry.yaml`. The registry is authoritative; this README is a derived view.
 
-## Parameter Sets
-- `reference`: `sample_stress`
-- `matched_metastable`: accepted stochastic control branch
+## Family Contract
+- benchmark_id: `BP_T5_Stochastic_Stress_Pair`
+- branch: `stochastic`
+- tier: `T5`
+- implementation_status: `complete`
+- evidence_class: `synthetic_counterexample`
+- run_modes: `sample_parameters, run_case`
 
-## Intended Use
-- harden Paper D with explicit uncertainty-limited failure geometry
-- isolate sample stress as the source of wider bootstrap bands and weaker confidence-bounded horizons
-- keep the underlying metastable model fixed so the comparison stays attributable
+## Formal System
+Paired four-state metastable networks with identical transition structure and different Monte Carlo sample counts.
 
-## Expected Reading
-- `matched_metastable` should keep a narrow bootstrap band and a materially positive confidence-bounded horizon
-- `sample_stress` should widen the bootstrap band, worsen estimation error, and reduce the confidence-bounded horizon
+## Claim Links
+- `T5_stochastic`: `docs/theorem_notes/T5_stochastic.tex` via gate `G5`
 
-## Reference Commands
-- `python benchmarks/BP_T5_Stochastic_Stress_Pair/generate.py`
-- `python benchmarks/BP_T5_Stochastic_Stress_Pair/run_reference.py`
-- `python benchmarks/BP_T5_Stochastic_Stress_Pair/run_matched_metastable.py`
-- `python benchmarks/BP_T5_Stochastic_Stress_Pair/figure_recipe.py`
+## Primary Observables
+- `ensemble_averaged_leakage`
+- `leakage_variance`
+- `autonomy_horizon`
+- `stochastic_uncertainty_metrics`
+
+## Fixtures
+- `synthetic_generator`: runtime-generated benchmark fixture
+
+## Cases
+- `reference`: role=`negative_control`, claim_status=`counterexample`, acceptance_profile=`stochastic_stress_counterexample`, expected_failure_modes=`horizon_failure, numerical_artifact_failure`
+- `matched_metastable`: role=`positive_control`, claim_status=`supported`, acceptance_profile=`stochastic_reference`, expected_failure_modes=`none`
+
+## Ground Truth Notes
+- Both branches keep the same metastable network and source-state partition.
+- The matched branch uses enough trajectories to keep bootstrap width and confidence-bounded horizon stable.
+- The sample-stress branch widens uncertainty and degrades the confidence-bounded horizon without introducing a new stochastic model class.
+
+## Canonical Commands
+- `python -m subsystem_emergence.benchmarking run-case BP_T5_Stochastic_Stress_Pair`
+- `python -m subsystem_emergence.benchmarking sample-parameters BP_T5_Stochastic_Stress_Pair`

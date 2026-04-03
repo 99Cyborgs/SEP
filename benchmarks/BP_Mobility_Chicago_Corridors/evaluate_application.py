@@ -1,4 +1,4 @@
-"""Run the fixed Paper E application evaluation sweep."""
+"""Run the fixed mobility application validation matrix."""
 
 from __future__ import annotations
 

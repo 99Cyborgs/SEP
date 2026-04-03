@@ -1,5 +1,6 @@
 {
   "benchmark_id": "BP_Noisy_Metastable_Network",
+  "case_id": "reference",
   "branch": "stochastic",
   "theorem_tier": "T5",
   "parameter_id": "reference",
@@ -30,9 +31,9 @@
     ]
   },
   "metadata": {
-    "code_hash": null,
+    "code_hash": "4adc2af",
     "solver": "scipy/numpy reference routines",
-    "runtime_seconds": 0.10027870000340044,
+    "runtime_seconds": 0.10597039999993285,
     "source_of_truth": {
       "embedded_zip_found": false,
       "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."

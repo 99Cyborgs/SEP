@@ -1,9 +1,17 @@
 {
-  "label": "gap_failure",
-  "triggered": true,
-  "metric": 0.026166628171083138,
-  "threshold": 0.03,
-  "direction": "lt",
-  "message": "Slow-mode separation is below the admissible gate threshold.",
-  "archive_path": "failures\\G1_linear_validity\\BP_Support_Portal_Funnel_negative_detour_seed0_gap_failure.json"
+  "benchmark_id": "BP_Support_Portal_Funnel",
+  "case_id": "negative_detour",
+  "parameter_id": "negative_detour",
+  "seed": 0,
+  "branch": "application",
+  "theorem_tier": "T3/G6",
+  "failure": {
+    "label": "gap_failure",
+    "triggered": true,
+    "metric": 0.026166628171083138,
+    "threshold": 0.03,
+    "direction": "lt",
+    "message": "Slow-mode separation is below the admissible gate threshold.",
+    "archive_path": "failures\\G1_linear_validity\\BP_Support_Portal_Funnel_negative_detour_seed0_gap_failure.json"
+  }
 }

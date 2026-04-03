@@ -1,4 +1,8 @@
-"""Shared validation helpers."""
+"""Shared validation I/O for evidence records and gate artifacts.
+
+This module normalizes repository-relative paths and gate report serialization.
+It does not evaluate any gate logic itself.
+"""
 
 from __future__ import annotations
 
@@ -6,20 +10,18 @@ import json
 from pathlib import Path
 from typing import Iterable
 
+from subsystem_emergence.evidence import load_evidence_records
+
 from .types import GateResult
-from subsystem_emergence.io.ledgers import repo_relative_path
+from subsystem_emergence.io.paths import repo_relative_path, validation_gates_root
 
 
-def load_ledgers(path: str | Path) -> list[dict]:
-    """Load all per-run JSON ledgers below a directory tree."""
+def load_records(path: str | Path) -> list[dict]:
+    """Load canonical evidence records from either a repo root or an evidence root."""
 
-    root = Path(path)
-    records: list[dict] = []
-    for item in sorted(root.rglob("*.json")):
-        if item.name == "ledger.jsonl":
-            continue
-        records.append(json.loads(item.read_text()))
-    return records
+    # Callers pass both repository roots and `<repo>/results/evidence`; normalize
+    # both forms to the repository root expected by `load_evidence_records`.
+    return load_evidence_records(Path(path).resolve().parents[1] if Path(path).name == "evidence" else path)
 
 
 def load_gate_criteria(path: str | Path) -> dict:
@@ -28,13 +30,13 @@ def load_gate_criteria(path: str | Path) -> dict:
     return json.loads(Path(path).read_text())
 
 
-def filter_ledgers(
+def filter_records(
     records: Iterable[dict],
     *,
     benchmark_ids: set[str] | None = None,
     branch: str | None = None,
 ) -> list[dict]:
-    """Filter ledgers by benchmark id and branch."""
+    """Filter canonical evidence records by benchmark id and branch."""
 
     filtered: list[dict] = []
     for record in records:
@@ -47,12 +49,16 @@ def filter_ledgers(
 
 
 def write_gate_artifacts(root: Path, result: GateResult) -> tuple[Path, Path]:
-    """Write JSON and Markdown artifacts for a gate result."""
+    """Write JSON and Markdown artifacts for a gate result.
 
-    output_dir = root / "results" / "gate_reports" / result.gate
+    The function mutates ``result`` with repository-relative artifact paths so
+    downstream ledgers can serialize the same object without re-resolving paths.
+    """
+
+    output_dir = validation_gates_root(root) / result.gate
     output_dir.mkdir(parents=True, exist_ok=True)
-    json_path = output_dir / f"{result.gate.lower()}_report.json"
-    md_path = output_dir / f"{result.gate.lower()}_report.md"
+    json_path = output_dir / "gate_report.json"
+    md_path = output_dir / "gate_report.md"
     result.report_json = repo_relative_path(json_path, root)
     result.report_markdown = repo_relative_path(md_path, root)
     json_path.write_text(json.dumps(result.to_dict(), indent=2))
@@ -78,3 +84,20 @@ def write_gate_artifacts(root: Path, result: GateResult) -> tuple[Path, Path]:
         )
     )
     return json_path, md_path
+
+
+def load_ledgers(path: str | Path) -> list[dict]:
+    """Deprecated alias for :func:`load_records`."""
+
+    return load_records(path)
+
+
+def filter_ledgers(
+    records: Iterable[dict],
+    *,
+    benchmark_ids: set[str] | None = None,
+    branch: str | None = None,
+) -> list[dict]:
+    """Deprecated alias for :func:`filter_records`."""
+
+    return filter_records(records, benchmark_ids=benchmark_ids, branch=branch)

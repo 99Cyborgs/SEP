@@ -3,9 +3,10 @@ name: CI
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
-  test:
+  metadata:
     runs-on: ubuntu-latest
     env:
       PYTHONDONTWRITEBYTECODE: "1"
@@ -16,9 +17,42 @@ jobs:
           python-version: "3.11"
       - name: Install
         run: python -m pip install -e .[dev]
-      - name: Structural Checks
+      - name: Metadata and Schema Checks
         run: python validation/ci_checks.py
+      - name: Registry Contract Tests
+        run: pytest tests/test_registry_contracts.py tests/test_repository_hygiene.py tests/test_benchmark_generation.py
+      - name: Archive Boundary Checks
+        run: pytest tests/test_archive_write_invariant.py tests/test_archive_bypass_detection.py tests/test_mutation_root_ordering.py tests/test_safe_execution.py tests/test_archive_reports.py -q
       - name: Build Distributions
         run: python -m build --sdist --wheel
-      - name: Test Suite
+
+  smoke:
+    needs: metadata
+    runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: python -m pip install -e .[dev]
+      - name: Smoke Validation
+        run: pytest tests/test_smoke_linear.py tests/test_evidence_engine.py tests/test_gate_execution.py tests/test_observables.py tests/test_projectors.py
+
+  regeneration:
+    if: github.event_name == 'workflow_dispatch'
+    needs: metadata
+    runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: python -m pip install -e .[dev]
+      - name: Full Validation Suite
         run: pytest

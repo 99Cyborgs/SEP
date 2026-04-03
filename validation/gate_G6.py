@@ -57,10 +57,10 @@ def _evaluate_required_application_cases(application_records: list[dict], requir
     return evaluated_cases, missing_cases
 
 
-def evaluate() -> dict:
-    root, criteria, records = gate_context("G6")
+def evaluate(root: Path | None = None) -> dict:
+    root, criteria, records = gate_context("G6", root)
     if not records:
-        return finalize_gate(root, "G6", criteria, records, False, {}, "No ledgers were found for identifiability checks.")
+        return finalize_gate(root, "G6", criteria, records, False, {}, "No evidence records were found for identifiability checks.")
     primary_benchmark_ids = set(criteria.get("primary_benchmark_ids", criteria["benchmark_ids"]))
     application_benchmark_ids = set(criteria.get("application_benchmark_ids", []))
     primary_thresholds = criteria.get("primary_identifiability_thresholds", {})

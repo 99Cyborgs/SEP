@@ -1,9 +1,17 @@
 {
-  "label": "coupling_failure",
-  "triggered": true,
-  "metric": 0.8089960229234174,
-  "threshold": 0.35,
-  "direction": "gt",
-  "message": "Reduced slow dynamics is too strongly coupled for the claimed regime.",
-  "archive_path": "failures\\G1_linear_validity\\BP_Mobility_Chicago_Corridors_weekday_pseudocount_loose_seed0_coupling_failure.json"
+  "benchmark_id": "BP_Mobility_Chicago_Corridors",
+  "case_id": "weekday_pseudocount_loose",
+  "parameter_id": "weekday_pseudocount_loose",
+  "seed": 0,
+  "branch": "application",
+  "theorem_tier": "T3/G6",
+  "failure": {
+    "label": "coupling_failure",
+    "triggered": true,
+    "metric": 0.8089960229234174,
+    "threshold": 0.35,
+    "direction": "gt",
+    "message": "Reduced slow dynamics is too strongly coupled for the claimed regime.",
+    "archive_path": "failures\\G1_linear_validity\\BP_Mobility_Chicago_Corridors_weekday_pseudocount_loose_seed0_coupling_failure.json"
+  }
 }

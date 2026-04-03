@@ -1,7 +1,9 @@
 # Repository Hygiene
 
 ## Committed Versus Regenerated
-- commit canonical benchmark specs, protocol docs, gate criteria, reference ledgers, and published figure manifests
+- commit canonical benchmark specs, protocol docs, gate criteria, and published archive manifests
+- treat `results/evidence/`, `results/indexes/`, and `results/validation_gates/` as canonical generated outputs that can be regenerated for validation
+- treat `results/ledgers/` as opt-in compatibility-only historical snapshots, not the primary evidence layer
 - do not treat `__pycache__/`, `.pytest_cache/`, or scratch reruns under `tmp/` as durable evidence
 - do not ship raw upstream zip archives inside the release snapshot; keep only derived fixtures plus source-archive names in metadata
 - regenerate transient diagnostics locally instead of checking them in as required content
@@ -11,9 +13,10 @@
 - disposable reruns and exploratory outputs belong under `tmp/` or another ignored scratch location
 
 ## Git Working Tree Recovery
-This workspace does not currently expose a discoverable `.git` directory above the project root. That means repository history cannot be reconstructed from local files alone.
+This repository is expected to be used inside a normal Git working tree with the project root as the authoritative checkout.
 
-If Git tracking needs to be restored:
-1. recover the authoritative upstream or original working tree containing `.git`
-2. re-home this project directory into that working tree rather than running `git init` here
-3. verify that `git status` resolves from the intended root and that `.gitignore` suppresses cache-only noise
+If the working tree becomes dirty during exploratory runs:
+1. prefer `--root tmp/<run_name>` for stable scratch benchmark executions, or omit `--root` to let the runtime auto-create an ignored scratch root
+2. remove transient caches and scratch outputs before concluding hygiene is broken
+3. refresh tracked archive snapshots only through `python -m subsystem_emergence.reports.archive.refresh --promote --force`
+4. emit compatibility ledgers only when intentionally generating legacy shims via `--emit-compatibility-ledgers`

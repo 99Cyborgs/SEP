@@ -1,24 +1,53 @@
-id: BP_Random_Gap_Ensemble
+registry_source: benchmarks/registry.yaml
+family_id: BP_Random_Gap_Ensemble
+title: Random Gap Ensemble
 branch: linear
-theorem_tier: T1/T2
+tier: T1/T2
+phase: 1
+description: Random matrix ensembles with matched spectral gaps and normal/nonnormal branches.
 system_class: random_linear_ensemble
 state_dimension: 4
 formal_system: Ensemble of linear matrices with matched slow_count and deliberately varied nonnormality.
-parameter_ranges:
-  gap: [0.05, 0.30]
-  rho: [0.01, 0.12]
-  ensemble_size: [8, 64]
-  slow_count: [2, 2]
-ground_truth_notes:
-  - Slow subsystem count is planted at two.
-  - Normal and nonnormal branches are both represented.
+implementation_status: complete
+evidence_class: synthetic_ensemble
+claim_refs:
+- T1_linear_autonomous
+- T2_nonnormal
+observables:
+- spectral_gap
+- projector_deformation
+- block_residual_norm
+- transient_amplification_score
+- leakage_trajectory
+fixtures: []
 expected_failure_modes:
-  - gap_failure
-  - transient_growth_failure
-  - horizon_failure
-primary_observables:
+- gap_failure
+- transient_growth_failure
+- horizon_failure
+cases:
+- family_id: BP_Random_Gap_Ensemble
+  case_id: reference
+  title: Mixed normal-nonnormal ensemble reference
+  parameter_id: reference
+  base_parameter_id: reference
+  role: reference
+  tier: T1/T2
+  claim_status: supported
+  implementation_status: complete
+  evidence_class: synthetic_ensemble
+  observables:
   - spectral_gap
   - projector_deformation
   - block_residual_norm
   - transient_amplification_score
   - leakage_trajectory
+  fixtures: []
+  acceptance_profile: linear_reference_relaxed
+  expected_failure_modes: []
+  run_modes:
+  - reference
+  tags:
+  - ensemble
+  - diagnostic
+  overrides: {}
+  notes: []

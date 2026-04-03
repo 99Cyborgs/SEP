@@ -1,0 +1,15 @@
+{
+  "summary_kind": "paper_e_archive_redirect",
+  "canonical_summary": "results/indexes/application_validation/BP_Mobility_Chicago_Corridors_validation_matrix.json",
+  "case_manifests": {
+    "accepted_weekday_reference": "results/evidence/BP_Mobility_Chicago_Corridors/reference/seed_0/run_manifest.json",
+    "rejected_weekend_negative": "results/evidence/BP_Mobility_Chicago_Corridors/negative_weekend/seed_0/run_manifest.json",
+    "external_negative_case": "results/evidence/BP_Mobility_Downtown_Routing_Instability/reference/seed_0/run_manifest.json",
+    "external_mixed_case": "results/evidence/BP_Mobility_NYC_East_Corridor/reference/seed_0/run_manifest.json"
+  },
+  "notes": [
+    "This archived Paper E summary is no longer a primary application output.",
+    "Use the canonical mobility validation matrix under results/indexes/application_validation/ for acceptance decisions and aggregate metrics.",
+    "Use the listed run manifests for evidence-bundle level drill-down instead of raw ledgers."
+  ]
+}

@@ -23,13 +23,11 @@ MOBILITY_FIXTURE_PATHS = {
 
 MOBILITY_EVALUATION_CASES: tuple[dict[str, Any], ...] = (
     {
-        "case_id": "weekday_reference",
+        "case_id": "reference",
         "base_parameter_id": "reference",
         "profile": "accepted",
         "description": "Baseline weekday commute slice on the full four-station Hyde Park corridor.",
-        "overrides": {
-            "parameter_id": "weekday_reference",
-        },
+        "overrides": {},
     },
     {
         "case_id": "weekday_pseudocount_tight",
@@ -83,14 +81,11 @@ MOBILITY_EVALUATION_CASES: tuple[dict[str, Any], ...] = (
         },
     },
     {
-        "case_id": "weekend_negative",
+        "case_id": "negative_weekend",
         "base_parameter_id": "negative_weekend",
         "profile": "failure",
         "description": "Sparse weekend-night slice kept as the instructive negative application case.",
-        "overrides": {
-            "parameter_id": "weekend_negative",
-            "case_label": "weekend_night_negative",
-        },
+        "overrides": {},
     },
 )
 
@@ -153,6 +148,6 @@ def build_windowed_mobility_operators(
 
 
 def mobility_evaluation_cases() -> list[dict[str, Any]]:
-    """Return the fixed Paper E robustness sweep cases."""
+    """Return the fixed mobility validation matrix cases."""
 
     return [dict(case) for case in MOBILITY_EVALUATION_CASES]

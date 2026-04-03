@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SEP Run Artifact Bundle Manifest",
+  "type": "object",
+  "required": [
+    "run_id",
+    "persistence_model",
+    "benchmark_id",
+    "case_id",
+    "parameter_id",
+    "seed",
+    "branch",
+    "theorem_tier",
+    "acceptance_profile",
+    "claim_status",
+    "implementation_status",
+    "evidence_class",
+    "decision_status",
+    "artifact_paths"
+  ],
+  "properties": {
+    "run_id": { "type": "string" },
+    "persistence_model": { "type": "string", "const": "evidence_bundle" },
+    "benchmark_id": { "type": "string" },
+    "case_id": { "type": "string" },
+    "parameter_id": { "type": "string" },
+    "seed": { "type": "integer" },
+    "branch": { "type": "string" },
+    "theorem_tier": { "type": "string" },
+    "acceptance_profile": { "type": "string" },
+    "claim_status": { "type": "string" },
+    "implementation_status": { "type": "string" },
+    "evidence_class": { "type": "string" },
+    "decision_status": { "type": "string" },
+    "claim_refs": { "type": "array", "items": { "type": "string" } },
+    "failure_labels": { "type": "array", "items": { "type": "string" } },
+    "compatibility_artifacts": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "artifact_paths": {
+      "type": "object",
+      "required": [
+        "environment_fingerprint",
+        "solver_config",
+        "seed_record",
+        "benchmark_case_snapshot",
+        "observables_summary",
+        "residual_diagnostics",
+        "gate_report",
+        "acceptance_decision",
+        "regression_check"
+      ],
+      "additionalProperties": { "type": "string" }
+    }
+  },
+  "additionalProperties": true
+}

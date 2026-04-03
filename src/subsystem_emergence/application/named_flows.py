@@ -8,7 +8,7 @@ from typing import Any, Mapping
 
 import numpy as np
 
-from subsystem_emergence.io.ledgers import repository_root
+from subsystem_emergence.io.paths import repository_root
 
 
 def named_flow_fixture(

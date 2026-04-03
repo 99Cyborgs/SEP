@@ -1,5 +1,6 @@
 {
   "benchmark_id": "BP_Support_Portal_Funnel",
+  "case_id": "negative_detour",
   "branch": "application",
   "theorem_tier": "T3/G6",
   "parameter_id": "negative_detour",
@@ -50,9 +51,9 @@
     ]
   },
   "metadata": {
-    "code_hash": null,
+    "code_hash": "4adc2af",
     "solver": "scipy/numpy reference routines",
-    "runtime_seconds": 0.04006479999952717,
+    "runtime_seconds": 0.04172169999947073,
     "source_of_truth": {
       "embedded_zip_found": false,
       "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."

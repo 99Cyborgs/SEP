@@ -1,5 +1,6 @@
 {
   "benchmark_id": "BP_Linear_Two_Block",
+  "case_id": "reference",
   "branch": "linear",
   "theorem_tier": "T1",
   "parameter_id": "reference",
@@ -43,9 +44,9 @@
     ]
   },
   "metadata": {
-    "code_hash": null,
+    "code_hash": "4adc2af",
     "solver": "scipy/numpy reference routines",
-    "runtime_seconds": 0.17991640000036568,
+    "runtime_seconds": 0.16701190000094357,
     "source_of_truth": {
       "embedded_zip_found": false,
       "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SEP Acceptance Profiles",
+  "type": "object",
+  "required": ["failure_taxonomy_profiles", "acceptance_profiles"],
+  "properties": {
+    "failure_taxonomy_profiles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": { "type": "number" }
+      }
+    },
+    "acceptance_profiles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["decision_mode", "metric_rules"],
+        "properties": {
+          "decision_mode": { "type": "string" },
+          "metric_rules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["metric_id", "path", "operator", "threshold"],
+              "properties": {
+                "metric_id": { "type": "string" },
+                "path": { "type": "string" },
+                "operator": { "type": "string" },
+                "threshold": { "type": ["number", "integer", "string"] }
+              },
+              "additionalProperties": true
+            }
+          },
+          "blocking_failure_labels": { "type": "array", "items": { "type": "string" } },
+          "advisory_failure_labels": { "type": "array", "items": { "type": "string" } },
+          "notes": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": true
+      }
+    }
+  }
+}

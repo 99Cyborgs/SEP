@@ -1,29 +1,78 @@
-id: BP_T3_Window_Sensitivity_Pair
+registry_source: benchmarks/registry.yaml
+family_id: BP_T3_Window_Sensitivity_Pair
+title: T3 Window Sensitivity Pair
 branch: transport
-theorem_tier: T3
+tier: T3
+phase: 2
+description: Paired positive-versus-mixed transport family exposing window dependence and coherent carrier failure geometry.
 system_class: finite_time_transport_window_sensitivity_pair
 state_dimension: 24
-formal_system: Paired windowed row-stochastic transport flows with matched geometry but different drift persistence across analysis windows.
-parameter_sets:
-  reference:
-    case_label: fast_drift_mixed
-    phase_increment: 2.4
-    coherent_strength: 2.0
-  matched_positive:
-    case_label: moderate_drift_positive
-    phase_increment: 0.9
-    coherent_strength: 2.4
-ground_truth_notes:
-  - Both branches use the same ring transport construction and coarse subsystem partition.
-  - The positive branch preserves coherent carriers across adjacent windows strongly enough to beat the frozen surrogate.
-  - The fast-drift branch keeps plausible transport structure while degrading coherent persistence and regrouping stability.
-  - The pair is intended as Paper B protocol evidence, not as a general cocycle theorem.
+formal_system: Paired windowed row-stochastic transport flows with matched geometry but different drift persistence across
+  analysis windows.
+implementation_status: complete
+evidence_class: synthetic_counterexample
+claim_refs:
+- T3_finite_time_transport
+observables:
+- singular_gap
+- coherent_projector_deformation
+- autonomy_horizon
+- transportability_metrics
+fixtures: []
 expected_failure_modes:
-  - horizon_failure
-  - carrier_failure
-  - window_selection_failure
-primary_observables:
+- horizon_failure
+- carrier_failure
+- window_selection_failure
+cases:
+- family_id: BP_T3_Window_Sensitivity_Pair
+  case_id: reference
+  title: Fast-drift mixed branch
+  parameter_id: reference
+  base_parameter_id: reference
+  role: negative_control
+  tier: T3
+  claim_status: counterexample
+  implementation_status: complete
+  evidence_class: synthetic_counterexample
+  observables:
   - singular_gap
   - coherent_projector_deformation
   - autonomy_horizon
   - transportability_metrics
+  fixtures: []
+  acceptance_profile: transport_counterexample
+  expected_failure_modes:
+  - carrier_failure
+  - horizon_failure
+  run_modes:
+  - reference
+  tags:
+  - negative
+  - window-sensitivity
+  overrides: {}
+  notes: []
+- family_id: BP_T3_Window_Sensitivity_Pair
+  case_id: matched_positive
+  title: Moderate-drift positive control
+  parameter_id: matched_positive
+  base_parameter_id: matched_positive
+  role: positive_control
+  tier: T3
+  claim_status: supported
+  implementation_status: complete
+  evidence_class: synthetic_transport
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - autonomy_horizon
+  - transportability_metrics
+  fixtures: []
+  acceptance_profile: transport_reference
+  expected_failure_modes: []
+  run_modes:
+  - reference
+  tags:
+  - positive
+  - control
+  overrides: {}
+  notes: []

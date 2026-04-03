@@ -48,8 +48,8 @@ def test_application_evaluation_cases_cover_positive_and_negative_profiles() -> 
     cases = mobility_evaluation_cases()
     case_ids = {case["case_id"] for case in cases}
     profiles = {case["profile"] for case in cases}
-    assert "weekday_reference" in case_ids
-    assert "weekend_negative" in case_ids
+    assert "reference" in case_ids
+    assert "negative_weekend" in case_ids
     assert profiles == {"accepted", "failure"}
 
 

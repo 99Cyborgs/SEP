@@ -1,181 +1,1584 @@
+schema_version: 2
+registry_role: canonical_benchmark_registry
+claims:
+- claim_id: T1_linear_autonomous
+  title: Spectrally isolated slow carriers support weakly coupled reduced autonomous dynamics.
+  claim_document_path: docs/theorem_notes/T1_linear_autonomous.tex
+  gate: G1
+  observables:
+  - spectral_gap
+  - projector_deformation
+  - block_residual_norm
+  - autonomy_horizon
+  tags:
+  - linear
+  - autonomous
+  - theorem
+- claim_id: T2_nonnormal
+  title: Nonnormal geometry can dominate benchmark validity even when eigenvalue gaps appear benign.
+  claim_document_path: docs/theorem_notes/T2_nonnormal.tex
+  gate: G2
+  observables:
+  - spectral_gap
+  - transient_amplification_score
+  - pseudospectral_proxy
+  - numerical_refinement_metrics
+  tags:
+  - nonnormal
+  - transient-growth
+  - theorem
+- claim_id: T3_finite_time_transport
+  title: Finite-time coherent transport yields benchmarkable subsystem evidence through windowed operators.
+  claim_document_path: docs/theorem_notes/T3_finite_time_transport.tex
+  gate: G3
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - autonomy_horizon
+  - leakage_trajectory
+  tags:
+  - transport
+  - finite-time
+  - theorem
+- claim_id: T4_weakly_nonlinear
+  title: Weakly nonlinear extensions remain valid only within explicitly diagnosed local carriers.
+  claim_document_path: docs/theorem_notes/T4_weakly_nonlinear.tex
+  gate: G4
+  observables:
+  - projector_deformation
+  - local_validity_metrics
+  - autonomy_horizon
+  tags:
+  - nonlinear
+  - local-validity
+  - theorem
+- claim_id: T5_stochastic
+  title: Stochastic subsystem claims require explicit uncertainty bounds and confidence-limited horizons.
+  claim_document_path: docs/theorem_notes/T5_stochastic.tex
+  gate: G5
+  observables:
+  - ensemble_averaged_leakage
+  - leakage_variance
+  - stochastic_uncertainty_metrics
+  - autonomy_horizon
+  tags:
+  - stochastic
+  - uncertainty
+  - theorem
+- claim_id: G6_application_identifiability
+  title: Application-facing subsystem claims remain governed only when reproducibility, refinement, and negative controls
+    are explicit.
+  claim_document_path: docs/protocols/external_application_evidence.md
+  gate: G6
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - autonomy_horizon
+  - block_residual_norm
+  tags:
+  - application
+  - identifiability
+  - validation
 benchmarks:
-- id: BP_Linear_Two_Block
+- family_id: BP_Linear_Two_Block
+  title: Linear Two Block
   branch: linear
   tier: T1
   phase: 1
   description: Exact planted linear block ODEs with weak slow-block coupling.
+  system_class: autonomous_linear
+  state_dimension: 8
+  formal_system: Q^T (diag(L_slow, L_fast) + R_slow) Q with planted 4-dimensional slow carrier.
+  implementation_status: complete
+  evidence_class: synthetic_constructive
+  claim_refs:
+  - T1_linear_autonomous
+  observables:
+  - spectral_gap
+  - projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures: &id001 []
+  expected_failure_modes:
+  - gap_failure
+  - carrier_failure
+  - coupling_failure
+  - numerical_artifact_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - synthetic
+  - linear
+  - positive-control
+  ground_truth_notes:
+  - Planted slow carrier is known before coordinate mixing.
+  - Subsystem partition is fixed at 2 + 2 within the slow carrier.
   spec_path: benchmarks/BP_Linear_Two_Block/spec.yaml
   readme_path: benchmarks/BP_Linear_Two_Block/README.md
   reference_script: benchmarks/BP_Linear_Two_Block/run_reference.py
-  expected_metrics_path: benchmarks/BP_Linear_Two_Block/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_Linear_Two_Block/figure_recipe.py
-- id: BP_Random_Gap_Ensemble
+  legacy_expected_metrics_path: benchmarks/BP_Linear_Two_Block/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_Linear_Two_Block/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Planted slow-block reference
+    parameter_id: reference
+    base_parameter_id: reference
+    role: reference
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: synthetic_constructive
+    acceptance_profile: linear_reference_strict
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - positive
+    - seeded
+    tier: T1
+    observables:
+    - spectral_gap
+    - projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id001
+- family_id: BP_Random_Gap_Ensemble
+  title: Random Gap Ensemble
   branch: linear
   tier: T1/T2
   phase: 1
   description: Random matrix ensembles with matched spectral gaps and normal/nonnormal branches.
+  system_class: random_linear_ensemble
+  state_dimension: 4
+  formal_system: Ensemble of linear matrices with matched slow_count and deliberately varied nonnormality.
+  implementation_status: complete
+  evidence_class: synthetic_ensemble
+  claim_refs:
+  - T1_linear_autonomous
+  - T2_nonnormal
+  observables:
+  - spectral_gap
+  - projector_deformation
+  - block_residual_norm
+  - transient_amplification_score
+  - leakage_trajectory
+  fixtures: &id002 []
+  expected_failure_modes:
+  - gap_failure
+  - transient_growth_failure
+  - horizon_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - synthetic
+  - ensemble
+  - nonnormal
+  ground_truth_notes:
+  - Slow subsystem count is planted at two.
+  - Normal and nonnormal branches are both represented.
   spec_path: benchmarks/BP_Random_Gap_Ensemble/spec.yaml
   readme_path: benchmarks/BP_Random_Gap_Ensemble/README.md
   reference_script: benchmarks/BP_Random_Gap_Ensemble/run_reference.py
-  expected_metrics_path: benchmarks/BP_Random_Gap_Ensemble/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_Random_Gap_Ensemble/figure_recipe.py
-- id: BP_Nearly_Decomposable_Chain
+  legacy_expected_metrics_path: benchmarks/BP_Random_Gap_Ensemble/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_Random_Gap_Ensemble/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Mixed normal-nonnormal ensemble reference
+    parameter_id: reference
+    base_parameter_id: reference
+    role: reference
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: synthetic_ensemble
+    acceptance_profile: linear_reference_relaxed
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - ensemble
+    - diagnostic
+    tier: T1/T2
+    observables:
+    - spectral_gap
+    - projector_deformation
+    - block_residual_norm
+    - transient_amplification_score
+    - leakage_trajectory
+    fixtures: *id002
+- family_id: BP_Nearly_Decomposable_Chain
+  title: Nearly Decomposable Chain
   branch: linear
   tier: T1/T5
   phase: 1
   description: Nearly decomposable Markov chains with planted metastable clusters.
+  system_class: markov_chain
+  state_dimension: 4
+  formal_system: Four-state row-stochastic chain with two metastable clusters and analysis on the generator P - I.
+  implementation_status: complete
+  evidence_class: synthetic_markov
+  claim_refs:
+  - T1_linear_autonomous
+  - T5_stochastic
+  observables:
+  - spectral_gap
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures: &id003 []
+  expected_failure_modes:
+  - gap_failure
+  - coupling_failure
+  - coordinate_artifact_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - synthetic
+  - markov
+  - metastable
+  ground_truth_notes:
+  - Clusters are planted as {0,1} and {2,3}.
+  - Slow carrier corresponds to the nearly conserved cluster modes.
   spec_path: benchmarks/BP_Nearly_Decomposable_Chain/spec.yaml
   readme_path: benchmarks/BP_Nearly_Decomposable_Chain/README.md
   reference_script: benchmarks/BP_Nearly_Decomposable_Chain/run_reference.py
-  expected_metrics_path: benchmarks/BP_Nearly_Decomposable_Chain/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_Nearly_Decomposable_Chain/figure_recipe.py
-- id: BP_Windowed_Transport_Flow
+  legacy_expected_metrics_path: benchmarks/BP_Nearly_Decomposable_Chain/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_Nearly_Decomposable_Chain/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Metastable chain reference
+    parameter_id: reference
+    base_parameter_id: reference
+    role: reference
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: synthetic_markov
+    acceptance_profile: linear_reference_relaxed
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - markov
+    - metastable
+    tier: T1/T5
+    observables:
+    - spectral_gap
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id003
+- family_id: BP_Windowed_Transport_Flow
+  title: Windowed Transport Flow
   branch: transport
   tier: T3
   phase: 2
   description: Windowed time-dependent transport operator benchmark on a ring.
+  system_class: finite_time_transport
+  state_dimension: 24
+  formal_system: Windowed row-stochastic transport flow with two coherent lobes on a ring.
+  implementation_status: complete
+  evidence_class: synthetic_transport
+  claim_refs:
+  - T3_finite_time_transport
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures: &id004 []
+  expected_failure_modes:
+  - gap_failure
+  - horizon_failure
+  - carrier_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - synthetic
+  - transport
+  - positive-control
+  ground_truth_notes:
+  - Two coherent lobes persist while drifting across windows.
+  - Frozen autonomous surrogates are intentionally weaker than the coherent-window treatment.
+  - The accepted positive reference uses moderate drift rather than a nearly stationary flow.
+  - Parameter regimes that preserve singular gaps but destroy window-to-window carrier alignment are treated as negative transport
+    evidence.
   spec_path: benchmarks/BP_Windowed_Transport_Flow/spec.yaml
   readme_path: benchmarks/BP_Windowed_Transport_Flow/README.md
   reference_script: benchmarks/BP_Windowed_Transport_Flow/run_reference.py
-  expected_metrics_path: benchmarks/BP_Windowed_Transport_Flow/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_Windowed_Transport_Flow/figure_recipe.py
-- id: BP_T3_Window_Sensitivity_Pair
+  legacy_expected_metrics_path: benchmarks/BP_Windowed_Transport_Flow/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_Windowed_Transport_Flow/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Windowed coherent transport reference
+    parameter_id: reference
+    base_parameter_id: reference
+    role: reference
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: synthetic_transport
+    acceptance_profile: transport_reference
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - transport
+    - positive
+    tier: T3
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id004
+- family_id: BP_T3_Window_Sensitivity_Pair
+  title: T3 Window Sensitivity Pair
   branch: transport
   tier: T3
   phase: 2
   description: Paired positive-versus-mixed transport family exposing window dependence and coherent carrier failure geometry.
+  system_class: finite_time_transport_window_sensitivity_pair
+  state_dimension: 24
+  formal_system: Paired windowed row-stochastic transport flows with matched geometry but different drift persistence across
+    analysis windows.
+  implementation_status: complete
+  evidence_class: synthetic_counterexample
+  claim_refs:
+  - T3_finite_time_transport
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - autonomy_horizon
+  - transportability_metrics
+  fixtures: &id005 []
+  expected_failure_modes:
+  - horizon_failure
+  - carrier_failure
+  - window_selection_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - synthetic
+  - transport
+  - counterexample
+  ground_truth_notes:
+  - Both branches use the same ring transport construction and coarse subsystem partition.
+  - The positive branch preserves coherent carriers across adjacent windows strongly enough to beat the frozen surrogate.
+  - The fast-drift branch keeps plausible transport structure while degrading coherent persistence and regrouping stability.
+  - The pair is intended as Paper B protocol evidence, not as a general cocycle theorem.
   spec_path: benchmarks/BP_T3_Window_Sensitivity_Pair/spec.yaml
   readme_path: benchmarks/BP_T3_Window_Sensitivity_Pair/README.md
   reference_script: benchmarks/BP_T3_Window_Sensitivity_Pair/run_reference.py
-  expected_metrics_path: benchmarks/BP_T3_Window_Sensitivity_Pair/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_T3_Window_Sensitivity_Pair/figure_recipe.py
-- id: BP_Non_Normal_Shear
+  legacy_expected_metrics_path: benchmarks/BP_T3_Window_Sensitivity_Pair/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_T3_Window_Sensitivity_Pair/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Fast-drift mixed branch
+    parameter_id: reference
+    base_parameter_id: reference
+    role: negative_control
+    claim_status: counterexample
+    implementation_status: complete
+    evidence_class: synthetic_counterexample
+    acceptance_profile: transport_counterexample
+    expected_failure_modes:
+    - carrier_failure
+    - horizon_failure
+    run_modes:
+    - reference
+    tags:
+    - negative
+    - window-sensitivity
+    tier: T3
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - autonomy_horizon
+    - transportability_metrics
+    fixtures: *id005
+  - case_id: matched_positive
+    title: Moderate-drift positive control
+    parameter_id: matched_positive
+    base_parameter_id: matched_positive
+    role: positive_control
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: synthetic_transport
+    acceptance_profile: transport_reference
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - positive
+    - control
+    tier: T3
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - autonomy_horizon
+    - transportability_metrics
+    fixtures: *id005
+- family_id: BP_Non_Normal_Shear
+  title: Non Normal Shear
   branch: nonnormal
   tier: T2
   phase: 1
   description: Shear and Jordan-like nonnormal systems with transient growth.
+  system_class: nonnormal_linear
+  state_dimension: 4
+  formal_system: Two-dimensional slow shear block weakly coupled to a fast stable block.
+  implementation_status: complete
+  evidence_class: synthetic_nonnormal
+  claim_refs:
+  - T2_nonnormal
+  observables:
+  - spectral_gap
+  - transient_amplification_score
+  - block_residual_norm
+  - leakage_trajectory
+  fixtures: &id006 []
+  expected_failure_modes:
+  - transient_growth_failure
+  - horizon_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - synthetic
+  - nonnormal
+  - shear
+  ground_truth_notes:
+  - Slow subsystem partition is planted.
+  - Transient amplification is intentionally strong despite stable eigenvalues.
   spec_path: benchmarks/BP_Non_Normal_Shear/spec.yaml
   readme_path: benchmarks/BP_Non_Normal_Shear/README.md
   reference_script: benchmarks/BP_Non_Normal_Shear/run_reference.py
-  expected_metrics_path: benchmarks/BP_Non_Normal_Shear/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_Non_Normal_Shear/figure_recipe.py
-- id: BP_Delay_Coupled_Pair
+  legacy_expected_metrics_path: benchmarks/BP_Non_Normal_Shear/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_Non_Normal_Shear/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Shear-driven nonnormal reference
+    parameter_id: reference
+    base_parameter_id: reference
+    role: reference
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: synthetic_nonnormal
+    acceptance_profile: nonnormal_reference
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - nonnormal
+    - diagnostic
+    tier: T2
+    observables:
+    - spectral_gap
+    - transient_amplification_score
+    - block_residual_norm
+    - leakage_trajectory
+    fixtures: *id006
+- family_id: BP_Delay_Coupled_Pair
+  title: Delay Coupled Pair
   branch: nonnormal
   tier: T2/T3
   phase: 2
   description: Fixed-lag delay-coupled linear module pair analyzed through a sampled history propagator.
+  system_class: fixed_lag_delay
+  state_dimension: 2
+  formal_system: x'(t) = A0 x(t) + A_tau x(t - tau) with sampled history-propagator diagnostics.
+  implementation_status: surrogate
+  evidence_class: surrogate_delay
+  claim_refs:
+  - T2_nonnormal
+  - T3_finite_time_transport
+  observables:
+  - transient_amplification_score
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures: &id007 []
+  expected_failure_modes:
+  - transient_growth_failure
+  - coupling_failure
+  - horizon_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - synthetic
+  - delay
+  - surrogate
+  ground_truth_notes:
+  - Two-module partition is planted.
+  - The physical state stays two-dimensional; the history snapshot space is diagnostic only.
   spec_path: benchmarks/BP_Delay_Coupled_Pair/spec.yaml
   readme_path: benchmarks/BP_Delay_Coupled_Pair/README.md
   reference_script: benchmarks/BP_Delay_Coupled_Pair/run_reference.py
-  expected_metrics_path: benchmarks/BP_Delay_Coupled_Pair/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_Delay_Coupled_Pair/figure_recipe.py
-- id: BP_T2_Same_Spectrum_Pair
+  legacy_expected_metrics_path: benchmarks/BP_Delay_Coupled_Pair/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_Delay_Coupled_Pair/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Sampled-history delay surrogate reference
+    parameter_id: reference
+    base_parameter_id: reference
+    role: reference
+    claim_status: qualified
+    implementation_status: surrogate
+    evidence_class: surrogate_delay
+    acceptance_profile: delay_surrogate_reference
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - qualified
+    - delay-surrogate
+    tier: T2/T3
+    observables:
+    - transient_amplification_score
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id007
+- family_id: BP_T2_Same_Spectrum_Pair
+  title: T2 Same Spectrum Pair
   branch: nonnormal
   tier: T2
   phase: 2
   description: Same-spectrum normal versus nonnormal pair exposing transient-growth failure geometry.
+  system_class: matched_spectrum_nonnormal_pair
+  state_dimension: 4
+  formal_system: Two autonomous linear systems with matched retained slow eigenvalues but different slow-block geometry.
+  implementation_status: complete
+  evidence_class: synthetic_counterexample
+  claim_refs:
+  - T2_nonnormal
+  observables:
+  - spectral_gap
+  - transient_amplification_score
+  - pseudospectral_proxy
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures: &id008 []
+  expected_failure_modes:
+  - transient_growth_failure
+  - horizon_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - synthetic
+  - nonnormal
+  - counterexample
+  ground_truth_notes:
+  - The retained slow eigenvalues are held fixed across the pair.
+  - The paired systems differ in slow-block geometry rather than nominal gap scale.
+  - The purpose is to expose failure geometry for Paper C, not to close T2.
   spec_path: benchmarks/BP_T2_Same_Spectrum_Pair/spec.yaml
   readme_path: benchmarks/BP_T2_Same_Spectrum_Pair/README.md
   reference_script: benchmarks/BP_T2_Same_Spectrum_Pair/run_reference.py
-  expected_metrics_path: benchmarks/BP_T2_Same_Spectrum_Pair/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_T2_Same_Spectrum_Pair/figure_recipe.py
-- id: BP_Weakly_Nonlinear_Slow_Manifold
+  legacy_expected_metrics_path: benchmarks/BP_T2_Same_Spectrum_Pair/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_T2_Same_Spectrum_Pair/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Matched nonnormal counterexample branch
+    parameter_id: reference
+    base_parameter_id: reference
+    role: negative_control
+    claim_status: counterexample
+    implementation_status: complete
+    evidence_class: synthetic_counterexample
+    acceptance_profile: same_spectrum_counterexample
+    expected_failure_modes:
+    - transient_growth_failure
+    - horizon_failure
+    run_modes:
+    - reference
+    tags:
+    - negative
+    - same-spectrum
+    tier: T2
+    observables:
+    - spectral_gap
+    - transient_amplification_score
+    - pseudospectral_proxy
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id008
+  - case_id: matched_normal
+    title: Matched normal control branch
+    parameter_id: matched_normal
+    base_parameter_id: matched_normal
+    role: positive_control
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: synthetic_constructive
+    acceptance_profile: linear_reference_relaxed
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - positive
+    - control
+    tier: T2
+    observables:
+    - spectral_gap
+    - transient_amplification_score
+    - pseudospectral_proxy
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id008
+- family_id: BP_Weakly_Nonlinear_Slow_Manifold
+  title: Weakly Nonlinear Slow Manifold
   branch: nonlinear
   tier: T4
   phase: 3
   description: Weakly nonlinear slow-manifold benchmark with curvature corrections.
+  system_class: weakly_nonlinear
+  state_dimension: 3
+  formal_system: Weakly nonlinear fast-slow system with a two-dimensional slow oscillator sector and one slaved fast variable.
+  implementation_status: complete
+  evidence_class: synthetic_nonlinear
+  claim_refs:
+  - T4_weakly_nonlinear
+  observables:
+  - projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures: &id009 []
+  expected_failure_modes:
+  - carrier_failure
+  - coupling_failure
+  - horizon_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - synthetic
+  - nonlinear
+  - positive-control
+  ground_truth_notes:
+  - Critical manifold is explicit in the benchmark construction.
+  - Curvature correction is required; no global nonlinear claim is intended.
   spec_path: benchmarks/BP_Weakly_Nonlinear_Slow_Manifold/spec.yaml
   readme_path: benchmarks/BP_Weakly_Nonlinear_Slow_Manifold/README.md
   reference_script: benchmarks/BP_Weakly_Nonlinear_Slow_Manifold/run_reference.py
-  expected_metrics_path: benchmarks/BP_Weakly_Nonlinear_Slow_Manifold/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_Weakly_Nonlinear_Slow_Manifold/figure_recipe.py
-- id: BP_T4_Local_Validity_Pair
+  legacy_expected_metrics_path: benchmarks/BP_Weakly_Nonlinear_Slow_Manifold/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_Weakly_Nonlinear_Slow_Manifold/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Weakly nonlinear local-validity reference
+    parameter_id: reference
+    base_parameter_id: reference
+    role: reference
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: synthetic_nonlinear
+    acceptance_profile: nonlinear_reference
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - nonlinear
+    - positive
+    tier: T4
+    observables:
+    - projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id009
+- family_id: BP_T4_Local_Validity_Pair
+  title: T4 Local Validity Pair
   branch: nonlinear
   tier: T4
   phase: 3
   description: Paired weakly nonlinear benchmark separating a locally valid regime from amplitude-driven local-validity breakdown.
+  system_class: weakly_nonlinear_local_validity_pair
+  state_dimension: 3
+  formal_system: Paired weakly nonlinear fast-slow systems with the same structural template but different local-validity
+    posture.
+  implementation_status: complete
+  evidence_class: synthetic_counterexample
+  claim_refs:
+  - T4_weakly_nonlinear
+  observables:
+  - projector_deformation
+  - leakage_trajectory
+  - autonomy_horizon
+  - local_validity_metrics
+  fixtures: &id010 []
+  expected_failure_modes:
+  - carrier_failure
+  - coupling_failure
+  - horizon_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - synthetic
+  - nonlinear
+  - counterexample
+  ground_truth_notes:
+  - Both branches use the same three-dimensional fast-slow template.
+  - The matched local branch stays closer to the slaved fast-variable relation and keeps the local-validity margin positive.
+  - The amplitude-breakdown branch increases anchor drift and fast slaving defect without claiming a global nonlinear instability
+    theorem.
   spec_path: benchmarks/BP_T4_Local_Validity_Pair/spec.yaml
   readme_path: benchmarks/BP_T4_Local_Validity_Pair/README.md
   reference_script: benchmarks/BP_T4_Local_Validity_Pair/run_reference.py
-  expected_metrics_path: benchmarks/BP_T4_Local_Validity_Pair/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_T4_Local_Validity_Pair/figure_recipe.py
-- id: BP_Noisy_Metastable_Network
+  legacy_expected_metrics_path: benchmarks/BP_T4_Local_Validity_Pair/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_T4_Local_Validity_Pair/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Amplitude-breakdown branch
+    parameter_id: reference
+    base_parameter_id: reference
+    role: negative_control
+    claim_status: counterexample
+    implementation_status: complete
+    evidence_class: synthetic_counterexample
+    acceptance_profile: local_validity_counterexample
+    expected_failure_modes:
+    - carrier_failure
+    - coupling_failure
+    - horizon_failure
+    run_modes:
+    - reference
+    tags:
+    - negative
+    - local-validity
+    tier: T4
+    observables:
+    - projector_deformation
+    - leakage_trajectory
+    - autonomy_horizon
+    - local_validity_metrics
+    fixtures: *id010
+  - case_id: matched_local
+    title: Locally valid control branch
+    parameter_id: matched_local
+    base_parameter_id: matched_local
+    role: positive_control
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: synthetic_nonlinear
+    acceptance_profile: nonlinear_reference
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - positive
+    - control
+    tier: T4
+    observables:
+    - projector_deformation
+    - leakage_trajectory
+    - autonomy_horizon
+    - local_validity_metrics
+    fixtures: *id010
+- family_id: BP_Noisy_Metastable_Network
+  title: Noisy Metastable Network
   branch: stochastic
   tier: T5
   phase: 4
   description: Noisy metastable network with propagator estimation and bootstrap uncertainty.
+  system_class: stochastic_metastable
+  state_dimension: 4
+  formal_system: Four-state stochastic network with two metastable sets and low-probability cross-cluster transitions.
+  implementation_status: complete
+  evidence_class: synthetic_stochastic
+  claim_refs:
+  - T5_stochastic
+  observables:
+  - spectral_gap
+  - block_residual_norm
+  - ensemble_averaged_leakage
+  - leakage_variance
+  - autonomy_horizon
+  fixtures: &id011 []
+  expected_failure_modes:
+  - gap_failure
+  - horizon_failure
+  - numerical_artifact_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - synthetic
+  - stochastic
+  - positive-control
+  ground_truth_notes:
+  - Metastable sets are {0,1} and {2,3}.
+  - Benchmark supports both exact propagator diagnostics and Monte Carlo estimates.
   spec_path: benchmarks/BP_Noisy_Metastable_Network/spec.yaml
   readme_path: benchmarks/BP_Noisy_Metastable_Network/README.md
   reference_script: benchmarks/BP_Noisy_Metastable_Network/run_reference.py
-  expected_metrics_path: benchmarks/BP_Noisy_Metastable_Network/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_Noisy_Metastable_Network/figure_recipe.py
-- id: BP_T5_Stochastic_Stress_Pair
+  legacy_expected_metrics_path: benchmarks/BP_Noisy_Metastable_Network/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_Noisy_Metastable_Network/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Bootstrap-stable stochastic reference
+    parameter_id: reference
+    base_parameter_id: reference
+    role: reference
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: synthetic_stochastic
+    acceptance_profile: stochastic_reference
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - stochastic
+    - positive
+    tier: T5
+    observables:
+    - spectral_gap
+    - block_residual_norm
+    - ensemble_averaged_leakage
+    - leakage_variance
+    - autonomy_horizon
+    fixtures: *id011
+- family_id: BP_T5_Stochastic_Stress_Pair
+  title: T5 Stochastic Stress Pair
   branch: stochastic
   tier: T5
   phase: 4
   description: Paired stochastic benchmark isolating sample-stress effects on uncertainty width and confidence-bounded horizons.
+  system_class: stochastic_sample_stress_pair
+  state_dimension: 4
+  formal_system: Paired four-state metastable networks with identical transition structure and different Monte Carlo sample
+    counts.
+  implementation_status: complete
+  evidence_class: synthetic_counterexample
+  claim_refs:
+  - T5_stochastic
+  observables:
+  - ensemble_averaged_leakage
+  - leakage_variance
+  - autonomy_horizon
+  - stochastic_uncertainty_metrics
+  fixtures: &id012 []
+  expected_failure_modes:
+  - horizon_failure
+  - numerical_artifact_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - synthetic
+  - stochastic
+  - counterexample
+  ground_truth_notes:
+  - Both branches keep the same metastable network and source-state partition.
+  - The matched branch uses enough trajectories to keep bootstrap width and confidence-bounded horizon stable.
+  - The sample-stress branch widens uncertainty and degrades the confidence-bounded horizon without introducing a new stochastic
+    model class.
   spec_path: benchmarks/BP_T5_Stochastic_Stress_Pair/spec.yaml
   readme_path: benchmarks/BP_T5_Stochastic_Stress_Pair/README.md
   reference_script: benchmarks/BP_T5_Stochastic_Stress_Pair/run_reference.py
-  expected_metrics_path: benchmarks/BP_T5_Stochastic_Stress_Pair/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_T5_Stochastic_Stress_Pair/figure_recipe.py
-- id: BP_Mobility_Chicago_Corridors
+  legacy_expected_metrics_path: benchmarks/BP_T5_Stochastic_Stress_Pair/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_T5_Stochastic_Stress_Pair/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Sample-stress branch
+    parameter_id: reference
+    base_parameter_id: reference
+    role: negative_control
+    claim_status: counterexample
+    implementation_status: complete
+    evidence_class: synthetic_counterexample
+    acceptance_profile: stochastic_stress_counterexample
+    expected_failure_modes:
+    - horizon_failure
+    - numerical_artifact_failure
+    run_modes:
+    - reference
+    tags:
+    - negative
+    - stress
+    tier: T5
+    observables:
+    - ensemble_averaged_leakage
+    - leakage_variance
+    - autonomy_horizon
+    - stochastic_uncertainty_metrics
+    fixtures: *id012
+  - case_id: matched_metastable
+    title: Adequately sampled control branch
+    parameter_id: matched_metastable
+    base_parameter_id: matched_metastable
+    role: positive_control
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: synthetic_stochastic
+    acceptance_profile: stochastic_reference
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - positive
+    - control
+    tier: T5
+    observables:
+    - ensemble_averaged_leakage
+    - leakage_variance
+    - autonomy_horizon
+    - stochastic_uncertainty_metrics
+    fixtures: *id012
+- family_id: BP_Mobility_Chicago_Corridors
+  title: Mobility Chicago Corridors
   branch: application
   tier: T3/G6
   phase: 5
   description: Bundled real-data mobility benchmark derived from Divvy Hyde Park station flows.
+  system_class: real_world_windowed_mobility
+  state_dimension: 4
+  formal_system: Row-stochastic station-to-station mobility operators derived from a bundled Hyde Park slice of Divvy January
+    2024 trip history.
+  implementation_status: complete
+  evidence_class: application_real_data
+  claim_refs:
+  - T3_finite_time_transport
+  - G6_application_identifiability
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures: &id013
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Mobility_Chicago_Corridors/data/divvy_hyde_park_jan2024.json
+    source_page: https://divvybikes.com/system-data
+    source_archive: 202401-divvy-tripdata.zip
+  expected_failure_modes:
+  - carrier_failure
+  - coupling_failure
+  - numerical_artifact_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  - validation_matrix
+  tags:
+  - application
+  - mobility
+  - real-data
+  ground_truth_notes:
+  - The benchmark is real-data and case-study-only; no new universal theorem is claimed.
+  - The reference case is usable because corridor structure is interpretable and reproducible from a bundled fixture.
+  - The weekend-night case is retained as an instructive negative application slice.
   spec_path: benchmarks/BP_Mobility_Chicago_Corridors/spec.yaml
   readme_path: benchmarks/BP_Mobility_Chicago_Corridors/README.md
   reference_script: benchmarks/BP_Mobility_Chicago_Corridors/run_reference.py
-  expected_metrics_path: benchmarks/BP_Mobility_Chicago_Corridors/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_Mobility_Chicago_Corridors/figure_recipe.py
-- id: BP_Mobility_Downtown_Routing_Instability
+  legacy_expected_metrics_path: benchmarks/BP_Mobility_Chicago_Corridors/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_Mobility_Chicago_Corridors/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Weekday commute reference corridor
+    parameter_id: reference
+    base_parameter_id: reference
+    role: reference
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: application_real_data
+    acceptance_profile: application_mobility_reference
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - mobility
+    - accepted
+    tier: T3/G6
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id013
+  - case_id: weekday_pseudocount_tight
+    title: Weekday tight-smoothing perturbation
+    parameter_id: weekday_pseudocount_tight
+    base_parameter_id: reference
+    role: reference_variant
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: application_real_data
+    acceptance_profile: application_mobility_reference
+    expected_failure_modes: []
+    run_modes:
+    - validation_matrix
+    tags:
+    - mobility
+    - sensitivity
+    overrides:
+      parameter_id: weekday_pseudocount_tight
+      pseudocount: 0.1
+      refined_pseudocount: 0.5
+      case_label: weekday_commute_tight_smoothing
+    tier: T3/G6
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id013
+  - case_id: weekday_pseudocount_loose
+    title: Weekday loose-smoothing perturbation
+    parameter_id: weekday_pseudocount_loose
+    base_parameter_id: reference
+    role: reference_variant
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: application_real_data
+    acceptance_profile: application_mobility_reference
+    expected_failure_modes: []
+    run_modes:
+    - validation_matrix
+    tags:
+    - mobility
+    - sensitivity
+    overrides:
+      parameter_id: weekday_pseudocount_loose
+      pseudocount: 0.5
+      refined_pseudocount: 1.0
+      case_label: weekday_commute_loose_smoothing
+    tier: T3/G6
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id013
+  - case_id: weekday_three_station_corridor
+    title: Weekday three-station perturbation
+    parameter_id: weekday_three_station_corridor
+    base_parameter_id: reference
+    role: reference_variant
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: application_real_data
+    acceptance_profile: application_mobility_reference
+    expected_failure_modes: []
+    run_modes:
+    - validation_matrix
+    tags:
+    - mobility
+    - sensitivity
+    overrides:
+      parameter_id: weekday_three_station_corridor
+      station_subset_indices:
+      - 0
+      - 1
+      - 2
+      block_sizes:
+      - 2
+      - 1
+      coherent_rank: 2
+      case_label: weekday_commute_three_station_corridor
+    tier: T3/G6
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id013
+  - case_id: weekday_window_coarsened
+    title: Weekday window-coarsening perturbation
+    parameter_id: weekday_window_coarsened
+    base_parameter_id: reference
+    role: reference_variant
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: application_real_data
+    acceptance_profile: application_mobility_reference
+    expected_failure_modes: []
+    run_modes:
+    - validation_matrix
+    tags:
+    - mobility
+    - sensitivity
+    overrides:
+      parameter_id: weekday_window_coarsened
+      window_groups:
+      - - 0
+      - - 1
+        - 2
+      - - 3
+      window_labels:
+      - 06:00-09:00
+      - 09:00-18:00
+      - 18:00-21:00
+      pseudocount: 0.1
+      refined_pseudocount: 0.2
+      case_label: weekday_commute_coarsened_windows
+    tier: T3/G6
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id013
+  - case_id: negative_weekend
+    title: Weekend negative control
+    parameter_id: negative_weekend
+    base_parameter_id: negative_weekend
+    role: negative_control
+    claim_status: rejected
+    implementation_status: complete
+    evidence_class: application_real_data
+    acceptance_profile: expected_failure_control
+    expected_failure_modes:
+    - carrier_failure
+    - numerical_artifact_failure
+    run_modes:
+    - reference
+    - validation_matrix
+    tags:
+    - mobility
+    - negative
+    tier: T3/G6
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id013
+- family_id: BP_Mobility_Downtown_Routing_Instability
+  title: Mobility Downtown Routing Instability
   branch: application
   tier: T3/G6
   phase: 5
   description: Bundled real-data downtown mobility benchmark selected for routing-instability under coarse graining.
+  system_class: real_world_windowed_mobility
+  state_dimension: 4
+  formal_system: Row-stochastic station-to-station mobility operators derived from a bundled downtown Chicago slice of Divvy
+    January 2024 trip history.
+  implementation_status: complete
+  evidence_class: application_real_data
+  claim_refs:
+  - T3_finite_time_transport
+  - G6_application_identifiability
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures: &id014
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Mobility_Downtown_Routing_Instability/data/divvy_downtown_commute_jan2024.json
+    source_page: https://divvybikes.com/system-data
+    source_archive: 202401-divvy-tripdata.zip
+  expected_failure_modes:
+  - carrier_failure
+  - coupling_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - application
+  - mobility
+  - negative-control
+  ground_truth_notes:
+  - The benchmark is real-data and intentionally negative.
+  - The failure mode is route-instability under coarse graining rather than low sample count.
+  - The benchmark broadens the governed mobility failure atlas with a second external rejection case.
   spec_path: benchmarks/BP_Mobility_Downtown_Routing_Instability/spec.yaml
   readme_path: benchmarks/BP_Mobility_Downtown_Routing_Instability/README.md
   reference_script: benchmarks/BP_Mobility_Downtown_Routing_Instability/run_reference.py
-  expected_metrics_path: benchmarks/BP_Mobility_Downtown_Routing_Instability/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_Mobility_Downtown_Routing_Instability/figure_recipe.py
-- id: BP_Mobility_NYC_East_Corridor
+  legacy_expected_metrics_path: benchmarks/BP_Mobility_Downtown_Routing_Instability/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_Mobility_Downtown_Routing_Instability/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Downtown routing-instability slice
+    parameter_id: reference
+    base_parameter_id: reference
+    role: negative_control
+    claim_status: rejected
+    implementation_status: complete
+    evidence_class: application_real_data
+    acceptance_profile: expected_failure_control
+    expected_failure_modes:
+    - carrier_failure
+    - coupling_failure
+    run_modes:
+    - reference
+    tags:
+    - mobility
+    - negative
+    tier: T3/G6
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id014
+- family_id: BP_Mobility_NYC_East_Corridor
+  title: Mobility NYC East Corridor
   branch: application
   tier: T3/G6
   phase: 5
   description: Bundled real-data New York City mobility benchmark selected as a mixed external corridor case.
+  system_class: real_world_windowed_mobility
+  state_dimension: 4
+  formal_system: Row-stochastic station-to-station mobility operators derived from a bundled Manhattan east-side slice of
+    Citi Bike January 2024 trip history.
+  implementation_status: complete
+  evidence_class: application_real_data
+  claim_refs:
+  - T3_finite_time_transport
+  - G6_application_identifiability
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures: &id015
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Mobility_NYC_East_Corridor/data/citibike_east_corridor_jan2024.json
+    source_page: https://citibikenyc.com/system-data
+    source_archive: 202401-citibike-tripdata.zip
+  expected_failure_modes:
+  - carrier_failure
+  - coupling_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - application
+  - mobility
+  - external
+  ground_truth_notes:
+  - The benchmark is real-data and intended as a mixed external application case.
+  - The case shows stable refinement and substantial traffic, but not carrier stability or weak coupling.
+  - The benchmark broadens the external mobility evidence set beyond the Chicago Divvy archive without claiming a second accepted application case.
   spec_path: benchmarks/BP_Mobility_NYC_East_Corridor/spec.yaml
   readme_path: benchmarks/BP_Mobility_NYC_East_Corridor/README.md
   reference_script: benchmarks/BP_Mobility_NYC_East_Corridor/run_reference.py
-  expected_metrics_path: benchmarks/BP_Mobility_NYC_East_Corridor/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_Mobility_NYC_East_Corridor/figure_recipe.py
-- id: BP_Clickstream_Docs_Funnel
+  legacy_expected_metrics_path: benchmarks/BP_Mobility_NYC_East_Corridor/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_Mobility_NYC_East_Corridor/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Mixed external corridor slice
+    parameter_id: reference
+    base_parameter_id: reference
+    role: negative_control
+    claim_status: rejected
+    implementation_status: complete
+    evidence_class: application_real_data
+    acceptance_profile: expected_failure_control
+    expected_failure_modes:
+    - carrier_failure
+    - coupling_failure
+    run_modes:
+    - reference
+    tags:
+    - mobility
+    - mixed
+    tier: T3/G6
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id015
+- family_id: BP_Clickstream_Docs_Funnel
+  title: Clickstream Docs Funnel
   branch: application
   tier: T3/G6
   phase: 5
   description: Bundled documentation clickstream benchmark selected as non-mobility cross-domain application evidence.
+  system_class: application_windowed_clickstream
+  state_dimension: 4
+  formal_system: Row-stochastic page-to-page clickstream operators derived from a bundled documentation navigation fixture.
+  implementation_status: complete
+  evidence_class: application_repository_fixture
+  claim_refs:
+  - T3_finite_time_transport
+  - G6_application_identifiability
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures: &id016
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Clickstream_Docs_Funnel/data/docs_navigation_funnel_q1_2026.json
+    source_page: bundled_repository_fixture
+    source_archive: docs_navigation_funnel_q1_2026.json
+  expected_failure_modes:
+  - carrier_failure
+  - coupling_failure
+  - numerical_artifact_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - application
+  - clickstream
+  - repository-fixture
+  ground_truth_notes:
+  - This is a bounded cross-domain application fixture, not a public-data theorem claim.
+  - The reference case is intended to show stable coherent structure outside mobility.
+  - The negative detour case is retained to preserve explicit rejection evidence.
   spec_path: benchmarks/BP_Clickstream_Docs_Funnel/spec.yaml
   readme_path: benchmarks/BP_Clickstream_Docs_Funnel/README.md
   reference_script: benchmarks/BP_Clickstream_Docs_Funnel/run_reference.py
-  expected_metrics_path: benchmarks/BP_Clickstream_Docs_Funnel/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_Clickstream_Docs_Funnel/figure_recipe.py
-- id: BP_Support_Portal_Funnel
+  legacy_expected_metrics_path: benchmarks/BP_Clickstream_Docs_Funnel/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_Clickstream_Docs_Funnel/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Stable documentation funnel reference
+    parameter_id: reference
+    base_parameter_id: reference
+    role: reference
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: application_repository_fixture
+    acceptance_profile: application_navigation_reference
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - navigation
+    - accepted
+    tier: T3/G6
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id016
+  - case_id: negative_detour
+    title: Detour-heavy documentation negative control
+    parameter_id: negative_detour
+    base_parameter_id: negative_detour
+    role: negative_control
+    claim_status: rejected
+    implementation_status: complete
+    evidence_class: application_repository_fixture
+    acceptance_profile: expected_failure_control
+    expected_failure_modes:
+    - carrier_failure
+    - coupling_failure
+    run_modes:
+    - reference
+    tags:
+    - navigation
+    - negative
+    tier: T3/G6
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id016
+- family_id: BP_Support_Portal_Funnel
+  title: Support Portal Funnel
   branch: application
   tier: T3/G6
   phase: 5
-  description: Bundled support-portal navigation benchmark selected as a second non-mobility cross-domain application evidence family.
+  description: Bundled support-portal navigation benchmark selected as a second non-mobility cross-domain application evidence
+    family.
+  system_class: application_windowed_support_navigation
+  state_dimension: 4
+  formal_system: Row-stochastic support-portal navigation operators derived from a bundled help-funnel fixture.
+  implementation_status: complete
+  evidence_class: application_repository_fixture
+  claim_refs:
+  - T3_finite_time_transport
+  - G6_application_identifiability
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures: &id017
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Support_Portal_Funnel/data/support_navigation_funnel_q1_2026.json
+    source_page: bundled_repository_fixture
+    source_archive: support_navigation_funnel_q1_2026.json
+  expected_failure_modes:
+  - gap_failure
+  - carrier_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - application
+  - support
+  - repository-fixture
+  ground_truth_notes:
+  - This is a bounded cross-domain application fixture, not a public-data theorem claim.
+  - The reference case is intended to show stable coherent structure in a second non-mobility navigation domain.
+  - The negative detour case is retained to preserve explicit rejection evidence driven by gap collapse and carrier deformation;
+    its residual coupling stays below the global coupling-failure cutoff.
   spec_path: benchmarks/BP_Support_Portal_Funnel/spec.yaml
   readme_path: benchmarks/BP_Support_Portal_Funnel/README.md
   reference_script: benchmarks/BP_Support_Portal_Funnel/run_reference.py
-  expected_metrics_path: benchmarks/BP_Support_Portal_Funnel/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_Support_Portal_Funnel/figure_recipe.py
-- id: BP_Workflow_Queue_Funnel
+  legacy_expected_metrics_path: benchmarks/BP_Support_Portal_Funnel/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_Support_Portal_Funnel/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Stable support-navigation reference
+    parameter_id: reference
+    base_parameter_id: reference
+    role: reference
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: application_repository_fixture
+    acceptance_profile: application_navigation_reference
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - navigation
+    - accepted
+    tier: T3/G6
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id017
+  - case_id: negative_detour
+    title: Detour-heavy support negative control
+    parameter_id: negative_detour
+    base_parameter_id: negative_detour
+    role: negative_control
+    claim_status: rejected
+    implementation_status: complete
+    evidence_class: application_repository_fixture
+    acceptance_profile: expected_failure_control
+    expected_failure_modes:
+    - carrier_failure
+    - gap_failure
+    run_modes:
+    - reference
+    tags:
+    - navigation
+    - negative
+    tier: T3/G6
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id017
+- family_id: BP_Workflow_Queue_Funnel
+  title: Workflow Queue Funnel
   branch: application
   tier: T3/G6
   phase: 5
   description: Bundled workflow-queue benchmark selected as a non-navigation operational application evidence family.
+  system_class: application_windowed_workflow_queue
+  state_dimension: 4
+  formal_system: Row-stochastic stage-to-stage workflow operators derived from a bundled operational queue fixture.
+  implementation_status: complete
+  evidence_class: application_repository_fixture
+  claim_refs:
+  - T3_finite_time_transport
+  - G6_application_identifiability
+  observables:
+  - singular_gap
+  - coherent_projector_deformation
+  - block_residual_norm
+  - leakage_trajectory
+  - autonomy_horizon
+  fixtures: &id018
+  - kind: named_flow_fixture
+    path: benchmarks/BP_Workflow_Queue_Funnel/data/workflow_queue_funnel_q1_2026.json
+    source_page: bundled_repository_fixture
+    source_archive: workflow_queue_funnel_q1_2026.json
+  expected_failure_modes:
+  - carrier_failure
+  run_modes:
+  - sample_parameters
+  - run_case
+  tags:
+  - application
+  - workflow
+  - repository-fixture
+  ground_truth_notes:
+  - This is a bounded cross-domain application fixture, not a public-data theorem claim.
+  - The reference case is intended to show stable coherent structure outside mobility and page navigation.
+  - The negative detour case is retained to preserve explicit rejection evidence driven by gap collapse and carrier deformation
+    rather than a taxonomy-level coupling failure.
   spec_path: benchmarks/BP_Workflow_Queue_Funnel/spec.yaml
   readme_path: benchmarks/BP_Workflow_Queue_Funnel/README.md
   reference_script: benchmarks/BP_Workflow_Queue_Funnel/run_reference.py
-  expected_metrics_path: benchmarks/BP_Workflow_Queue_Funnel/expected_metrics.json
-  figure_recipe_path: benchmarks/BP_Workflow_Queue_Funnel/figure_recipe.py
+  legacy_expected_metrics_path: benchmarks/BP_Workflow_Queue_Funnel/expected_metrics.json
+  legacy_figure_recipe_path: reports/archive/benchmark_scripts/BP_Workflow_Queue_Funnel/figure_recipe.py
+  cases:
+  - case_id: reference
+    title: Stable workflow queue reference
+    parameter_id: reference
+    base_parameter_id: reference
+    role: reference
+    claim_status: supported
+    implementation_status: complete
+    evidence_class: application_repository_fixture
+    acceptance_profile: application_workflow_reference
+    expected_failure_modes: []
+    run_modes:
+    - reference
+    tags:
+    - workflow
+    - accepted
+    tier: T3/G6
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id018
+  - case_id: negative_detour
+    title: Rework-heavy workflow negative control
+    parameter_id: negative_detour
+    base_parameter_id: negative_detour
+    role: negative_control
+    claim_status: rejected
+    implementation_status: complete
+    evidence_class: application_repository_fixture
+    acceptance_profile: expected_failure_control
+    expected_failure_modes:
+    - carrier_failure
+    run_modes:
+    - reference
+    tags:
+    - workflow
+    - negative
+    tier: T3/G6
+    observables:
+    - singular_gap
+    - coherent_projector_deformation
+    - block_residual_norm
+    - leakage_trajectory
+    - autonomy_horizon
+    fixtures: *id018
+

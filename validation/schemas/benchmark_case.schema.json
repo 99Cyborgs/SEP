@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SEP Benchmark Case",
+  "type": "object",
+  "required": [
+    "case_id",
+    "title",
+    "parameter_id",
+    "base_parameter_id",
+    "role",
+    "tier",
+    "claim_status",
+    "implementation_status",
+    "evidence_class",
+    "observables",
+    "fixtures",
+    "acceptance_profile",
+    "expected_failure_modes",
+    "run_modes",
+    "tags"
+  ],
+  "properties": {
+    "case_id": { "type": "string" },
+    "title": { "type": "string" },
+    "parameter_id": { "type": "string" },
+    "base_parameter_id": { "type": "string" },
+    "role": { "type": "string" },
+    "tier": { "type": "string" },
+    "claim_status": { "type": "string" },
+    "implementation_status": { "type": "string" },
+    "evidence_class": { "type": "string" },
+    "observables": { "type": "array", "items": { "type": "string" } },
+    "fixtures": { "type": "array", "items": { "type": "object" } },
+    "acceptance_profile": { "type": "string" },
+    "expected_failure_modes": { "type": "array", "items": { "type": "string" } },
+    "run_modes": { "type": "array", "items": { "type": "string" } },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "overrides": { "type": "object" },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

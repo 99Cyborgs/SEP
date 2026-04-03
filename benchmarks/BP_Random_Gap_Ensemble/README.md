@@ -1,26 +1,39 @@
-# BP Random Gap Ensemble
+# Random Gap Ensemble
 
-## Formal System Definition
-An ensemble of low-dimensional linear systems with matched nominal gap scales but different nonnormal structure. Half of the ensemble is close to normal, half is intentionally nonnormal.
+This document is generated from `benchmarks/registry.yaml`. The registry is authoritative; this README is a derived view.
 
-## Parameter Ranges
-- gap: `0.05` to `0.30`
-- condition number / nonnormality: normal branch near `1`, nonnormal branch intentionally elevated
-- sampled times: `0` to `5`
+## Family Contract
+- benchmark_id: `BP_Random_Gap_Ensemble`
+- branch: `linear`
+- tier: `T1/T2`
+- implementation_status: `complete`
+- evidence_class: `synthetic_ensemble`
+- run_modes: `sample_parameters, run_case`
+
+## Formal System
+Ensemble of linear matrices with matched slow_count and deliberately varied nonnormality.
+
+## Claim Links
+- `T1_linear_autonomous`: `docs/theorem_notes/T1_linear_autonomous.tex` via gate `G1`
+- `T2_nonnormal`: `docs/theorem_notes/T2_nonnormal.tex` via gate `G2`
+
+## Primary Observables
+- `spectral_gap`
+- `projector_deformation`
+- `block_residual_norm`
+- `transient_amplification_score`
+- `leakage_trajectory`
+
+## Fixtures
+- `synthetic_generator`: runtime-generated benchmark fixture
+
+## Cases
+- `reference`: role=`reference`, claim_status=`supported`, acceptance_profile=`linear_reference_relaxed`, expected_failure_modes=`none`
 
 ## Ground Truth Notes
-- Slow subsystem count is planted at `2`.
-- The ensemble is designed to test whether pure affine laws fail when transient growth is introduced without changing spectral order in a misleading way.
+- Slow subsystem count is planted at two.
+- Normal and nonnormal branches are both represented.
 
-## Theorem Tier
-`T1/T2`
-
-## Expected Failure Modes
-- `gap_failure`
-- `transient_growth_failure`
-- `horizon_failure`
-
-## Reference Commands
-- `python benchmarks/BP_Random_Gap_Ensemble/generate.py`
-- `python benchmarks/BP_Random_Gap_Ensemble/run_reference.py`
-- `python benchmarks/BP_Random_Gap_Ensemble/figure_recipe.py`
+## Canonical Commands
+- `python -m subsystem_emergence.benchmarking run-case BP_Random_Gap_Ensemble`
+- `python -m subsystem_emergence.benchmarking sample-parameters BP_Random_Gap_Ensemble`

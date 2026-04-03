@@ -2,7 +2,7 @@
 
 ## Current Cross-Domain Posture
 The repository now carries four bounded application domains:
-- bike-share mobility case studies for Paper E
+- bike-share mobility case studies as governed real-data transport evidence
 - a bundled documentation clickstream benchmark as non-mobility operator evidence
 - a bundled support-portal navigation benchmark as a second non-mobility operator evidence family
 - a bundled workflow-queue benchmark as non-navigation operational evidence
@@ -10,11 +10,11 @@ The repository now carries four bounded application domains:
 ## Policy
 - keep application claims case-study-only unless a theorem note explicitly upgrades them
 - preserve at least one negative or mixed case in each domain
-- reuse the same ledger, gate, and refinement conventions used by transport-style synthetic benchmarks
+- reuse the same evidence-bundle, gate, and refinement conventions used by transport-style synthetic benchmarks
 - separate three layers explicitly:
   - global failure taxonomy labels
-  - benchmark-local package acceptance overlays
-  - gate-level publication-readiness enforcement
+  - benchmark-local acceptance profiles
+  - gate-level validation enforcement
 
 ## Current Non-Mobility Benchmark
 - `BP_Clickstream_Docs_Funnel`

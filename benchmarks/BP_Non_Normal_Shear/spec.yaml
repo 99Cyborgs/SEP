@@ -1,21 +1,49 @@
-id: BP_Non_Normal_Shear
+registry_source: benchmarks/registry.yaml
+family_id: BP_Non_Normal_Shear
+title: Non Normal Shear
 branch: nonnormal
-theorem_tier: T2
+tier: T2
+phase: 1
+description: Shear and Jordan-like nonnormal systems with transient growth.
 system_class: nonnormal_linear
 state_dimension: 4
 formal_system: Two-dimensional slow shear block weakly coupled to a fast stable block.
-parameter_ranges:
-  shear_amplitude: [1.0, 5.0]
-  rho: [0.01, 0.10]
-  slow_count: [2, 2]
-ground_truth_notes:
-  - Slow subsystem partition is planted.
-  - Transient amplification is intentionally strong despite stable eigenvalues.
+implementation_status: complete
+evidence_class: synthetic_nonnormal
+claim_refs:
+- T2_nonnormal
+observables:
+- spectral_gap
+- transient_amplification_score
+- block_residual_norm
+- leakage_trajectory
+fixtures: []
 expected_failure_modes:
-  - transient_growth_failure
-  - horizon_failure
-primary_observables:
+- transient_growth_failure
+- horizon_failure
+cases:
+- family_id: BP_Non_Normal_Shear
+  case_id: reference
+  title: Shear-driven nonnormal reference
+  parameter_id: reference
+  base_parameter_id: reference
+  role: reference
+  tier: T2
+  claim_status: supported
+  implementation_status: complete
+  evidence_class: synthetic_nonnormal
+  observables:
   - spectral_gap
   - transient_amplification_score
   - block_residual_norm
   - leakage_trajectory
+  fixtures: []
+  acceptance_profile: nonnormal_reference
+  expected_failure_modes: []
+  run_modes:
+  - reference
+  tags:
+  - nonnormal
+  - diagnostic
+  overrides: {}
+  notes: []

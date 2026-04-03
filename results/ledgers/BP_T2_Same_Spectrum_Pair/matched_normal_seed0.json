@@ -1,5 +1,6 @@
 {
   "benchmark_id": "BP_T2_Same_Spectrum_Pair",
+  "case_id": "matched_normal",
   "branch": "nonnormal",
   "theorem_tier": "T2",
   "parameter_id": "matched_normal",
@@ -51,9 +52,9 @@
     "pairing_rule": "same retained eigenvalues, different slow-block geometry"
   },
   "metadata": {
-    "code_hash": null,
+    "code_hash": "4adc2af",
     "solver": "scipy/numpy reference routines",
-    "runtime_seconds": 0.07560110000122222,
+    "runtime_seconds": 0.07705470000291825,
     "source_of_truth": {
       "embedded_zip_found": false,
       "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."

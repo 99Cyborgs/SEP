@@ -1,5 +1,6 @@
 {
   "benchmark_id": "BP_Mobility_NYC_East_Corridor",
+  "case_id": "reference",
   "branch": "application",
   "theorem_tier": "T3/G6",
   "parameter_id": "reference",
@@ -49,9 +50,9 @@
     ]
   },
   "metadata": {
-    "code_hash": null,
+    "code_hash": "4adc2af",
     "solver": "scipy/numpy reference routines",
-    "runtime_seconds": 0.05088229999819305,
+    "runtime_seconds": 0.04334920000110287,
     "source_of_truth": {
       "embedded_zip_found": false,
       "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."

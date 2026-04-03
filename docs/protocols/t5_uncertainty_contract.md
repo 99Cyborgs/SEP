@@ -13,7 +13,7 @@ Interpret `T5` evidence as a probabilistic finite-sample statement rather than a
 - the resulting bootstrap width, estimation error, and confidence-bounded horizon
 
 ## Diagnostic Contract
-`T5` ledgers should now expose:
+`T5` evidence bundles should now expose:
 - `bootstrap_width`
 - `ensemble_mean_leakage`
 - `metastability_score`

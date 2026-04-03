@@ -1,23 +1,50 @@
-id: BP_Weakly_Nonlinear_Slow_Manifold
+registry_source: benchmarks/registry.yaml
+family_id: BP_Weakly_Nonlinear_Slow_Manifold
+title: Weakly Nonlinear Slow Manifold
 branch: nonlinear
-theorem_tier: T4
+tier: T4
+phase: 3
+description: Weakly nonlinear slow-manifold benchmark with curvature corrections.
 system_class: weakly_nonlinear
 state_dimension: 3
 formal_system: Weakly nonlinear fast-slow system with a two-dimensional slow oscillator sector and one slaved fast variable.
-parameter_ranges:
-  epsilon: [0.05, 0.12]
-  rho: [0.03, 0.10]
-  curvature: [0.0, 1.0]
-  amplitude: [0.1, 1.5]
-ground_truth_notes:
-  - Critical manifold is explicit in the benchmark construction.
-  - Curvature correction is required; no global nonlinear claim is intended.
+implementation_status: complete
+evidence_class: synthetic_nonlinear
+claim_refs:
+- T4_weakly_nonlinear
+observables:
+- projector_deformation
+- block_residual_norm
+- leakage_trajectory
+- autonomy_horizon
+fixtures: []
 expected_failure_modes:
-  - carrier_failure
-  - coupling_failure
-  - horizon_failure
-primary_observables:
+- carrier_failure
+- coupling_failure
+- horizon_failure
+cases:
+- family_id: BP_Weakly_Nonlinear_Slow_Manifold
+  case_id: reference
+  title: Weakly nonlinear local-validity reference
+  parameter_id: reference
+  base_parameter_id: reference
+  role: reference
+  tier: T4
+  claim_status: supported
+  implementation_status: complete
+  evidence_class: synthetic_nonlinear
+  observables:
   - projector_deformation
   - block_residual_norm
   - leakage_trajectory
   - autonomy_horizon
+  fixtures: []
+  acceptance_profile: nonlinear_reference
+  expected_failure_modes: []
+  run_modes:
+  - reference
+  tags:
+  - nonlinear
+  - positive
+  overrides: {}
+  notes: []

@@ -10,10 +10,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import finalize_gate, gate_context, main_dump
 
 
-def evaluate() -> dict:
-    root, criteria, records = gate_context("G3")
+def evaluate(root: Path | None = None) -> dict:
+    root, criteria, records = gate_context("G3", root)
     if not records:
-        return finalize_gate(root, "G3", criteria, records, False, {}, "No transport ledgers were found.")
+        return finalize_gate(root, "G3", criteria, records, False, {}, "No transport evidence records were found.")
     primary_records = [record for record in records if record["benchmark_id"] == "BP_Windowed_Transport_Flow"]
     if not primary_records:
         return finalize_gate(
@@ -23,7 +23,7 @@ def evaluate() -> dict:
             records,
             False,
             {"record_count": len(records)},
-            "No primary BP_Windowed_Transport_Flow ledger was found.",
+            "No primary BP_Windowed_Transport_Flow evidence record was found.",
         )
     record = primary_records[0]
     transport = record["observables"]["transportability_metrics"] or {}

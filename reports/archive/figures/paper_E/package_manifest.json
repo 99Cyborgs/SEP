@@ -1,0 +1,20 @@
+{
+  "benchmark_id": "BP_Mobility_Chicago_Corridors",
+  "summary_json": "results/indexes/application_validation/BP_Mobility_Chicago_Corridors_validation_matrix.json",
+  "outputs": {
+    "weekday_leakage_png": "reports/archive/figures/paper_E/weekday_leakage.png",
+    "weekday_horizon_png": "reports/archive/figures/paper_E/weekday_horizon.png",
+    "weekend_failure_comparison_png": "reports/archive/figures/paper_E/weekend_failure_comparison.png",
+    "robustness_summary_markdown": "reports/archive/figures/paper_E/robustness_summary.md"
+  },
+  "evidence_inventory": {
+    "accepted_weekday_case": "results/evidence/BP_Mobility_Chicago_Corridors/reference/seed_0/run_manifest.json",
+    "rejected_weekend_case": "results/evidence/BP_Mobility_Chicago_Corridors/negative_weekend/seed_0/run_manifest.json",
+    "external_negative_case": "results/evidence/BP_Mobility_Downtown_Routing_Instability/reference/seed_0/run_manifest.json",
+    "external_mixed_case": "results/evidence/BP_Mobility_NYC_East_Corridor/reference/seed_0/run_manifest.json",
+    "weekday_sweep_accepted": true,
+    "negative_case_rejected": true,
+    "external_negative_rejected": true,
+    "external_mixed_case_present": true
+  }
+}

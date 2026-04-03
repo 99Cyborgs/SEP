@@ -1,9 +1,17 @@
 {
-  "label": "coupling_failure",
-  "triggered": true,
-  "metric": 1.0080101987634622,
-  "threshold": 0.35,
-  "direction": "gt",
-  "message": "Reduced slow dynamics is too strongly coupled for the claimed regime.",
-  "archive_path": "failures\\G1_linear_validity\\BP_Random_Gap_Ensemble_reference_seed0_coupling_failure.json"
+  "benchmark_id": "BP_Random_Gap_Ensemble",
+  "case_id": "reference",
+  "parameter_id": "reference",
+  "seed": 0,
+  "branch": "linear",
+  "theorem_tier": "T2",
+  "failure": {
+    "label": "coupling_failure",
+    "triggered": true,
+    "metric": 1.0080101987634622,
+    "threshold": 0.35,
+    "direction": "gt",
+    "message": "Reduced slow dynamics is too strongly coupled for the claimed regime.",
+    "archive_path": "failures\\G1_linear_validity\\BP_Random_Gap_Ensemble_reference_seed0_coupling_failure.json"
+  }
 }

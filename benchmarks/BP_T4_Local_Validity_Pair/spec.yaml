@@ -1,28 +1,78 @@
-id: BP_T4_Local_Validity_Pair
+registry_source: benchmarks/registry.yaml
+family_id: BP_T4_Local_Validity_Pair
+title: T4 Local Validity Pair
 branch: nonlinear
-theorem_tier: T4
+tier: T4
+phase: 3
+description: Paired weakly nonlinear benchmark separating a locally valid regime from amplitude-driven local-validity breakdown.
 system_class: weakly_nonlinear_local_validity_pair
 state_dimension: 3
 formal_system: Paired weakly nonlinear fast-slow systems with the same structural template but different local-validity posture.
-parameter_sets:
-  reference:
-    case_label: amplitude_breakdown
-    epsilon: 0.04
-    coupling: 0.04
-  matched_local:
-    case_label: matched_local
-    epsilon: 0.08
-    coupling: 0.07
-ground_truth_notes:
-  - Both branches use the same three-dimensional fast-slow template.
-  - The matched local branch stays closer to the slaved fast-variable relation and keeps the local-validity margin positive.
-  - The amplitude-breakdown branch increases anchor drift and fast slaving defect without claiming a global nonlinear instability theorem.
+implementation_status: complete
+evidence_class: synthetic_counterexample
+claim_refs:
+- T4_weakly_nonlinear
+observables:
+- projector_deformation
+- leakage_trajectory
+- autonomy_horizon
+- local_validity_metrics
+fixtures: []
 expected_failure_modes:
-  - carrier_failure
-  - coupling_failure
-  - horizon_failure
-primary_observables:
+- carrier_failure
+- coupling_failure
+- horizon_failure
+cases:
+- family_id: BP_T4_Local_Validity_Pair
+  case_id: reference
+  title: Amplitude-breakdown branch
+  parameter_id: reference
+  base_parameter_id: reference
+  role: negative_control
+  tier: T4
+  claim_status: counterexample
+  implementation_status: complete
+  evidence_class: synthetic_counterexample
+  observables:
   - projector_deformation
   - leakage_trajectory
   - autonomy_horizon
   - local_validity_metrics
+  fixtures: []
+  acceptance_profile: local_validity_counterexample
+  expected_failure_modes:
+  - carrier_failure
+  - coupling_failure
+  - horizon_failure
+  run_modes:
+  - reference
+  tags:
+  - negative
+  - local-validity
+  overrides: {}
+  notes: []
+- family_id: BP_T4_Local_Validity_Pair
+  case_id: matched_local
+  title: Locally valid control branch
+  parameter_id: matched_local
+  base_parameter_id: matched_local
+  role: positive_control
+  tier: T4
+  claim_status: supported
+  implementation_status: complete
+  evidence_class: synthetic_nonlinear
+  observables:
+  - projector_deformation
+  - leakage_trajectory
+  - autonomy_horizon
+  - local_validity_metrics
+  fixtures: []
+  acceptance_profile: nonlinear_reference
+  expected_failure_modes: []
+  run_modes:
+  - reference
+  tags:
+  - positive
+  - control
+  overrides: {}
+  notes: []

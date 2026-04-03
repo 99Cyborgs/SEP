@@ -1,22 +1,22 @@
-"""Failure taxonomy and archive helpers."""
+"""Repository-wide failure taxonomy and archive serialization helpers.
+
+Scope: map benchmark observables onto stable failure labels and persist triggered
+failures into the gate archive layout consumed by reporting code.
+Boundary: this module classifies and serializes failures; it does not decide
+gate pass/fail semantics.
+"""
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
+from subsystem_emergence.policy import failure_taxonomy_thresholds
+
 from .types import FailureReport
 
 
-DEFAULT_FAILURE_TAXONOMY_THRESHOLDS = {
-    "min_gap": 0.03,
-    "max_projector_deformation": 0.35,
-    "max_block_residual": 0.35,
-    "max_transient_amplification": 6.0,
-    "min_horizon_ratio": 0.45,
-    "max_coordinate_sensitivity": 0.5,
-    "max_refinement_span": 0.3,
-}
+DEFAULT_FAILURE_TAXONOMY_THRESHOLDS = failure_taxonomy_thresholds()
 
 
 FAILURE_ARCHIVE_MAP = {
@@ -31,7 +31,12 @@ FAILURE_ARCHIVE_MAP = {
 
 
 def evaluate_failure_signatures(record: dict, criteria: dict) -> list[FailureReport]:
-    """Apply the repository-wide failure taxonomy to a benchmark record."""
+    """Apply threshold-based failure labels to one benchmark evidence record.
+
+    The observable schema is intentionally permissive: historical records may
+    expose either autonomous or transport-specific metric names, so the
+    classifier normalizes equivalent fields before thresholding.
+    """
 
     merged_criteria = {**DEFAULT_FAILURE_TAXONOMY_THRESHOLDS, **criteria}
     observables = record.get("observables", {})
@@ -51,6 +56,8 @@ def evaluate_failure_signatures(record: dict, criteria: dict) -> list[FailureRep
     elif "windows" in record.get("parameters", {}):
         sampled_horizon = float(max(record["parameters"]["windows"]))
     comparison_horizon = predicted_horizon
+    # Predicted horizons beyond the sampled support are not falsifiable by the
+    # current record, so the ratio is capped against the observed sampling span.
     if comparison_horizon > 0.0 and sampled_horizon > 0.0:
         comparison_horizon = min(comparison_horizon, sampled_horizon)
     horizon_ratio = observed_horizon / comparison_horizon if comparison_horizon > 0.0 else 1.0
@@ -134,7 +141,11 @@ def evaluate_failure_signatures(record: dict, criteria: dict) -> list[FailureRep
 
 
 def archive_failure_reports(root: Path, gate: str, record: dict, reports: list[FailureReport]) -> list[str]:
-    """Archive triggered failure reports in the expected gate directories."""
+    """Persist triggered failures under the archive layout expected by validators.
+
+    The archive directory is keyed by failure label rather than the calling gate
+    when the taxonomy assigns a stricter canonical destination.
+    """
 
     archived_paths: list[str] = []
     benchmark_id = record["benchmark_id"]
@@ -147,6 +158,19 @@ def archive_failure_reports(root: Path, gate: str, record: dict, reports: list[F
         archive_dir.mkdir(parents=True, exist_ok=True)
         archive_path = archive_dir / f"{benchmark_id}_{parameter_id}_seed{seed}_{report.label}.json"
         report.archive_path = str(archive_path.relative_to(root))
-        archive_path.write_text(json.dumps(report.to_dict(), indent=2))
+        archive_path.write_text(
+            json.dumps(
+                {
+                    "benchmark_id": benchmark_id,
+                    "case_id": record.get("case_id", parameter_id),
+                    "parameter_id": parameter_id,
+                    "seed": seed,
+                    "branch": record.get("branch"),
+                    "theorem_tier": record.get("theorem_tier"),
+                    "failure": report.to_dict(),
+                },
+                indent=2,
+            )
+        )
         archived_paths.append(report.archive_path)
     return archived_paths

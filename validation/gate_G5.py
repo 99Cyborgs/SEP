@@ -10,10 +10,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import finalize_gate, gate_context, main_dump
 
 
-def evaluate() -> dict:
-    root, criteria, records = gate_context("G5")
+def evaluate(root: Path | None = None) -> dict:
+    root, criteria, records = gate_context("G5", root)
     if not records:
-        return finalize_gate(root, "G5", criteria, records, False, {}, "No stochastic ledgers were found.")
+        return finalize_gate(root, "G5", criteria, records, False, {}, "No stochastic evidence records were found.")
     primary_records = [record for record in records if record["benchmark_id"] == "BP_Noisy_Metastable_Network"]
     if not primary_records:
         return finalize_gate(
@@ -23,7 +23,7 @@ def evaluate() -> dict:
             records,
             False,
             {"record_count": len(records)},
-            "No primary BP_Noisy_Metastable_Network ledger was found.",
+            "No primary BP_Noisy_Metastable_Network evidence record was found.",
         )
     record = primary_records[0]
     transport = record["observables"]["transportability_metrics"] or {}

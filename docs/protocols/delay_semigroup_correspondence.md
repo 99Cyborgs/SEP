@@ -32,4 +32,4 @@ This note records how the repository relates the infinite-dimensional fixed-lag 
 - `adjacent_terminal_projector_deformation_max`
 - `constant_history_projector_deformation`
 
-The delay benchmark should be cited as bounded theorem support only after these diagnostics are reported alongside the usual nonnormal correction metrics and the delay-specific `G2` summary metrics.
+The delay benchmark should be cited only as qualified sampled-history support after these diagnostics are reported alongside the usual nonnormal correction metrics and the delay-specific `G2` summary metrics.

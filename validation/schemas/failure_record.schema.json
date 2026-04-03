@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SEP Failure Record",
+  "type": "object",
+  "required": ["benchmark_id", "case_id", "seed", "failure_reports"],
+  "properties": {
+    "benchmark_id": { "type": "string" },
+    "case_id": { "type": "string" },
+    "seed": { "type": "integer" },
+    "failure_reports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "triggered", "direction", "message"],
+        "properties": {
+          "label": { "type": "string" },
+          "triggered": { "type": "boolean" },
+          "metric": { "type": ["number", "null"] },
+          "threshold": { "type": ["number", "null"] },
+          "direction": { "type": "string" },
+          "message": { "type": "string" },
+          "archive_path": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

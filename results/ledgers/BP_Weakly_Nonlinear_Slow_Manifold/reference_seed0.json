@@ -1,5 +1,6 @@
 {
   "benchmark_id": "BP_Weakly_Nonlinear_Slow_Manifold",
+  "case_id": "reference",
   "branch": "nonlinear",
   "theorem_tier": "T4",
   "parameter_id": "reference",
@@ -88,9 +89,9 @@
     ]
   },
   "metadata": {
-    "code_hash": null,
+    "code_hash": "4adc2af",
     "solver": "scipy/numpy reference routines",
-    "runtime_seconds": 0.04880520000006072,
+    "runtime_seconds": 0.11916699999710545,
     "source_of_truth": {
       "embedded_zip_found": false,
       "reconciliation_note": "No embedded zip archive was found; the live scaffold was reconciled in place."
